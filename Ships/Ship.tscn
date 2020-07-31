@@ -22,19 +22,9 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 5 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "sail_downright",
-"speed": 1.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "sail_left",
-"speed": 1.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "sail_downleft",
 "speed": 1.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 17 ) ],
@@ -47,11 +37,6 @@ animations = [ {
 "name": "sail_upright",
 "speed": 1.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "sail_right",
-"speed": 1.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "sail_upleft",
@@ -60,6 +45,21 @@ animations = [ {
 "frames": [ ExtResource( 16 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "sail_up",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "sail_downright",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "sail_downleft",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "sail_right",
 "speed": 1.0
 } ]
 
@@ -88,6 +88,8 @@ polygon = PoolVector2Array( 10, 6, 22, 0, 22, -11, 11, -30, -12, -30, -22, -11, 
 current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+
+[node name="PathCheck" type="RayCast2D" parent="."]
 [connection signal="input_event" from="BBox" to="." method="_on_BBox_input_event"]
 [connection signal="mouse_entered" from="BBox" to="." method="_on_BBox_mouse_entered"]
 [connection signal="mouse_exited" from="BBox" to="." method="_on_BBox_mouse_exited"]

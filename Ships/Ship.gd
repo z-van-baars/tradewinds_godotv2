@@ -10,6 +10,7 @@ signal target_entity_reached
 var tools
 var ships
 var seanav
+var seanav2d
 var ship_stats
 var selected = false
 
@@ -37,6 +38,7 @@ func _ready():
 	tools = get_tree().root.get_node("Main/Tools")
 	ships = get_tree().root.get_node("Main/Ships")
 	seanav = get_tree().root.get_node("Main/WorldGen/SeaNavMap")
+	seanav2d = get_tree().root.get_node("Main/SeaNav2D")
 	ship_stats = get_tree().root.get_node("Main/ShipStats")
 
 func initialize_stats(hull_class, is_player_ship, import_captain=null):
@@ -44,6 +46,7 @@ func initialize_stats(hull_class, is_player_ship, import_captain=null):
 	hull = hull_class
 	speed = ship_stats.speed[hull_class]
 	cargo_cap = ship_stats.cargo_cap[hull_class]
+	final_target = position
 	player_ship = is_player_ship
 	if import_captain != null:
 		captain = import_captain
@@ -77,45 +80,46 @@ func connect_signals(player_node, info_card, dispatch_node, captain_node):
 	
 func _process(delta):
 	if target_entity != null:
-		# Check if our target moved
+		# Check if our target moved and repath if so
 		if target_entity.position != final_target:
-			get_navpath(target_entity.position)
+			path_to(target_entity.position)
 
 func _physics_process(delta):
+	# Do we have a path with at least 1 point remaining?
 	if path.size() > 0:
 		if position.distance_to(step_target) < 5:
-			get_step_target()
-			if abs(direction.x) == 1 and abs(direction.y) == 1:
-				direction = direction.normalized()
+			print("arrived at step")
+			step_target = path[0]
+			path.remove(0)
 	else:
-		if position.distance_to(final_target) > 5:
-			step_target = final_target
-		else:
+		step_target = final_target
+		if position.distance_to(final_target) < 5:
 			zero_target()
-			return
 
-		var movement = speed * direction * delta
+	direction = (step_target - position).normalized()
+	if abs(direction.x) == 1 and abs(direction.y) == 1:
+		direction = direction.normalized()
+
+	# Early Exit from Movement if we are at our target city
+	if destination_city != null:
+		if position.distance_to(destination_city.get_center()) < 40:
+			emit_signal("destination_reached", destination_city)
+			zero_target()
 	
-		# Early Exit from Movement if we have a target city and are there
-		if destination_city != null:
-			if position.distance_to(destination_city.get_center()) < 40:
-				emit_signal("destination_reached", destination_city)
-				zero_target()
-		
-		# Early Exit from Movement if we have a target entity and are there
-		elif destination_city == null and target_entity != null:
-			if position.distance_to(target_entity.get_center()) < 15:
-				print(target_entity.captain)
-				emit_signal(
-					"target_entity_reached",
-					self,
-					target_entity.captain,
-					target_entity)
-				zero_target()
-				clear_target_entity()
+	# Early Exit from Movement if we have a target entity and are there
+	elif destination_city == null and target_entity != null:
+		if position.distance_to(target_entity.get_center()) < 15:
+			emit_signal(
+				"target_entity_reached",
+				self,
+				target_entity.captain,
+				target_entity)
+			zero_target()
+			clear_target_entity()
 
-		move_and_collide(movement)
-
+	# move and junk
+	var movement = speed * direction * delta
+	move_and_collide(movement)
 	animates_ship(direction)
 
 func get_center():
@@ -143,20 +147,32 @@ func clear_target_entity():
 
 func get_step_target():
 	var new_step_target = seanav.map_to_world(path[0])
-	path.pop_front()
-	step_target = new_step_target
+	path.remove(0)
+	step_target = Vector2(new_step_target.x, new_step_target.y + 32)
 	direction = (step_target - position).normalized()
 
-func get_navpath(target_world_pos):
+func get_navpath_astar(target_world_pos):
 	var target_tile = seanav.world_to_map(target_world_pos)
 	var start_tile = seanav.world_to_map(position)
+	if target_tile == start_tile:
+		final_target = target_world_pos
 	var nav_path = seanav.path_to(start_tile, target_tile)
 	if nav_path != null:
-		set_path(target_world_pos, nav_path)
+		set_path(nav_path)
+		print(nav_path)
 
-func set_path(new_target, new_path):
+func path_to(target_world_pos):
+	final_target = target_world_pos
+	var nav_path = seanav2d.get_simple_path(position, target_world_pos)
+	if nav_path.size() < 1:
+		return
+	set_path(nav_path)
+
+func set_path(new_path):
 	path = new_path
-	final_target = new_target
+	print(path)
+	step_target = path[0]
+	path.remove(0)
 
 func select():
 	selected = true

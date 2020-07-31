@@ -22,10 +22,13 @@ func _process(delta):
 			recently_visited.erase(city)
 	
 func wander():
-	var new_target = Vector2(
-		$Ship.position.x + randi()%500 - 250,
-		$Ship.position.y + randi() % 500 - 250)
-	$Ship.set_target(new_target)
+	var biome_map = get_tree().root.get_node("Main/WorldGen/BiomeMap")
+	var nearby_tiles = tools.get_nearby_tiles(
+		biome_map.world_to_map($Ship.position), 10)
+	var nearby_water_tiles = tools.filter_tiles(nearby_tiles, true)
+	var random_target_tile = tools.r_choice(nearby_water_tiles)
+	var random_coords = biome_map.map_to_world(random_target_tile)
+	$Ship.path_to(random_coords)
 
 func transact():
 	var cargo_escrow = {}
@@ -88,7 +91,7 @@ func _on_CityTimer_timeout():
 		dest_city = find_best_deal()
 	else:
 		dest_city = tools.r_choice(get_tree().root.get_node("Main/Cities").get_children())
-	$Ship.set_target(
+	$Ship.path_to(
 		get_tree().root.get_node("Main/WorldGen/BiomeMap").map_to_world(dest_city.map_tile))
 	$Ship.destination_city = dest_city
 

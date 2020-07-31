@@ -42,7 +42,7 @@ func filter_tiles(tile_list: Array, water=false):
 			water_tiles.append(tile)
 		else:
 			land_tiles.append(tile)
-	if water:
+	if water == true:
 		return water_tiles
 	else:
 		return land_tiles

@@ -1,6 +1,7 @@
 extends TileMap
 var worldgen
 var biomemap
+var seanav_map
 var tools
 
 var biome_tiles = {
@@ -22,11 +23,17 @@ var biome_tiles = {
 	"tundra": [56, 57, 58, 59]}
 	
 
-
+var water_biomes = [
+	"ocean",
+	"lake",
+	"shallows",
+	"sea"
+]
 
 
 func set_maps(worldgen):
 	tools = get_tree().root.get_node("Main/Tools")
+	seanav_map = get_tree().root.get_node("Main/SeaNav2D/SeaNavTileMap")
 	worldgen = worldgen
 	biomemap = worldgen.biomemap
 
@@ -39,5 +46,9 @@ func set_biome_type(worldgen):
 			var tile_id = tools.r_choice(
 				biome_tiles[str_biome])
 			set_cell(x, y, tile_id)
+			if str_biome in water_biomes:
+				seanav_map.set_cell(x, y, 1)
+			else:
+				seanav_map.set_cell(x, y, 0)
 			x += 1
 		y += 1

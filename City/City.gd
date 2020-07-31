@@ -16,15 +16,23 @@ var city_name = "~"
 var portrait_id = randi()%3+0
 var size = (randi()%10+1)
 var population = size * 1000
+var growth_counter = 0
+var growth_cap = size * size * 10
+
 var neighborhood = []
+var coastal_neighbors = []
 var prioritized_tiles = []
+
 var artikel_supply = {}
 var artikel_price = {}
 var demand_for = {}
 var demand_last = {}
 var production_last = {}
-var growth_counter = 0
-var growth_cap = size * size * 10
+
+var water_indexes = [
+	28, 29, 30, 31,
+	36, 37, 38, 39,
+	40, 41, 42, 43]
 
 func initialize():
 	city_name = get_tree().root.get_node("Main/Cities").get_name()
@@ -33,6 +41,9 @@ func initialize():
 	artikels = get_tree().root.get_node("Main/Artikels")
 	set_bounding_box()
 	neighborhood = tools.get_nearby_tiles(map_tile, 3 + int(size / 3))
+	for each in neighborhood:
+		if biome_map.get_cellv(each) in water_indexes:
+			coastal_neighbors.append(each)
 	resort_neighborhood()
 	init_cargo()
 	init_demand()

@@ -8,6 +8,7 @@ signal toggle_logistics_menu
 signal open_city_menu
 
 var spawn_mode = false
+var teleport_mode = false
 
 var artikels
 var own_ship_selected = false
@@ -37,7 +38,6 @@ func _ready():
 	$Ship.cargo["Rum"] = 2
 	$Ship.cargo["Bread"] = 5
 	$Ship.generate_random_officers()
-	$Ship.position.y += 5
 	
 
 func randomize_start(cities):
@@ -45,8 +45,9 @@ func randomize_start(cities):
 	var neighbor_tiles = tools.get_neighbor_tiles(r_city.map_tile)
 	# filter tiles around a random start city for water only
 	var f_neighbor_tiles = tools.filter_tiles(neighbor_tiles, true)
-	var r_start = tools.r_choice(neighbor_tiles)
+	var r_start = tools.r_choice(f_neighbor_tiles)
 	$Ship.position = get_tree().root.get_node("Main/WorldGen/BiomeMap").map_to_world(r_start)
+	$Ship.position.y += 32
 
 func get_ship_pos():
 	return $Ship.position
@@ -63,6 +64,8 @@ func increment_silver(quantity):
 func _on_City_right_click(city_node):
 	if own_ship_selected == true:
 		$Ship.destination_city = city_node
+		if city_node.coastal_neighbors.size() > 0:
+			$Ship.get_navpath(tools.r_choice(city_node.coastal_neighbors))
 
 func _on_Ship_left_click(ship_node):
 	ship_selected = ship_node
@@ -105,6 +108,12 @@ func _input(event):
 		get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").visible = false
 		get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").text = "Paused"
 		spawn_mode = false
+	elif event.is_action_pressed("teleport"):
+		teleport_mode = !teleport_mode
+		if teleport_mode == true:
+			get_tree().root.get_node("Main/UILayer/MapWidget/BoostIndicator").show()
+		elif teleport_mode == false:
+			get_tree().root.get_node("Main/UILayer/MapWidget/BoostIndicator").hide()
 	elif event.is_action_pressed("boost_key"):
 		if $Ship.speed == 75:
 			get_tree().root.get_node("Main/UILayer/MapWidget/BoostIndicator").show()
@@ -129,7 +138,10 @@ func _input(event):
 		if event.is_action_pressed("right_click"):
 			var new_target = get_viewport().get_canvas_transform().xform_inv(event.position)
 			var adjusted_target = new_target * camera.zoom * camera.zoom
-			$Ship.get_navpath(adjusted_target)
+			if teleport_mode == true:
+				$Ship.position = adjusted_target
+				return
+			$Ship.path_to(adjusted_target)
 
 				
 			

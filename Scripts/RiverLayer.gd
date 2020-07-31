@@ -20,6 +20,14 @@ func _process(delta):
 func _draw():
 	for river in rivers:
 		draw_river(river)
+	if get_tree().root.get_node("Main/Player/Ship").path.size() > 0:
+		var path_pts = []
+		path_pts.append(get_tree().root.get_node("Main/Player/Ship").position)
+		path_pts.append(get_tree().root.get_node("Main/Player/Ship").step_target)
+		for each_tile in get_tree().root.get_node("Main/Player/Ship").path:
+			var path_pt_raw = get_tree().root.get_node("Main/WorldGen/BiomeMap").map_to_world(each_tile)
+			path_pts.append(Vector2(path_pt_raw.x, path_pt_raw.y + 32))
+		draw_polyline(path_pts, Color.red, 10)
 	
 func draw_river(river_pts: Array):
 	draw_polyline(river_pts, Color.blue, 15)

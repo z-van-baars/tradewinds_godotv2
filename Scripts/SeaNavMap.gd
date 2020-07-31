@@ -1,6 +1,7 @@
 extends TileMap
 
-onready var astar_node = AStar2D.new()
+
+onready var astar_node = load("res://scripts/AstarMod.gd").new()
 
 var map_width
 var map_height
@@ -22,12 +23,25 @@ func _ready():
 	_half_cell_size = cell_size / 2
 
 func initialize(biomemap, biome_tilemap):
+	var start = OS.get_unix_time()
 	map_width = biomemap[0].size()
 	map_height = biomemap.size()
+	print("Importing tiles from worldgen...")
 	setup_tiles(biome_tilemap)
+	var new_time = OS.get_unix_time() - start
+	print(new_time % 60)
+	print("Identifying navigable tiles...")
 	obstacles = get_used_cells_by_id(0)
+	new_time = OS.get_unix_time() - new_time
+	print(new_time % 60)
+	print("Adding navigable cells to internal array...")
 	var walkable_cells_list = astar_add_walkable_cells(obstacles)
+	new_time = OS.get_unix_time() - new_time
+	print(new_time % 60)
+	print("Adding navigable tile connections...")
 	astar_connect_walkable_cells_diagonal(walkable_cells_list)
+	new_time = OS.get_unix_time() - new_time
+	print(new_time % 60)
 
 func setup_tiles(biome_tilemap):
 	for y in range(map_height):
