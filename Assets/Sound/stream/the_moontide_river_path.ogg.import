@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/the_moontide_river_path.ogg-73dafd32228b9c3e2a64bc0c0ccbcca7.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/stream/the_moontide_river_path.ogg"
+dest_files=[ "res://.import/the_moontide_river_path.ogg-73dafd32228b9c3e2a64bc0c0ccbcca7.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

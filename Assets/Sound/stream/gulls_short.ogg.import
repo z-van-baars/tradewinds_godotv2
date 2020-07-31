@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/gulls_short.ogg-6c311b853b277de9ddd3b11c78cb19d8.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/stream/gulls_short.ogg"
+dest_files=[ "res://.import/gulls_short.ogg-6c311b853b277de9ddd3b11c78cb19d8.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

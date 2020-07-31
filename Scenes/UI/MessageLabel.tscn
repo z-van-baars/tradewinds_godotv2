@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Fonts/TimesSS/TimesHeader18.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/MessageLabel.gd" type="Script" id=2]
+
+[node name="MessageLabel" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1323.0
+margin_bottom = -1059.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 553.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 1 )
+text = "Lord Mortimer chases down his enemies ending in defeat but "
+align = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="FadeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

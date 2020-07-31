@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/harpsichord_01.ogg-d005237a127dffd735e77089b56ed356.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/ui/harpsichord_01.ogg"
+dest_files=[ "res://.import/harpsichord_01.ogg-d005237a127dffd735e77089b56ed356.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

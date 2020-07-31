@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/gulls_loud.ogg-151cc7b3405e234738444732072e7f68.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/stream/gulls_loud.ogg"
+dest_files=[ "res://.import/gulls_loud.ogg-151cc7b3405e234738444732072e7f68.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

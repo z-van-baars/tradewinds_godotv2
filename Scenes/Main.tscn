@@ -1,0 +1,3010 @@
+[gd_scene load_steps=144 format=2]
+
+[ext_resource path="res://Assets/Tile Overlays/very_wet.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Tile Overlays/wet.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Tile Overlays/very_dry.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Tile Overlays/dry.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/Buttons/x_regular.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/Buttons/arrow_down_regular.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/city_menu_pane.png" type="Texture" id=7]
+[ext_resource path="res://Assets/UI/Buttons/market_hover.png" type="Texture" id=8]
+[ext_resource path="res://Assets/UI/Buttons/arrow_up_regular.png" type="Texture" id=9]
+[ext_resource path="res://Assets/UI/market_screen.png" type="Texture" id=10]
+[ext_resource path="res://Assets/UI/Buttons/market_regular.png" type="Texture" id=11]
+[ext_resource path="res://Assets/UI/Buttons/back_hover.png" type="Texture" id=12]
+[ext_resource path="res://Assets/UI/Buttons/arrow_down_hover.png" type="Texture" id=13]
+[ext_resource path="res://Assets/UI/Buttons/x_hover.png" type="Texture" id=14]
+[ext_resource path="res://Assets/UI/Buttons/back_regular.png" type="Texture" id=15]
+[ext_resource path="res://Assets/UI/Buttons/arrow_up_hover.png" type="Texture" id=16]
+[ext_resource path="res://Tilesets/TempTileset.tres" type="TileSet" id=17]
+[ext_resource path="res://Tilesets/CityTileset.tres" type="TileSet" id=18]
+[ext_resource path="res://Tilesets/BiomeTileset.tres" type="TileSet" id=19]
+[ext_resource path="res://Assets/Vegetation/jungle_4.png" type="Texture" id=20]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scripts/Artikels.gd" type="Script" id=22]
+[ext_resource path="res://Scripts/BiomeMap.gd" type="Script" id=23]
+[ext_resource path="res://Scripts/Cities.gd" type="Script" id=24]
+[ext_resource path="res://Scripts/ShipStats.gd" type="Script" id=25]
+[ext_resource path="res://Scripts/BiomeSelector.gd" type="Script" id=26]
+[ext_resource path="res://Scripts/CityMenu.gd" type="Script" id=27]
+[ext_resource path="res://Scripts/Captains.gd" type="Script" id=28]
+[ext_resource path="res://Fonts/Quicksand/Quicksand.tres" type="DynamicFont" id=29]
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=30]
+[ext_resource path="res://Scripts/MarketMenu.gd" type="Script" id=31]
+[ext_resource path="res://Scripts/DateBar.gd" type="Script" id=32]
+[ext_resource path="res://Scripts/Tools.gd" type="Script" id=33]
+[ext_resource path="res://Scripts/MoistureMap.gd" type="Script" id=34]
+[ext_resource path="res://Scripts/PreviewContainer.gd" type="Script" id=35]
+[ext_resource path="res://Scripts/WorldGen.gd" type="Script" id=36]
+[ext_resource path="res://Scripts/TempMap.gd" type="Script" id=37]
+[ext_resource path="res://Assets/UI/Buttons/buy_hover.png" type="Texture" id=38]
+[ext_resource path="res://Assets/UI/main_menu.png" type="Texture" id=39]
+[ext_resource path="res://Assets/UI/Buttons/sell_regular.png" type="Texture" id=40]
+[ext_resource path="res://Assets/UI/Buttons/sell_hover.png" type="Texture" id=41]
+[ext_resource path="res://Assets/UI/Buttons/buy_regular.png" type="Texture" id=42]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=43]
+[ext_resource path="res://Assets/UI/Buttons/new_game_regular.png" type="Texture" id=44]
+[ext_resource path="res://Assets/UI/Buttons/new_game_hovered.png" type="Texture" id=45]
+[ext_resource path="res://Assets/UI/load_screen_splash.png" type="Texture" id=46]
+[ext_resource path="res://Assets/UI/mini_map_bg.png" type="Texture" id=47]
+[ext_resource path="res://Assets/UI/Buttons/recenter_regular.png" type="Texture" id=48]
+[ext_resource path="res://Assets/UI/Buttons/recenter_hover.png" type="Texture" id=49]
+[ext_resource path="res://Scripts/MapWidget.gd" type="Script" id=50]
+[ext_resource path="res://Scripts/ShipIcon.gd" type="Script" id=51]
+[ext_resource path="res://Ships/Galleon/down_right.png" type="Texture" id=52]
+[ext_resource path="res://Assets/UI/quantity_popup.png" type="Texture" id=53]
+[ext_resource path="res://Assets/UI/Buttons/done_regular.png" type="Texture" id=54]
+[ext_resource path="res://Assets/UI/Buttons/max_hover.png" type="Texture" id=55]
+[ext_resource path="res://Assets/UI/Buttons/cancel_hover.png" type="Texture" id=56]
+[ext_resource path="res://Assets/UI/Buttons/arrow_right_regular.png" type="Texture" id=57]
+[ext_resource path="res://Assets/UI/Buttons/cancel_regular.png" type="Texture" id=58]
+[ext_resource path="res://Assets/UI/Buttons/arrow_left_hover.png" type="Texture" id=59]
+[ext_resource path="res://Assets/UI/Buttons/arrow_left_regular.png" type="Texture" id=60]
+[ext_resource path="res://Assets/UI/Buttons/min_hover.png" type="Texture" id=61]
+[ext_resource path="res://Assets/UI/Buttons/arrow_right_hover.png" type="Texture" id=62]
+[ext_resource path="res://Assets/UI/Buttons/done_hover.png" type="Texture" id=63]
+[ext_resource path="res://Assets/UI/Buttons/max_regular.png" type="Texture" id=64]
+[ext_resource path="res://Assets/UI/Buttons/min_regular.png" type="Texture" id=65]
+[ext_resource path="res://Scripts/BuySellMenu.gd" type="Script" id=66]
+[ext_resource path="res://Assets/UI/icons/coin_20.png" type="Texture" id=67]
+[ext_resource path="res://Scripts/Calendar.gd" type="Script" id=68]
+[ext_resource path="res://Scripts/ShipMenu.gd" type="Script" id=69]
+[ext_resource path="res://Assets/UI/logistics_bg.png" type="Texture" id=70]
+[ext_resource path="res://Scripts/InfoCard.gd" type="Script" id=71]
+[ext_resource path="res://Scripts/Ships.gd" type="Script" id=72]
+[ext_resource path="res://Fonts/TimesSS/TIMESS__.ttf" type="DynamicFontData" id=73]
+[ext_resource path="res://Fonts/Prince Valiant/PrinceValiant.tres" type="DynamicFont" id=74]
+[ext_resource path="res://Fonts/TimesSS/TimesHeader18.tres" type="DynamicFont" id=75]
+[ext_resource path="res://Scripts/Battle.gd" type="Script" id=76]
+[ext_resource path="res://Scripts/Encounter.gd" type="Script" id=77]
+[ext_resource path="res://Fonts/Capitalis/Capitalis.tres" type="DynamicFont" id=78]
+[ext_resource path="res://Fonts/Capitalis/CapitalisTypOasis.ttf" type="DynamicFontData" id=79]
+[ext_resource path="res://Scripts/Dispatcher.gd" type="Script" id=80]
+[ext_resource path="res://Fonts/Prince Valiant/PrinceValiant.ttf" type="DynamicFontData" id=81]
+[ext_resource path="res://Assets/UI/Buttons/blank_regular.png" type="Texture" id=82]
+[ext_resource path="res://Assets/UI/Buttons/blank_hovered.png" type="Texture" id=83]
+[ext_resource path="res://Scripts/BalancePanel.gd" type="Script" id=84]
+[ext_resource path="res://Assets/Sound/ui/click.ogg" type="AudioStream" id=85]
+[ext_resource path="res://Assets/Sound/ui/coins_05.ogg" type="AudioStream" id=86]
+[ext_resource path="res://Assets/Sound/ui/cabinet_1.ogg" type="AudioStream" id=87]
+[ext_resource path="res://Scripts/Characters.gd" type="Script" id=88]
+[ext_resource path="res://Scenes/ExchangeMenu.gd" type="Script" id=89]
+[ext_resource path="res://Scenes/UI/ArtikelBox.tscn" type="PackedScene" id=90]
+[ext_resource path="res://Assets/UI/tx_menu.png" type="Texture" id=91]
+[ext_resource path="res://Scenes/UI/DragBox.gd" type="Script" id=92]
+[ext_resource path="res://Assets/Sound/ui/coins_01.ogg" type="AudioStream" id=93]
+[ext_resource path="res://Scripts/RiverLayer.gd" type="Script" id=94]
+[ext_resource path="res://Scripts/ByBiome.gd" type="Script" id=95]
+[ext_resource path="res://Scripts/MessageLogDisplay.gd" type="Script" id=96]
+[ext_resource path="res://Assets/Sound/ui/click_2.ogg" type="AudioStream" id=97]
+[ext_resource path="res://Scripts/VegetationMap.gd" type="Script" id=98]
+[ext_resource path="res://Assets/Sound/stream/market_1.ogg" type="AudioStream" id=99]
+[ext_resource path="res://Assets/Sound/stream/market_2.ogg" type="AudioStream" id=100]
+[ext_resource path="res://Assets/Vegetation/taiga_2.png" type="Texture" id=101]
+[ext_resource path="res://Assets/Vegetation/jungle_3.png" type="Texture" id=102]
+[ext_resource path="res://Assets/Vegetation/conifer_2.png" type="Texture" id=103]
+[ext_resource path="res://Assets/Vegetation/conifer_3.png" type="Texture" id=104]
+[ext_resource path="res://Assets/Vegetation/conifer_4.png" type="Texture" id=105]
+[ext_resource path="res://Assets/Vegetation/forest_2.png" type="Texture" id=106]
+[ext_resource path="res://Assets/Vegetation/forest_3.png" type="Texture" id=107]
+[ext_resource path="res://Assets/Vegetation/forest_4.png" type="Texture" id=108]
+[ext_resource path="res://Assets/Vegetation/jungle_2.png" type="Texture" id=109]
+[ext_resource path="res://Assets/Vegetation/conifer_1.png" type="Texture" id=110]
+[ext_resource path="res://Assets/Vegetation/forest_1.png" type="Texture" id=111]
+[ext_resource path="res://Assets/Vegetation/jungle_1.png" type="Texture" id=112]
+[ext_resource path="res://Assets/Vegetation/taiga_1.png" type="Texture" id=113]
+[ext_resource path="res://Fonts/TimesSS/TimesSubtext12.tres" type="DynamicFont" id=114]
+[ext_resource path="res://Assets/Sound/stream/gets windy out past the breakers.ogg" type="AudioStream" id=115]
+[ext_resource path="res://Scenes/Styles/BluePanel.tres" type="StyleBox" id=116]
+[ext_resource path="res://Scenes/Styles/TanButtonHover.tres" type="StyleBox" id=117]
+[ext_resource path="res://Scenes/Styles/TanButton.tres" type="StyleBox" id=118]
+[ext_resource path="res://Scenes/Styles/TanButtonPressed.tres" type="StyleBox" id=119]
+[ext_resource path="res://Assets/Sound/ui/flick_1.ogg" type="AudioStream" id=120]
+[ext_resource path="res://Assets/Sound/ui/drop_3.ogg" type="AudioStream" id=121]
+[ext_resource path="res://Assets/Sound/ui/drop_1.ogg" type="AudioStream" id=122]
+[ext_resource path="res://Assets/Sound/ui/drop_4.ogg" type="AudioStream" id=123]
+[ext_resource path="res://Assets/Sound/ui/pickup_1.ogg" type="AudioStream" id=124]
+[ext_resource path="res://Assets/Sound/ui/door_close_01.ogg" type="AudioStream" id=125]
+[ext_resource path="res://Assets/Sound/stream/the_moontide_river_path.ogg" type="AudioStream" id=126]
+[ext_resource path="res://Assets/Sound/stream/seaside_gulls_egypt.ogg" type="AudioStream" id=127]
+[ext_resource path="res://Assets/Sound/stream/ship_at_bay.ogg" type="AudioStream" id=128]
+[ext_resource path="res://Assets/Sound/stream/waves_1.ogg" type="AudioStream" id=129]
+[ext_resource path="res://Assets/Sound/stream/gulls_double.ogg" type="AudioStream" id=130]
+[ext_resource path="res://Assets/Sound/stream/gulls_short.ogg" type="AudioStream" id=131]
+[ext_resource path="res://Assets/Sound/stream/gulls_loud.ogg" type="AudioStream" id=132]
+[ext_resource path="res://Assets/Sound/stream/gulls_full.ogg" type="AudioStream" id=133]
+[ext_resource path="res://Scripts/SeaNavMap.gd" type="Script" id=134]
+
+[sub_resource type="TileSet" id=1]
+0/name = "conifer_1.png 0"
+0/texture = ExtResource( 110 )
+0/tex_offset = Vector2( 0, -187 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 128, 256 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "conifer_2.png 1"
+1/texture = ExtResource( 103 )
+1/tex_offset = Vector2( 0, -187 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 128, 256 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "conifer_3.png 2"
+2/texture = ExtResource( 104 )
+2/tex_offset = Vector2( 0, -187 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 128, 256 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "conifer_4.png 3"
+3/texture = ExtResource( 105 )
+3/tex_offset = Vector2( 0, -187 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 128, 256 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "forest_1.png 4"
+4/texture = ExtResource( 111 )
+4/tex_offset = Vector2( 0, -187 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 128, 256 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "forest_2.png 5"
+5/texture = ExtResource( 106 )
+5/tex_offset = Vector2( 0, -187 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 0, 0, 128, 256 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+6/name = "forest_3.png 6"
+6/texture = ExtResource( 107 )
+6/tex_offset = Vector2( 0, -187 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 0, 0, 128, 256 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
+7/name = "forest_4.png 7"
+7/texture = ExtResource( 108 )
+7/tex_offset = Vector2( 0, -187 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 0, 128, 256 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "jungle_1.png 8"
+8/texture = ExtResource( 112 )
+8/tex_offset = Vector2( 0, -187 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 128, 256 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+9/name = "jungle_2.png 9"
+9/texture = ExtResource( 109 )
+9/tex_offset = Vector2( 0, -187 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 0, 0, 128, 256 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+10/name = "jungle_3.png 10"
+10/texture = ExtResource( 102 )
+10/tex_offset = Vector2( 0, -187 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 0, 0, 128, 256 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
+10/shapes = [  ]
+10/z_index = 0
+11/name = "jungle_4.png 11"
+11/texture = ExtResource( 20 )
+11/tex_offset = Vector2( 0, -187 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 0, 0, 128, 256 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
+11/shapes = [  ]
+11/z_index = 0
+12/name = "taiga_1.png 12"
+12/texture = ExtResource( 113 )
+12/tex_offset = Vector2( 0, -187 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 0, 0, 128, 256 )
+12/tile_mode = 0
+12/occluder_offset = Vector2( 0, 0 )
+12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape_one_way = false
+12/shape_one_way_margin = 0.0
+12/shapes = [  ]
+12/z_index = 0
+13/name = "taiga_2.png 13"
+13/texture = ExtResource( 101 )
+13/tex_offset = Vector2( 0, -187 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 0, 0, 128, 256 )
+13/tile_mode = 0
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
+13/shapes = [  ]
+13/z_index = 0
+
+[sub_resource type="TileSet" id=2]
+0/name = "very_dry.png 0"
+0/texture = ExtResource( 3 )
+0/tex_offset = Vector2( 0, -58 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 128, 128, 128 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "dry.png 1"
+1/texture = ExtResource( 4 )
+1/tex_offset = Vector2( 0, -58 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 128, 128, 128 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "wet.png 2"
+2/texture = ExtResource( 2 )
+2/tex_offset = Vector2( 0, -58 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 128, 128, 128 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "very_wet.png 3"
+3/texture = ExtResource( 1 )
+3/tex_offset = Vector2( 0, -58 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 128, 128, 128 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+
+[sub_resource type="DynamicFont" id=3]
+size = 22
+font_data = ExtResource( 73 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.313726, 0.266667, 0.117647, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.976471, 0.811765, 0.0117647, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="DynamicFont" id=5]
+size = 25
+font_data = ExtResource( 79 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 25
+font_data = ExtResource( 79 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 48
+font_data = ExtResource( 81 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 26
+font_data = ExtResource( 73 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 24
+font_data = ExtResource( 73 )
+
+[node name="Main" type="Node"]
+script = ExtResource( 30 )
+
+[node name="Sounds" type="Node2D" parent="."]
+pause_mode = 2
+
+[node name="UI" type="Node2D" parent="Sounds"]
+
+[node name="Click_1" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 85 )
+
+[node name="Click_2" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 97 )
+volume_db = -19.689
+pitch_scale = 2.18
+
+[node name="Coins_1" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 93 )
+
+[node name="Coins_5" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 86 )
+
+[node name="Cabinet_1" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 87 )
+
+[node name="Flick_1" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 120 )
+
+[node name="Drop_1" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 122 )
+
+[node name="Drop_3" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 121 )
+
+[node name="Drop_4" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 123 )
+
+[node name="Pickup_1" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 124 )
+volume_db = 4.0
+
+[node name="Close_1" type="AudioStreamPlayer" parent="Sounds/UI"]
+stream = ExtResource( 125 )
+
+[node name="Stream" type="Node2D" parent="Sounds"]
+
+[node name="Market_1" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 99 )
+volume_db = -3.0
+
+[node name="Market_2" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 100 )
+volume_db = -3.0
+
+[node name="Windy" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 115 )
+volume_db = -3.0
+
+[node name="Moontide" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 126 )
+volume_db = -5.0
+
+[node name="EgyptGulls" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 127 )
+
+[node name="AtBay" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 128 )
+
+[node name="GullsDouble" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 130 )
+
+[node name="GullsShort" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 131 )
+
+[node name="GullsLoud" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 132 )
+
+[node name="GullsFull" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 133 )
+
+[node name="Waves_1" type="AudioStreamPlayer" parent="Sounds/Stream"]
+stream = ExtResource( 129 )
+
+[node name="MusicTimer" type="Timer" parent="Sounds"]
+
+[node name="Tools" type="Node2D" parent="."]
+script = ExtResource( 33 )
+
+[node name="ShipStats" type="Node2D" parent="."]
+script = ExtResource( 25 )
+
+[node name="Artikels" type="Node2D" parent="."]
+script = ExtResource( 22 )
+
+[node name="ByBiome" type="Node2D" parent="Artikels"]
+script = ExtResource( 95 )
+
+[node name="Calendar" type="Node2D" parent="."]
+script = ExtResource( 68 )
+
+[node name="Timer" type="Timer" parent="Calendar"]
+
+[node name="WorldGen" type="Node" parent="."]
+script = ExtResource( 36 )
+
+[node name="BiomeMap" type="TileMap" parent="WorldGen"]
+mode = 1
+tile_set = ExtResource( 19 )
+cell_size = Vector2( 128, 64 )
+collision_bounce = 0.1
+format = 1
+tile_data = PoolIntArray( 7, 39, 0, 8, 39, 0, 9, 39, 0, 10, 39, 0, 11, 39, 0, 12, 39, 0, 13, 39, 0, 65543, 39, 0, 65544, 40, 0, 65545, 41, 0, 65546, 40, 0, 65547, 40, 0, 65548, 40, 0, 65549, 39, 0, 131079, 39, 0, 131080, 40, 0, 131081, 12, 0, 131082, 12, 0, 131083, 12, 0, 131084, 40, 0, 131085, 39, 0, 196615, 39, 0, 196616, 40, 0, 196617, 12, 0, 196618, 12, 0, 196619, 12, 0, 196620, 40, 0, 196621, 39, 0, 262151, 39, 0, 262152, 40, 0, 262153, 40, 0, 262154, 40, 0, 262155, 40, 0, 262156, 40, 0, 262157, 39, 0, 327687, 39, 0, 327688, 39, 0, 327689, 39, 0, 327690, 39, 0, 327691, 39, 0, 327692, 39, 0, 327693, 39, 0 )
+script = ExtResource( 23 )
+
+[node name="SeaNavMap" type="TileMap" parent="WorldGen"]
+mode = 1
+cell_size = Vector2( 128, 64 )
+format = 1
+script = ExtResource( 134 )
+
+[node name="VegetationMap" type="TileMap" parent="WorldGen"]
+mode = 1
+tile_set = SubResource( 1 )
+cell_size = Vector2( 128, 64 )
+format = 1
+script = ExtResource( 98 )
+
+[node name="TempMap" type="TileMap" parent="WorldGen"]
+visible = false
+mode = 1
+tile_set = ExtResource( 17 )
+cell_size = Vector2( 128, 64 )
+format = 1
+script = ExtResource( 37 )
+
+[node name="MoistureMap" type="TileMap" parent="WorldGen"]
+visible = false
+mode = 1
+tile_set = SubResource( 2 )
+cell_size = Vector2( 128, 64 )
+format = 1
+script = ExtResource( 34 )
+
+[node name="CityMap" type="TileMap" parent="WorldGen"]
+mode = 1
+tile_set = ExtResource( 18 )
+cell_size = Vector2( 128, 64 )
+format = 1
+
+[node name="PreviewContainer" type="Node2D" parent="WorldGen"]
+script = ExtResource( 35 )
+
+[node name="BiomeSelector" type="Node2D" parent="WorldGen"]
+script = ExtResource( 26 )
+
+[node name="RiverLayer" type="Node2D" parent="WorldGen"]
+script = ExtResource( 94 )
+
+[node name="Cities" type="Node2D" parent="."]
+script = ExtResource( 24 )
+
+[node name="Captains" type="Node2D" parent="."]
+script = ExtResource( 28 )
+
+[node name="Characters" type="Node2D" parent="."]
+script = ExtResource( 88 )
+
+[node name="Ships" type="Node2D" parent="."]
+script = ExtResource( 72 )
+
+[node name="Dispatcher" type="Node2D" parent="."]
+script = ExtResource( 80 )
+
+[node name="Player" parent="." instance=ExtResource( 21 )]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="DateBar" type="ColorRect" parent="UILayer"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -960.0
+margin_right = 960.0
+margin_bottom = 27.0
+color = Color( 0, 0, 0, 0.392157 )
+script = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SilverLabel" type="Label" parent="UILayer/DateBar"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 44.0
+margin_top = -18.5
+margin_right = 224.0
+margin_bottom = 18.5
+custom_fonts/font = ExtResource( 75 )
+text = "0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatusLabel" type="Label" parent="UILayer/DateBar"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.151
+margin_top = -14.5426
+margin_right = 99.8494
+margin_bottom = 11.4574
+custom_fonts/font = SubResource( 3 )
+text = "Paused"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DateLabel" type="Label" parent="UILayer/DateBar"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -279.0
+margin_top = -12.5
+margin_right = -20.0
+margin_bottom = 12.5
+custom_fonts/font = ExtResource( 75 )
+text = "Date ~ April 27, 1528"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SilverIcon" type="TextureRect" parent="UILayer/DateBar"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 20.0
+margin_top = -10.0
+margin_right = 20.0
+margin_bottom = 10.0
+texture = ExtResource( 67 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageLogDisplay" type="VBoxContainer" parent="UILayer"]
+margin_left = 1350.0
+margin_top = 340.0
+margin_right = 1910.0
+margin_bottom = 830.0
+custom_constants/separation = 28
+alignment = 2
+script = ExtResource( 96 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapWidget" type="TextureRect" parent="UILayer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -200.0
+texture = ExtResource( 47 )
+script = ExtResource( 50 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LogisticsButton" type="TextureButton" parent="UILayer/MapWidget"]
+margin_left = 1.0
+margin_top = 143.0
+margin_right = 57.0
+margin_bottom = 199.0
+texture_normal = ExtResource( 48 )
+texture_pressed = ExtResource( 49 )
+texture_hover = ExtResource( 49 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LandwaterMinimap" type="TextureRect" parent="UILayer/MapWidget"]
+margin_left = 100.0
+margin_top = 2.0
+margin_right = 239.0
+margin_bottom = 141.0
+rect_rotation = 45.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BiomeMinimap" type="TextureRect" parent="UILayer/MapWidget"]
+visible = false
+margin_left = 100.0
+margin_top = 2.0
+margin_right = 239.0
+margin_bottom = 141.0
+rect_rotation = 45.0
+expand = true
+
+[node name="MoistureMinimap" type="TextureRect" parent="UILayer/MapWidget"]
+visible = false
+margin_left = 100.0
+margin_top = 2.0
+margin_right = 239.0
+margin_bottom = 141.0
+rect_rotation = 45.0
+expand = true
+
+[node name="TempMinimap" type="TextureRect" parent="UILayer/MapWidget"]
+visible = false
+margin_left = 100.0
+margin_top = 2.0
+margin_right = 239.0
+margin_bottom = 141.0
+rect_rotation = 45.0
+expand = true
+
+[node name="NationMinimap" type="TextureRect" parent="UILayer/MapWidget"]
+visible = false
+margin_left = 100.0
+margin_top = 2.0
+margin_right = 239.0
+margin_bottom = 141.0
+rect_rotation = 45.0
+expand = true
+
+[node name="ShipIcon" type="Sprite" parent="UILayer/MapWidget"]
+position = Vector2( 98, 98 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 52 )
+script = ExtResource( 51 )
+
+[node name="BoostIndicator" type="Button" parent="UILayer/MapWidget"]
+visible = false
+margin_left = 6.68982
+margin_top = 6.20502
+margin_right = 33.6898
+margin_bottom = 26.205
+
+[node name="Label" type="Label" parent="UILayer/MapWidget/BoostIndicator"]
+margin_left = 7.00391
+margin_top = -1.0
+margin_right = 47.0039
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 75 )
+text = "B"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LandButton" type="Button" parent="UILayer/MapWidget"]
+margin_left = 128.58
+margin_top = 2.8833
+margin_right = 148.58
+margin_bottom = 22.8833
+custom_styles/hover = ExtResource( 117 )
+custom_styles/pressed = ExtResource( 119 )
+custom_styles/focus = ExtResource( 119 )
+custom_styles/normal = ExtResource( 118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/MapWidget/LandButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.5
+margin_top = -7.0
+margin_right = 3.5
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 114 )
+text = "L"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoistureButton" type="Button" parent="UILayer/MapWidget"]
+margin_left = 175.898
+margin_top = 2.8833
+margin_right = 195.898
+margin_bottom = 22.8833
+custom_styles/hover = ExtResource( 117 )
+custom_styles/pressed = ExtResource( 119 )
+custom_styles/focus = ExtResource( 119 )
+custom_styles/normal = ExtResource( 118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/MapWidget/MoistureButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -5.5
+margin_top = -7.0
+margin_right = 5.5
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 114 )
+text = "M"
+
+[node name="TempButton" type="Button" parent="UILayer/MapWidget"]
+margin_left = 175.898
+margin_top = 26.205
+margin_right = 195.898
+margin_bottom = 46.205
+custom_styles/hover = ExtResource( 117 )
+custom_styles/pressed = ExtResource( 119 )
+custom_styles/focus = ExtResource( 119 )
+custom_styles/normal = ExtResource( 118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/MapWidget/TempButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -3.5
+margin_top = -7.0
+margin_right = 3.5
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 114 )
+text = "T"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BiomeButton" type="Button" parent="UILayer/MapWidget"]
+margin_left = 152.553
+margin_top = 2.8833
+margin_right = 172.553
+margin_bottom = 22.8833
+custom_styles/hover = ExtResource( 117 )
+custom_styles/pressed = ExtResource( 119 )
+custom_styles/focus = ExtResource( 119 )
+custom_styles/normal = ExtResource( 118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/MapWidget/BiomeButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.0
+margin_top = -7.0
+margin_right = 4.0
+margin_bottom = 7.0
+custom_fonts/font = ExtResource( 114 )
+text = "B"
+
+[node name="MainMenu" type="TextureRect" parent="UILayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -960.0
+margin_top = -104.0
+margin_right = 960.0
+margin_bottom = 1097.0
+texture = ExtResource( 39 )
+script = ExtResource( 43 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGameButton" type="TextureButton" parent="UILayer/MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.253
+anchor_right = 0.5
+anchor_bottom = 0.274
+margin_left = -67.0
+margin_top = 0.147003
+margin_right = 68.0
+margin_bottom = 2.92603
+texture_normal = ExtResource( 44 )
+texture_pressed = ExtResource( 45 )
+texture_hover = ExtResource( 45 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapGenMessage" type="Panel" parent="UILayer/MainMenu"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -32.0
+margin_right = 250.0
+margin_bottom = 32.0
+
+[node name="Label" type="Label" parent="UILayer/MainMenu/MapGenMessage"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -248.5
+margin_top = -13.5
+margin_right = 248.5
+margin_bottom = 13.5
+custom_fonts/font = ExtResource( 75 )
+text = "Starting..."
+align = 1
+
+[node name="CityMenu" type="TextureRect" parent="UILayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -240.0
+margin_top = -150.0
+margin_right = 240.0
+margin_bottom = 150.0
+texture = ExtResource( 7 )
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DragButton" type="Button" parent="UILayer/CityMenu"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 480.0
+margin_bottom = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CityPortrait" type="TextureRect" parent="UILayer/CityMenu"]
+margin_left = 5.0
+margin_top = 14.0
+margin_right = 226.0
+margin_bottom = 134.0
+
+[node name="CityName" type="Label" parent="UILayer/CityMenu"]
+margin_left = 245.0
+margin_top = 20.0
+margin_right = 421.0
+margin_bottom = 119.0
+custom_fonts/font = ExtResource( 74 )
+text = "City Name Here"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XButton" type="TextureButton" parent="UILayer/CityMenu"]
+margin_left = 455.0
+margin_top = 4.0
+margin_right = 475.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+
+[node name="MarketButton" type="TextureButton" parent="UILayer/CityMenu"]
+margin_left = 8.0
+margin_top = 143.0
+margin_right = 78.0
+margin_bottom = 173.0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+
+[node name="InfoPanel" type="Panel" parent="UILayer/CityMenu"]
+margin_left = 250.0
+margin_top = 60.0
+margin_right = 457.0
+margin_bottom = 194.0
+custom_styles/panel = ExtResource( 116 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LordLabel" type="Label" parent="UILayer/CityMenu/InfoPanel"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 150.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 75 )
+text = "Lord - "
+
+[node name="FactionLabel" type="Label" parent="UILayer/CityMenu/InfoPanel"]
+margin_left = 9.0
+margin_top = 25.0
+margin_right = 127.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 75 )
+text = "Faction - "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopLabel" type="Label" parent="UILayer/CityMenu/InfoPanel"]
+margin_left = 7.922
+margin_top = 47.0
+margin_right = 101.922
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 75 )
+text = "Population - "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GrowthLabel" type="Label" parent="UILayer/CityMenu/InfoPanel"]
+margin_left = 7.922
+margin_top = 68.0
+margin_right = 101.922
+margin_bottom = 89.0
+custom_fonts/font = ExtResource( 75 )
+text = "Growth Cap - "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShipYardButton" type="Button" parent="UILayer/CityMenu"]
+margin_left = 84.0
+margin_top = 143.0
+margin_right = 175.0
+margin_bottom = 173.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/normal = ExtResource( 116 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/CityMenu/ShipYardButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.5
+margin_top = -11.0
+margin_right = 32.5
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 75 )
+text = "Shipyard"
+
+[node name="MarketMenu" type="TextureRect" parent="UILayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -490.0
+margin_top = -360.0
+margin_right = 490.0
+margin_bottom = 360.0
+texture = ExtResource( 10 )
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DragButton" type="Button" parent="UILayer/MarketMenu"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 980.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarketArtikels" type="HBoxContainer" parent="UILayer/MarketMenu"]
+margin_left = 29.0
+margin_top = 74.0
+margin_right = 478.0
+margin_bottom = 607.0
+custom_constants/separation = 80
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArtikelsVbox" type="VBoxContainer" parent="UILayer/MarketMenu/MarketArtikels"]
+margin_bottom = 533.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dbox1" type="VBoxContainer" parent="UILayer/MarketMenu/MarketArtikels"]
+margin_left = 80.0
+margin_right = 80.0
+margin_bottom = 533.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dbox2" type="VBoxContainer" parent="UILayer/MarketMenu/MarketArtikels"]
+margin_left = 160.0
+margin_right = 160.0
+margin_bottom = 533.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dbox3" type="VBoxContainer" parent="UILayer/MarketMenu/MarketArtikels"]
+margin_left = 240.0
+margin_right = 240.0
+margin_bottom = 533.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuantitiesVbox" type="VBoxContainer" parent="UILayer/MarketMenu/MarketArtikels"]
+margin_left = 320.0
+margin_right = 320.0
+margin_bottom = 533.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueVbox" type="VBoxContainer" parent="UILayer/MarketMenu/MarketArtikels"]
+margin_left = 400.0
+margin_right = 400.0
+margin_bottom = 533.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerArtikels" type="HBoxContainer" parent="UILayer/MarketMenu"]
+margin_left = 500.0
+margin_top = 75.0
+margin_right = 958.0
+margin_bottom = 607.0
+custom_constants/separation = 80
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArtikelsVbox" type="VBoxContainer" parent="UILayer/MarketMenu/PlayerArtikels"]
+margin_bottom = 532.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dbox1" type="VBoxContainer" parent="UILayer/MarketMenu/PlayerArtikels"]
+margin_left = 80.0
+margin_right = 80.0
+margin_bottom = 532.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dbox2" type="VBoxContainer" parent="UILayer/MarketMenu/PlayerArtikels"]
+margin_left = 160.0
+margin_right = 160.0
+margin_bottom = 532.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dbox3" type="VBoxContainer" parent="UILayer/MarketMenu/PlayerArtikels"]
+margin_left = 240.0
+margin_right = 240.0
+margin_bottom = 532.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuantitiesVbox" type="VBoxContainer" parent="UILayer/MarketMenu/PlayerArtikels"]
+margin_left = 320.0
+margin_right = 320.0
+margin_bottom = 532.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ValueVbox" type="VBoxContainer" parent="UILayer/MarketMenu/PlayerArtikels"]
+margin_left = 400.0
+margin_right = 400.0
+margin_bottom = 532.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CityName" type="Label" parent="UILayer/MarketMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -182.0
+margin_top = 2.0
+margin_right = 182.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 74 )
+text = "Whatever Market"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CargoLabel" type="Label" parent="UILayer/MarketMenu"]
+margin_left = 753.852
+margin_top = 664.138
+margin_right = 807.852
+margin_bottom = 688.138
+custom_fonts/font = ExtResource( 75 )
+text = "15 / 50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XButton" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 955.232
+margin_top = 4.0
+margin_right = 975.232
+margin_bottom = 24.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+
+[node name="MarketUp" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_top = 74.0
+margin_right = 20.0
+margin_bottom = 94.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 16 )
+
+[node name="MarketDown" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_top = 588.094
+margin_right = 20.0
+margin_bottom = 608.094
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerUp" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 959.971
+margin_top = 74.0
+margin_right = 979.971
+margin_bottom = 94.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 16 )
+
+[node name="PlayerDown" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 959.971
+margin_top = 588.094
+margin_right = 979.971
+margin_bottom = 608.094
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 13 )
+
+[node name="BackButton" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 12 )
+
+[node name="DoneButton" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 454.0
+margin_top = 688.0
+margin_right = 524.0
+margin_bottom = 714.0
+texture_normal = ExtResource( 54 )
+texture_pressed = ExtResource( 63 )
+texture_hover = ExtResource( 63 )
+
+[node name="SellButton" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 561.0
+margin_top = 615.0
+margin_right = 611.0
+margin_bottom = 645.0
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 41 )
+texture_hover = ExtResource( 41 )
+
+[node name="BuyButton" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 370.0
+margin_top = 615.0
+margin_right = 420.0
+margin_bottom = 645.0
+texture_normal = ExtResource( 42 )
+texture_pressed = ExtResource( 38 )
+texture_hover = ExtResource( 38 )
+
+[node name="Reset" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 423.0
+margin_top = 616.0
+margin_right = 558.0
+margin_bottom = 644.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 83 )
+texture_hover = ExtResource( 83 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/MarketMenu/Reset"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.5
+margin_top = -7.0
+margin_right = 50.5
+margin_bottom = 7.0
+text = "Reset"
+align = 1
+
+[node name="Balance" type="TextureButton" parent="UILayer/MarketMenu"]
+margin_left = 423.0
+margin_top = 651.0
+margin_right = 558.0
+margin_bottom = 679.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 82 )
+texture_hover = ExtResource( 82 )
+script = ExtResource( 84 )
+
+[node name="Label" type="Label" parent="UILayer/MarketMenu/Balance"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.5
+margin_top = -7.0
+margin_right = 50.5
+margin_bottom = 7.0
+text = "0"
+align = 1
+
+[node name="Panel" type="Panel" parent="UILayer/MarketMenu/Balance"]
+visible = false
+margin_right = 130.0
+margin_bottom = 36.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MarketMenu/Balance/Panel"]
+margin_right = 130.0
+margin_bottom = 36.0
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SilverLabel" type="Label" parent="UILayer/MarketMenu"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -226.148
+margin_top = 279.711
+margin_right = -26.1479
+margin_bottom = 300.711
+custom_fonts/font = ExtResource( 75 )
+text = "Silver: 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExchangeMenu" type="TextureRect" parent="UILayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
+texture = ExtResource( 91 )
+script = ExtResource( 89 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/ExchangeMenu"]
+margin_right = 1278.0
+margin_bottom = 789.0
+color = Color( 0.0745098, 0.101961, 0.164706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverTimer" type="Timer" parent="UILayer/ExchangeMenu"]
+wait_time = 0.5
+
+[node name="DropTimer" type="Timer" parent="UILayer/ExchangeMenu"]
+wait_time = 0.1
+one_shot = true
+
+[node name="CityName" type="Label" parent="UILayer/ExchangeMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -182.0
+margin_top = 8.00003
+margin_right = 182.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 74 )
+text = "Whatever Market"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="UILayer/ExchangeMenu"]
+margin_left = 2.26108
+margin_top = 2.00003
+margin_right = 22.2611
+margin_bottom = 22.0
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XButton" type="TextureButton" parent="UILayer/ExchangeMenu"]
+margin_left = 1257.55
+margin_top = 2.00003
+margin_right = 1277.55
+margin_bottom = 22.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GiveZone" type="Panel" parent="UILayer/ExchangeMenu"]
+margin_left = 44.0
+margin_top = 125.0
+margin_right = 522.0
+margin_bottom = 741.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EntityGrid" type="GridContainer" parent="UILayer/ExchangeMenu"]
+margin_left = 44.0
+margin_top = 134.0
+margin_right = 520.0
+margin_bottom = 746.0
+mouse_filter = 2
+custom_constants/vseparation = 68
+custom_constants/hseparation = 68
+columns = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TakeAll" type="TextureButton" parent="UILayer/ExchangeMenu"]
+margin_left = 525.0
+margin_top = 126.0
+margin_right = 545.0
+margin_bottom = 146.0
+texture_normal = ExtResource( 57 )
+texture_pressed = ExtResource( 62 )
+texture_hover = ExtResource( 62 )
+
+[node name="TakeAllLabel" type="Label" parent="UILayer/ExchangeMenu"]
+margin_left = 525.0
+margin_top = 150.0
+margin_right = 589.0
+margin_bottom = 171.0
+custom_fonts/font = ExtResource( 75 )
+text = "Take All"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TakeZone" type="Panel" parent="UILayer/ExchangeMenu"]
+margin_left = 890.0
+margin_top = 61.0
+margin_right = 1230.0
+margin_bottom = 672.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShipGrid" type="GridContainer" parent="UILayer/ExchangeMenu"]
+margin_left = 890.0
+margin_top = 61.0
+margin_right = 1230.0
+margin_bottom = 673.0
+mouse_filter = 2
+custom_constants/vseparation = 68
+custom_constants/hseparation = 68
+columns = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GiveAll" type="TextureButton" parent="UILayer/ExchangeMenu"]
+margin_left = 867.0
+margin_top = 126.0
+margin_right = 887.0
+margin_bottom = 146.0
+texture_normal = ExtResource( 60 )
+texture_pressed = ExtResource( 59 )
+texture_hover = ExtResource( 59 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GiveAllLabel" type="Label" parent="UILayer/ExchangeMenu"]
+margin_left = 813.0
+margin_top = 150.0
+margin_right = 886.0
+margin_bottom = 171.0
+custom_fonts/font = ExtResource( 75 )
+text = "Give All"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExchangeGrid" type="GridContainer" parent="UILayer/ExchangeMenu"]
+margin_left = 539.849
+margin_top = 360.0
+margin_right = 879.849
+margin_bottom = 700.0
+custom_constants/vseparation = 68
+custom_constants/hseparation = 68
+columns = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BalanceBox" type="TextureButton" parent="UILayer/ExchangeMenu"]
+margin_left = 619.0
+margin_top = 287.0
+margin_right = 754.0
+margin_bottom = 315.0
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 82 )
+texture_hover = ExtResource( 82 )
+script = ExtResource( 84 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmountLabel" type="Label" parent="UILayer/ExchangeMenu/BalanceBox"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.5
+margin_top = -11.0
+margin_right = 50.5
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 75 )
+text = "0"
+align = 1
+
+[node name="ResetButton" type="TextureButton" parent="UILayer/ExchangeMenu"]
+margin_left = 550.0
+margin_top = 324.5
+margin_right = 685.0
+margin_bottom = 352.5
+texture_normal = ExtResource( 82 )
+texture_pressed = ExtResource( 83 )
+texture_hover = ExtResource( 83 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/ExchangeMenu/ResetButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.5
+margin_top = -7.0
+margin_right = 50.5
+margin_bottom = 7.0
+text = "Reset"
+align = 1
+
+[node name="DoneButton" type="TextureButton" parent="UILayer/ExchangeMenu"]
+margin_left = 698.0
+margin_top = 328.0
+margin_right = 768.0
+margin_bottom = 354.0
+texture_normal = ExtResource( 54 )
+texture_pressed = ExtResource( 63 )
+texture_hover = ExtResource( 63 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SilverRemainingLabel" type="Label" parent="UILayer/ExchangeMenu"]
+modulate = Color( 0.894118, 0.705882, 0.0627451, 1 )
+margin_left = 761.0
+margin_top = 289.0
+margin_right = 855.0
+margin_bottom = 320.0
+custom_fonts/font = ExtResource( 75 )
+text = "1500"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverBox" type="ColorRect" parent="UILayer/ExchangeMenu"]
+visible = false
+margin_right = 240.0
+margin_bottom = 226.0
+mouse_filter = 2
+color = Color( 0.0778198, 0.0801112, 0.132813, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="Label" parent="UILayer/ExchangeMenu/HoverBox"]
+modulate = Color( 0.894118, 0.737255, 0.12549, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -120.0
+margin_top = 11.0
+margin_right = 118.0
+margin_bottom = 29.0
+custom_fonts/font = ExtResource( 78 )
+text = "NAme Goes Here"
+align = 1
+
+[node name="BasePriceLabel" type="Label" parent="UILayer/ExchangeMenu/HoverBox"]
+modulate = Color( 0.894118, 0.658824, 0.101961, 1 )
+margin_left = 15.0
+margin_top = 60.0
+margin_right = 209.0
+margin_bottom = 81.0
+custom_fonts/font = ExtResource( 75 )
+text = "Base Price - "
+
+[node name="ProducedLabel" type="Label" parent="UILayer/ExchangeMenu/HoverBox"]
+modulate = Color( 0.290196, 0.72549, 0.25098, 1 )
+margin_left = 15.0
+margin_top = 86.0
+margin_right = 209.0
+margin_bottom = 107.0
+custom_fonts/font = ExtResource( 75 )
+text = "Produced Last Week -"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PerishableLabel" type="Label" parent="UILayer/ExchangeMenu/HoverBox"]
+margin_left = 15.0
+margin_top = 36.0
+margin_right = 209.0
+margin_bottom = 69.0
+custom_fonts/font = ExtResource( 75 )
+text = "Non-Perishable"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DemandLabel" type="Label" parent="UILayer/ExchangeMenu/HoverBox"]
+modulate = Color( 0.752941, 0.0784314, 0.0784314, 1 )
+margin_left = 15.0
+margin_top = 112.0
+margin_right = 209.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 75 )
+text = "Demand - 5t9"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DragBox" parent="UILayer/ExchangeMenu" instance=ExtResource( 90 )]
+visible = false
+script = ExtResource( 92 )
+
+[node name="LootMenu" type="TextureRect" parent="UILayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = 250.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DragButton" type="Button" parent="UILayer/LootMenu"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 4.0
+margin_right = 500.0
+margin_bottom = 500.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OtherArtikels" type="HBoxContainer" parent="UILayer/LootMenu"]
+margin_left = 34.0
+margin_top = 58.0
+margin_right = 245.0
+margin_bottom = 405.0
+custom_constants/separation = 170
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArtikelsVbox" type="VBoxContainer" parent="UILayer/LootMenu/OtherArtikels"]
+margin_bottom = 347.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuantitiesVbox" type="VBoxContainer" parent="UILayer/LootMenu/OtherArtikels"]
+margin_left = 170.0
+margin_right = 170.0
+margin_bottom = 347.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerArtikels" type="HBoxContainer" parent="UILayer/LootMenu"]
+margin_left = 250.0
+margin_top = 58.0
+margin_right = 466.0
+margin_bottom = 405.0
+custom_constants/separation = 170
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArtikelsVbox" type="VBoxContainer" parent="UILayer/LootMenu/PlayerArtikels"]
+margin_bottom = 347.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuantitiesVbox" type="VBoxContainer" parent="UILayer/LootMenu/PlayerArtikels"]
+margin_left = 170.0
+margin_right = 170.0
+margin_bottom = 347.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EntityName" type="Label" parent="UILayer/LootMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -182.0
+margin_top = 2.0
+margin_right = 182.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 74 )
+text = "Whatever Market"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CargoLabel" type="Label" parent="UILayer/LootMenu"]
+margin_left = 313.571
+margin_top = 442.063
+margin_right = 367.571
+margin_bottom = 466.063
+custom_fonts/font = ExtResource( 75 )
+text = "15 / 50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XButton" type="TextureButton" parent="UILayer/LootMenu"]
+margin_left = 475.0
+margin_top = 4.0
+margin_right = 495.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+
+[node name="MarketUp" type="TextureButton" parent="UILayer/LootMenu"]
+margin_left = 14.0
+margin_top = 58.0
+margin_right = 34.0
+margin_bottom = 78.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 16 )
+
+[node name="MarketDown" type="TextureButton" parent="UILayer/LootMenu"]
+margin_left = 14.0
+margin_top = 385.0
+margin_right = 34.0
+margin_bottom = 405.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 13 )
+
+[node name="PlayerUp" type="TextureButton" parent="UILayer/LootMenu"]
+margin_left = 466.0
+margin_top = 58.0
+margin_right = 486.0
+margin_bottom = 78.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 16 )
+
+[node name="PlayerDown" type="TextureButton" parent="UILayer/LootMenu"]
+margin_left = 466.0
+margin_top = 385.0
+margin_right = 486.0
+margin_bottom = 405.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 13 )
+
+[node name="BackButton" type="TextureButton" parent="UILayer/LootMenu"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 12 )
+texture_hover = ExtResource( 12 )
+
+[node name="Sell" type="TextureButton" parent="UILayer/LootMenu"]
+margin_left = 254.0
+margin_top = 411.0
+margin_right = 304.0
+margin_bottom = 441.0
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 41 )
+texture_hover = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buy" type="TextureButton" parent="UILayer/LootMenu"]
+margin_left = 39.0
+margin_top = 411.0
+margin_right = 89.0
+margin_bottom = 441.0
+texture_normal = ExtResource( 42 )
+texture_pressed = ExtResource( 38 )
+texture_hover = ExtResource( 38 )
+
+[node name="SilverLabel" type="Label" parent="UILayer/LootMenu"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -247.424
+margin_top = 215.205
+margin_right = -47.4244
+margin_bottom = 236.205
+custom_fonts/font = ExtResource( 75 )
+text = "Silver: 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadSplash" type="TextureRect" parent="UILayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 46 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuantityPopup" type="TextureRect" parent="UILayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -80.0
+margin_right = 90.0
+margin_bottom = 80.0
+texture = ExtResource( 53 )
+script = ExtResource( 66 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DragButton" type="Button" parent="UILayer/QuantityPopup"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 180.0
+margin_bottom = 160.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SilverIcon" type="TextureRect" parent="UILayer/QuantityPopup"]
+margin_left = 5.0
+margin_top = 105.0
+margin_right = 25.0
+margin_bottom = 125.0
+texture = ExtResource( 67 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="TextureButton" parent="UILayer/QuantityPopup"]
+margin_left = 15.0
+margin_top = 127.0
+margin_right = 85.0
+margin_bottom = 153.0
+texture_normal = ExtResource( 58 )
+texture_pressed = ExtResource( 56 )
+texture_hover = ExtResource( 56 )
+
+[node name="Done" type="TextureButton" parent="UILayer/QuantityPopup"]
+margin_left = 96.0
+margin_top = 127.0
+margin_right = 166.0
+margin_bottom = 153.0
+texture_normal = ExtResource( 54 )
+texture_pressed = ExtResource( 63 )
+texture_hover = ExtResource( 63 )
+
+[node name="QuantityLabel" type="Label" parent="UILayer/QuantityPopup"]
+margin_left = 47.0
+margin_top = 62.0
+margin_right = 132.0
+margin_bottom = 76.0
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuySellLabel" type="Label" parent="UILayer/QuantityPopup"]
+margin_left = 28.0
+margin_top = 34.0
+margin_right = 151.0
+margin_bottom = 48.0
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaxLabel" type="Label" parent="UILayer/QuantityPopup"]
+margin_left = 128.0
+margin_top = 62.0
+margin_right = 157.0
+margin_bottom = 76.0
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArtikelLabel" type="Label" parent="UILayer/QuantityPopup"]
+margin_left = 10.0
+margin_top = 7.0
+margin_right = 169.0
+margin_bottom = 28.0
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SilverLabel" type="Label" parent="UILayer/QuantityPopup"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -152.0
+margin_top = 28.0
+margin_right = -84.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 29 )
+text = "0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CostLabel" type="Label" parent="UILayer/QuantityPopup"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = 28.0
+margin_right = -12.0
+margin_bottom = 44.0
+custom_fonts/font = ExtResource( 29 )
+text = "0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftArrow" type="TextureButton" parent="UILayer/QuantityPopup"]
+margin_left = 3.0
+margin_top = 58.0
+margin_right = 23.0
+margin_bottom = 78.0
+texture_normal = ExtResource( 60 )
+texture_pressed = ExtResource( 59 )
+texture_hover = ExtResource( 59 )
+
+[node name="RightArrow" type="TextureButton" parent="UILayer/QuantityPopup"]
+margin_left = 157.0
+margin_top = 58.0
+margin_right = 177.0
+margin_bottom = 78.0
+texture_normal = ExtResource( 57 )
+texture_pressed = ExtResource( 62 )
+texture_hover = ExtResource( 62 )
+
+[node name="Min" type="TextureButton" parent="UILayer/QuantityPopup"]
+margin_left = 3.0
+margin_top = 80.0
+margin_right = 43.0
+margin_bottom = 103.0
+texture_normal = ExtResource( 65 )
+texture_pressed = ExtResource( 61 )
+texture_hover = ExtResource( 61 )
+
+[node name="Max" type="TextureButton" parent="UILayer/QuantityPopup"]
+margin_left = 137.0
+margin_top = 80.0
+margin_right = 177.0
+margin_bottom = 103.0
+texture_normal = ExtResource( 64 )
+texture_pressed = ExtResource( 55 )
+texture_hover = ExtResource( 55 )
+
+[node name="LogisticsMenu" type="TextureRect" parent="UILayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = -400.0
+texture = ExtResource( 70 )
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShipTab" type="TextureRect" parent="UILayer/LogisticsMenu"]
+visible = false
+margin_right = 800.0
+margin_bottom = 800.0
+texture = ExtResource( 70 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShipSprite" type="Sprite" parent="UILayer/LogisticsMenu/ShipTab"]
+position = Vector2( 410, 134 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 52 )
+
+[node name="ShipName" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
+modulate = Color( 1, 0.811765, 0.407843, 1 )
+margin_left = 34.0
+margin_top = 64.0
+margin_right = 330.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 78 )
+text = "Ship Name Here"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ship Class" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
+margin_left = 34.0
+margin_top = 96.0
+margin_right = 98.0
+margin_bottom = 110.0
+text = "Ship Class"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HullLabel" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
+modulate = Color( 0.894118, 0.733333, 0.376471, 1 )
+margin_left = 130.0
+margin_top = 96.0
+margin_right = 290.0
+margin_bottom = 110.0
+text = "Ship of the Line"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speed" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
+margin_left = 34.0
+margin_top = 120.0
+margin_right = 79.0
+margin_bottom = 134.0
+text = "Speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedLabel" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
+modulate = Color( 0.894118, 0.733333, 0.376471, 1 )
+margin_left = 130.0
+margin_top = 120.0
+margin_right = 175.0
+margin_bottom = 134.0
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cargo" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
+margin_left = 34.0
+margin_top = 144.0
+margin_right = 79.0
+margin_bottom = 158.0
+text = "Cargo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CargoLabel" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
+modulate = Color( 0.894118, 0.733333, 0.376471, 1 )
+margin_left = 130.0
+margin_top = 144.0
+margin_right = 175.0
+margin_bottom = 158.0
+text = "10/100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CargoTab" type="TextureRect" parent="UILayer/LogisticsMenu"]
+visible = false
+margin_right = 800.0
+margin_bottom = 800.0
+texture = ExtResource( 70 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerArtikels" type="HBoxContainer" parent="UILayer/LogisticsMenu/CargoTab"]
+margin_left = 34.0
+margin_top = 80.0
+margin_right = 315.0
+margin_bottom = 357.0
+custom_constants/separation = 130
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ArtikelsVbox" type="VBoxContainer" parent="UILayer/LogisticsMenu/CargoTab/PlayerArtikels"]
+margin_bottom = 277.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuantitiesVbox" type="VBoxContainer" parent="UILayer/LogisticsMenu/CargoTab/PlayerArtikels"]
+margin_left = 130.0
+margin_right = 130.0
+margin_bottom = 277.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cargo" type="Label" parent="UILayer/LogisticsMenu/CargoTab"]
+margin_left = 34.0
+margin_top = 53.0
+margin_right = 79.0
+margin_bottom = 67.0
+text = "Cargo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CargoLabel" type="Label" parent="UILayer/LogisticsMenu/CargoTab"]
+modulate = Color( 0.894118, 0.733333, 0.376471, 1 )
+margin_left = 130.0
+margin_top = 53.0
+margin_right = 175.0
+margin_bottom = 67.0
+text = "10/100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InspectButton" type="Button" parent="UILayer/LogisticsMenu/CargoTab"]
+margin_left = 259.0
+margin_top = 60.0
+margin_right = 379.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/LogisticsMenu/CargoTab/InspectButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -37.5
+margin_top = -9.0
+margin_right = 37.5
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Inspect"
+align = 1
+
+[node name="DumpButton" type="Button" parent="UILayer/LogisticsMenu/CargoTab"]
+margin_left = 259.0
+margin_top = 96.0
+margin_right = 379.0
+margin_bottom = 124.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/LogisticsMenu/CargoTab/DumpButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -41.5
+margin_top = -9.0
+margin_right = 41.5
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Dump"
+align = 1
+
+[node name="OfficersTab" type="TextureRect" parent="UILayer/LogisticsMenu"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 70 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OfficerPortraits" type="GridContainer" parent="UILayer/LogisticsMenu/OfficersTab"]
+margin_left = 20.0
+margin_top = 53.0
+margin_right = 784.0
+margin_bottom = 781.0
+custom_constants/vseparation = 131
+custom_constants/hseparation = 176
+columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CrewTab" type="TextureRect" parent="UILayer/LogisticsMenu"]
+visible = false
+margin_right = 800.0
+margin_bottom = 800.0
+texture = ExtResource( 70 )
+
+[node name="MoraleTab" type="TextureRect" parent="UILayer/LogisticsMenu"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 70 )
+
+[node name="EquipmentTab" type="TextureRect" parent="UILayer/LogisticsMenu"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 70 )
+
+[node name="DragButton" type="Button" parent="UILayer/LogisticsMenu"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 800.0
+margin_bottom = 800.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XButton" type="TextureButton" parent="UILayer/LogisticsMenu"]
+margin_left = 774.502
+margin_top = 4.0
+margin_right = 794.502
+margin_bottom = 24.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 14 )
+texture_hover = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShipButton" type="Button" parent="UILayer/LogisticsMenu"]
+margin_left = 5.43555
+margin_top = 4.0
+margin_right = 125.436
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/LogisticsMenu/ShipButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -9.0
+margin_right = 20.0
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Ship"
+
+[node name="CargoButton" type="Button" parent="UILayer/LogisticsMenu"]
+margin_left = 128.0
+margin_top = 4.0
+margin_right = 248.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/LogisticsMenu/CargoButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -34.5
+margin_top = -9.0
+margin_right = 34.5
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Cargo"
+
+[node name="OfficersButton" type="Button" parent="UILayer/LogisticsMenu"]
+margin_left = 251.0
+margin_top = 4.0
+margin_right = 371.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/LogisticsMenu/OfficersButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -42.0
+margin_top = -9.0
+margin_right = 42.0
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Officers"
+
+[node name="CrewButton" type="Button" parent="UILayer/LogisticsMenu"]
+margin_left = 374.0
+margin_top = 3.9574
+margin_right = 494.0
+margin_bottom = 31.9574
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/LogisticsMenu/CrewButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -27.0
+margin_top = -9.0
+margin_right = 27.0
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Crew"
+
+[node name="MoraleButton" type="Button" parent="UILayer/LogisticsMenu"]
+margin_left = 497.0
+margin_top = 4.0
+margin_right = 617.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/LogisticsMenu/MoraleButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -9.0
+margin_right = 40.0
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Morale"
+
+[node name="EquipmentButton" type="Button" parent="UILayer/LogisticsMenu"]
+margin_left = 620.0
+margin_top = 4.0
+margin_right = 740.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/LogisticsMenu/EquipmentButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -54.5
+margin_top = -9.0
+margin_right = 54.5
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Equipment"
+
+[node name="InfoCard" type="Panel" parent="UILayer"]
+visible = false
+modulate = Color( 1, 1, 1, 0.705882 )
+margin_left = 431.0
+margin_top = 224.0
+margin_right = 693.0
+margin_bottom = 464.0
+mouse_filter = 2
+script = ExtResource( 71 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EntityName" type="Label" parent="UILayer/InfoCard"]
+visible = false
+modulate = Color( 1, 0.811765, 0.407843, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -68.0
+margin_top = -109.5
+margin_right = 68.0
+margin_bottom = -88.5
+custom_fonts/font = ExtResource( 75 )
+text = "City Name Here"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CaptainLabel" type="Label" parent="UILayer/InfoCard"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -118.0
+margin_top = 40.0
+margin_right = 118.0
+margin_bottom = 61.0
+custom_fonts/font = ExtResource( 75 )
+text = "Captain - Bartholomew Wiggins"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LordLabel" type="Label" parent="UILayer/InfoCard"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.5
+margin_top = -80.0
+margin_right = 62.5
+margin_bottom = -59.0
+custom_fonts/font = ExtResource( 75 )
+text = "Lord - Unknown"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HullLabel" type="Label" parent="UILayer/InfoCard"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.0
+margin_top = -50.0
+margin_right = 63.0
+margin_bottom = -29.0
+custom_fonts/font = ExtResource( 75 )
+text = "Galleon"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopLabel" type="Label" parent="UILayer/InfoCard"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.5
+margin_top = -50.0
+margin_right = 62.5
+margin_bottom = -29.0
+custom_fonts/font = ExtResource( 75 )
+text = "Pop - 58,000"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StateLabel" type="Label" parent="UILayer/InfoCard"]
+visible = false
+margin_left = 4.0
+margin_top = 129.0
+margin_right = 259.0
+margin_bottom = 150.0
+custom_fonts/font = ExtResource( 75 )
+text = "State - "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedLabel" type="Label" parent="UILayer/InfoCard"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -63.13
+margin_top = -22.0
+margin_right = 61.87
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 75 )
+text = "Speed - "
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProductionLabel" type="Label" parent="UILayer/InfoCard"]
+visible = false
+margin_left = 13.0
+margin_top = 129.0
+margin_right = 249.0
+margin_bottom = 226.0
+custom_fonts/font = ExtResource( 114 )
+autowrap = true
+
+[node name="EncounterScreen" type="ColorRect" parent="UILayer"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
+color = Color( 0.113725, 0.219608, 0.298039, 1 )
+script = ExtResource( 77 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FightButton" type="Button" parent="UILayer/EncounterScreen"]
+margin_left = 710.0
+margin_top = 495.0
+margin_right = 1251.0
+margin_bottom = 529.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FightLabel" type="Label" parent="UILayer/EncounterScreen/FightButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -43.0
+margin_top = -13.0
+margin_right = 43.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 5 )
+text = "Fight"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InsultButton" type="Button" parent="UILayer/EncounterScreen"]
+margin_left = 710.0
+margin_top = 541.0
+margin_right = 1251.0
+margin_bottom = 575.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InsultLabel" type="Label" parent="UILayer/EncounterScreen/InsultButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -51.0
+margin_top = -13.0
+margin_right = 51.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 5 )
+text = "Insult"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ComplimentButton" type="Button" parent="UILayer/EncounterScreen"]
+margin_left = 710.0
+margin_top = 587.0
+margin_right = 1251.0
+margin_bottom = 621.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ComplimentLabel" type="Label" parent="UILayer/EncounterScreen/ComplimentButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -95.5
+margin_top = -13.0
+margin_right = 95.5
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 5 )
+text = "Compliment"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeaveButton" type="Button" parent="UILayer/EncounterScreen"]
+margin_left = 710.0
+margin_top = 633.0
+margin_right = 1251.0
+margin_bottom = 667.0
+
+[node name="LeaveLabel" type="Label" parent="UILayer/EncounterScreen/LeaveButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = -13.0
+margin_right = 46.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 6 )
+text = "Leave"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EntityLabel" type="Label" parent="UILayer/EncounterScreen"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -307.0
+margin_top = 33.0
+margin_right = 611.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 7 )
+text = "The Whatever"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharacterLabel" type="Label" parent="UILayer/EncounterScreen"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -307.0
+margin_top = 125.0
+margin_right = 611.0
+margin_bottom = 155.0
+custom_fonts/font = SubResource( 8 )
+text = "Captained by Ignatious Thoroughgood"
+align = 1
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/EncounterScreen"]
+margin_left = 320.0
+margin_top = 169.0
+margin_right = 1250.0
+margin_bottom = 480.0
+color = Color( 0.0926971, 0.140426, 0.175781, 1 )
+
+[node name="MessageLabel" type="Label" parent="UILayer/EncounterScreen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -307.0
+margin_top = -180.0
+margin_right = 600.0
+margin_bottom = 108.0
+custom_fonts/font = SubResource( 9 )
+text = "Message Goes Here"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Portrait" type="TextureRect" parent="UILayer/EncounterScreen"]
+margin_left = 44.0
+margin_top = 54.0632
+margin_right = 556.0
+margin_bottom = 566.063
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/EncounterScreen/Portrait"]
+visible = false
+margin_right = 512.0
+margin_bottom = 512.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TraitGrid" type="GridContainer" parent="UILayer/EncounterScreen"]
+margin_left = 44.0
+margin_top = 236.0
+margin_right = 300.0
+margin_bottom = 310.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BattleScreen" type="ColorRect" parent="UILayer"]
+visible = false
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0.113725, 0.219608, 0.298039, 1 )
+script = ExtResource( 76 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WinButton" type="Button" parent="UILayer/BattleScreen"]
+margin_left = 407.0
+margin_top = 596.0
+margin_right = 550.0
+margin_bottom = 679.0
+
+[node name="WinLabel" type="Label" parent="UILayer/BattleScreen/WinButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -17.5
+margin_top = -9.0
+margin_right = 17.5
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Win"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoseButton" type="Button" parent="UILayer/BattleScreen"]
+margin_left = 613.0
+margin_top = 595.0
+margin_right = 771.0
+margin_bottom = 679.0
+
+[node name="LoseLabel" type="Label" parent="UILayer/BattleScreen/LoseButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.0
+margin_top = -9.0
+margin_right = 22.0
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Lose"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack1Button" type="Button" parent="UILayer/BattleScreen"]
+margin_left = 408.0
+margin_top = 318.0
+margin_right = 580.0
+margin_bottom = 392.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack1Label" type="Label" parent="UILayer/BattleScreen/Attack1Button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.5
+margin_top = -9.0
+margin_right = 62.5
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Attack One"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack2Button" type="Button" parent="UILayer/BattleScreen"]
+margin_left = 407.0
+margin_top = 450.0
+margin_right = 579.0
+margin_bottom = 527.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack2Label" type="Label" parent="UILayer/BattleScreen/Attack2Button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.0
+margin_top = -9.0
+margin_right = 67.0
+margin_bottom = 9.0
+custom_fonts/font = ExtResource( 78 )
+text = "Attack Two"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OutcomeMessageTimer" type="Timer" parent="UILayer/BattleScreen"]
+wait_time = 3.0
+[connection signal="finished" from="Sounds/Stream/Windy" to="." method="_on_MusTrack_finished"]
+[connection signal="finished" from="Sounds/Stream/Moontide" to="." method="_on_MusTrack_finished"]
+[connection signal="finished" from="Sounds/Stream/EgyptGulls" to="." method="_on_MusTrack_finished"]
+[connection signal="finished" from="Sounds/Stream/AtBay" to="." method="_on_MusTrack_finished"]
+[connection signal="finished" from="Sounds/Stream/GullsShort" to="." method="_on_MusTrack_finished"]
+[connection signal="finished" from="Sounds/Stream/GullsFull" to="." method="_on_MusTrack_finished"]
+[connection signal="finished" from="Sounds/Stream/Waves_1" to="." method="_on_MusTrack_finished"]
+[connection signal="timeout" from="Sounds/MusicTimer" to="." method="_on_MusicTimer_timeout"]
+[connection signal="date_changed" from="Calendar" to="UILayer/DateBar" method="_on_Calendar_date_changed"]
+[connection signal="week_end" from="Calendar" to="Cities" method="_on_Calendar_week_end"]
+[connection signal="timeout" from="Calendar/Timer" to="Calendar" method="_on_Timer_timeout"]
+[connection signal="open_encounter_screen" from="Dispatcher" to="UILayer/EncounterScreen" method="_on_Dispatcher_open_encounter_screen"]
+[connection signal="open_city_menu" from="Player" to="UILayer/CityMenu" method="_on_Player_open_city_menu"]
+[connection signal="toggle_logistics_menu" from="Player" to="UILayer/LogisticsMenu" method="_on_Player_toggle_logistics_menu"]
+[connection signal="pressed" from="UILayer/MapWidget/LogisticsButton" to="UILayer/LogisticsMenu" method="_on_LogisticsButton_pressed"]
+[connection signal="pressed" from="UILayer/MapWidget/LandButton" to="UILayer/MapWidget" method="_on_LandButton_pressed"]
+[connection signal="pressed" from="UILayer/MapWidget/MoistureButton" to="UILayer/MapWidget" method="_on_MoistureButton_pressed"]
+[connection signal="pressed" from="UILayer/MapWidget/TempButton" to="UILayer/MapWidget" method="_on_TempButton_pressed"]
+[connection signal="pressed" from="UILayer/MapWidget/BiomeButton" to="UILayer/MapWidget" method="_on_BiomeButton_pressed"]
+[connection signal="pressed" from="UILayer/MainMenu/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="UILayer/MainMenu/NewGameButton" to="UILayer/MainMenu" method="_on_NewGameButton_pressed"]
+[connection signal="visibility_changed" from="UILayer/CityMenu" to="UILayer/CityMenu" method="_on_CityMenu_visibility_changed"]
+[connection signal="button_down" from="UILayer/CityMenu/DragButton" to="UILayer/CityMenu" method="_on_DragButton_button_down"]
+[connection signal="button_up" from="UILayer/CityMenu/DragButton" to="UILayer/CityMenu" method="_on_DragButton_button_up"]
+[connection signal="pressed" from="UILayer/CityMenu/XButton" to="UILayer/CityMenu" method="_on_XButton_pressed"]
+[connection signal="pressed" from="UILayer/CityMenu/MarketButton" to="UILayer/CityMenu" method="_on_MarketButton_pressed"]
+[connection signal="pressed" from="UILayer/CityMenu/MarketButton" to="UILayer/ExchangeMenu" method="_on_MarketButton_pressed"]
+[connection signal="visibility_changed" from="UILayer/MarketMenu" to="UILayer/MarketMenu" method="_on_MarketMenu_visibility_changed"]
+[connection signal="button_down" from="UILayer/MarketMenu/DragButton" to="UILayer/MarketMenu" method="_on_DragButton_button_down"]
+[connection signal="button_up" from="UILayer/MarketMenu/DragButton" to="UILayer/MarketMenu" method="_on_DragButton_button_up"]
+[connection signal="pressed" from="UILayer/MarketMenu/XButton" to="UILayer/MarketMenu" method="_on_XButton_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/MarketUp" to="UILayer/MarketMenu" method="_on_MarketUp_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/MarketDown" to="UILayer/MarketMenu" method="_on_MarketDown_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/PlayerUp" to="UILayer/MarketMenu" method="_on_ShipUp_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/PlayerDown" to="UILayer/MarketMenu" method="_on_ShipDown_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/BackButton" to="UILayer/MarketMenu" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/DoneButton" to="UILayer/MarketMenu" method="_on_DoneButton_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/SellButton" to="UILayer/MarketMenu" method="_on_SellButton_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/BuyButton" to="UILayer/MarketMenu" method="_on_BuyButton_pressed"]
+[connection signal="pressed" from="UILayer/MarketMenu/Reset" to="UILayer/MarketMenu" method="_on_Reset_pressed"]
+[connection signal="mouse_entered" from="UILayer/MarketMenu/Balance" to="UILayer/MarketMenu/Balance" method="_on_Balance_mouse_entered"]
+[connection signal="mouse_exited" from="UILayer/MarketMenu/Balance" to="UILayer/MarketMenu/Balance" method="_on_Balance_mouse_exited"]
+[connection signal="timeout" from="UILayer/ExchangeMenu/HoverTimer" to="UILayer/ExchangeMenu" method="_on_HoverTimer_timeout"]
+[connection signal="timeout" from="UILayer/ExchangeMenu/DropTimer" to="UILayer/ExchangeMenu" method="_on_DropTimer_timeout"]
+[connection signal="pressed" from="UILayer/ExchangeMenu/BackButton" to="UILayer/ExchangeMenu" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="UILayer/ExchangeMenu/XButton" to="UILayer/ExchangeMenu" method="_on_XButton_pressed"]
+[connection signal="mouse_entered" from="UILayer/ExchangeMenu/GiveZone" to="UILayer/ExchangeMenu" method="_on_GiveZone_mouse_entered"]
+[connection signal="mouse_exited" from="UILayer/ExchangeMenu/GiveZone" to="UILayer/ExchangeMenu" method="_on_GiveZone_mouse_exited"]
+[connection signal="mouse_entered" from="UILayer/ExchangeMenu/TakeZone" to="UILayer/ExchangeMenu" method="_on_TakeZone_mouse_entered"]
+[connection signal="mouse_exited" from="UILayer/ExchangeMenu/TakeZone" to="UILayer/ExchangeMenu" method="_on_TakeZone_mouse_exited"]
+[connection signal="pressed" from="UILayer/ExchangeMenu/ResetButton" to="UILayer/ExchangeMenu" method="_on_ResetButton_pressed"]
+[connection signal="pressed" from="UILayer/ExchangeMenu/DoneButton" to="UILayer/ExchangeMenu" method="_on_DoneButton_pressed"]
+[connection signal="button_down" from="UILayer/LootMenu/DragButton" to="UILayer/LootMenu" method="_on_DragButton_button_down"]
+[connection signal="button_up" from="UILayer/LootMenu/DragButton" to="UILayer/LootMenu" method="_on_DragButton_button_up"]
+[connection signal="pressed" from="UILayer/LootMenu/XButton" to="UILayer/LootMenu" method="_on_XButton_pressed"]
+[connection signal="pressed" from="UILayer/LootMenu/MarketUp" to="UILayer/LootMenu" method="_on_MarketUp_pressed"]
+[connection signal="pressed" from="UILayer/LootMenu/MarketDown" to="UILayer/LootMenu" method="_on_MarketDown_pressed"]
+[connection signal="pressed" from="UILayer/LootMenu/PlayerUp" to="UILayer/LootMenu" method="_on_ShipUp_pressed"]
+[connection signal="pressed" from="UILayer/LootMenu/PlayerDown" to="UILayer/LootMenu" method="_on_ShipDown_pressed"]
+[connection signal="pressed" from="UILayer/LootMenu/BackButton" to="UILayer/LootMenu" method="_on_BackButton_pressed"]
+[connection signal="pressed" from="UILayer/LootMenu/Sell" to="UILayer/LootMenu" method="_on_Sell_pressed"]
+[connection signal="pressed" from="UILayer/LootMenu/Buy" to="UILayer/LootMenu" method="_on_Buy_pressed"]
+[connection signal="purchase" from="UILayer/QuantityPopup" to="UILayer/MarketMenu" method="_on_QuantityPopup_purchase"]
+[connection signal="sale" from="UILayer/QuantityPopup" to="UILayer/MarketMenu" method="_on_QuantityPopup_sale"]
+[connection signal="button_down" from="UILayer/QuantityPopup/DragButton" to="UILayer/QuantityPopup" method="_on_DragButton_button_down"]
+[connection signal="button_up" from="UILayer/QuantityPopup/DragButton" to="UILayer/QuantityPopup" method="_on_DragButton_button_up"]
+[connection signal="pressed" from="UILayer/QuantityPopup/Cancel" to="UILayer/QuantityPopup" method="_on_Cancel_pressed"]
+[connection signal="pressed" from="UILayer/QuantityPopup/Done" to="UILayer/QuantityPopup" method="_on_Done_pressed"]
+[connection signal="pressed" from="UILayer/QuantityPopup/LeftArrow" to="UILayer/QuantityPopup" method="_on_LeftArrow_pressed"]
+[connection signal="pressed" from="UILayer/QuantityPopup/RightArrow" to="UILayer/QuantityPopup" method="_on_RightArrow_pressed"]
+[connection signal="pressed" from="UILayer/QuantityPopup/Min" to="UILayer/QuantityPopup" method="_on_Min_pressed"]
+[connection signal="pressed" from="UILayer/QuantityPopup/Max" to="UILayer/QuantityPopup" method="_on_Max_pressed"]
+[connection signal="button_down" from="UILayer/LogisticsMenu/DragButton" to="UILayer/LogisticsMenu" method="_on_DragButton_button_down"]
+[connection signal="button_up" from="UILayer/LogisticsMenu/DragButton" to="UILayer/LogisticsMenu" method="_on_DragButton_button_up"]
+[connection signal="pressed" from="UILayer/LogisticsMenu/XButton" to="UILayer/LogisticsMenu" method="_on_XButton_pressed"]
+[connection signal="pressed" from="UILayer/LogisticsMenu/ShipButton" to="UILayer/LogisticsMenu" method="_on_ShipButton_pressed"]
+[connection signal="pressed" from="UILayer/LogisticsMenu/CargoButton" to="UILayer/LogisticsMenu" method="_on_CargoButton_pressed"]
+[connection signal="pressed" from="UILayer/LogisticsMenu/OfficersButton" to="UILayer/LogisticsMenu" method="_on_OfficersButton_pressed"]
+[connection signal="pressed" from="UILayer/LogisticsMenu/CrewButton" to="UILayer/LogisticsMenu" method="_on_CrewButton_pressed"]
+[connection signal="pressed" from="UILayer/LogisticsMenu/MoraleButton" to="UILayer/LogisticsMenu" method="_on_MoraleButton_pressed"]
+[connection signal="pressed" from="UILayer/LogisticsMenu/EquipmentButton" to="UILayer/LogisticsMenu" method="_on_EquipmentButton_pressed"]
+[connection signal="pressed" from="UILayer/EncounterScreen/FightButton" to="UILayer/BattleScreen" method="_on_FightButton_pressed"]
+[connection signal="pressed" from="UILayer/EncounterScreen/FightButton" to="UILayer/EncounterScreen" method="_on_FightButton_pressed"]
+[connection signal="pressed" from="UILayer/EncounterScreen/InsultButton" to="UILayer/EncounterScreen" method="_on_InsultButton_pressed"]
+[connection signal="pressed" from="UILayer/EncounterScreen/ComplimentButton" to="UILayer/EncounterScreen" method="_on_ComplimentButton_pressed"]
+[connection signal="pressed" from="UILayer/EncounterScreen/LeaveButton" to="UILayer/EncounterScreen" method="_on_LeaveButton_pressed"]
+[connection signal="pressed" from="UILayer/BattleScreen/WinButton" to="UILayer/BattleScreen" method="_on_WinButton_pressed"]
+[connection signal="pressed" from="UILayer/BattleScreen/LoseButton" to="UILayer/BattleScreen" method="_on_LoseButton_pressed"]
+[connection signal="timeout" from="UILayer/BattleScreen/OutcomeMessageTimer" to="UILayer/DateBar" method="_on_OutcomeMessageTimer_timeout"]

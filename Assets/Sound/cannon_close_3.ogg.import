@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cannon_close_3.ogg-ad1ec3f74365f80a374b2c6c31c4be64.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/cannon_close_3.ogg"
+dest_files=[ "res://.import/cannon_close_3.ogg-ad1ec3f74365f80a374b2c6c31c4be64.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

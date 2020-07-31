@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ship_at_bay.ogg-77aebbb66c69320958dee46a61bc5f5f.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/stream/ship_at_bay.ogg"
+dest_files=[ "res://.import/ship_at_bay.ogg-77aebbb66c69320958dee46a61bc5f5f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

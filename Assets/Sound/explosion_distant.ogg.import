@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/explosion_distant.ogg-730cb2c8a48bc77a7d731baf7f0a3254.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/explosion_distant.ogg"
+dest_files=[ "res://.import/explosion_distant.ogg-730cb2c8a48bc77a7d731baf7f0a3254.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
