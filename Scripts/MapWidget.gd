@@ -5,6 +5,7 @@ var map_height
 var biomemap
 var tempmap
 var moisturemap
+var waterflux_map
 var player
 
 
@@ -12,6 +13,7 @@ func setup_references(width, height):
 	biomemap = get_tree().root.get_node("Main/WorldGen").biomemap
 	tempmap = get_tree().root.get_node("Main/WorldGen").tempmap
 	moisturemap = get_tree().root.get_node("Main/WorldGen").moisturemap
+	waterflux_map = get_tree().root.get_node("Main/WorldGen").waterflux_map
 	map_width = width
 	map_height = height
 	player = get_tree().root.get_node("Main/Player")
@@ -106,6 +108,22 @@ func redraw_minimaps():
 	itex.create_from_image(img)
 	$BiomeMinimap.texture = itex
 
+	
+	x = 0
+	y = 0
+	img = create_map_texture()
+	for row in waterflux_map:
+		for tile_flux in row:
+			var tile_color = Color(min(1, tile_flux[1] * 0.001), min(1, tile_flux[1] * 0.001), 1.00)
+			img.set_pixel(x, y, tile_color)
+			x += 1
+		x = 0
+		y += 1
+	img.unlock()
+	itex = ImageTexture.new()
+	itex.create_from_image(img)
+	$WatershedMinimap.texture = itex
+
 	var t_colors = {
 		4: Color.blue,
 		0: Color.cornflower,
@@ -191,6 +209,7 @@ func create_map_texture():
 func all_off():
 	$LandwaterMinimap.hide()
 	$MoistureMinimap.hide()
+	$WatershedMinimap.hide()
 	$TempMinimap.hide()
 	$BiomeMinimap.hide()
 
@@ -209,3 +228,8 @@ func _on_TempButton_pressed():
 func _on_BiomeButton_pressed():
 	all_off()
 	$BiomeMinimap.show()
+
+
+func _on_WatershedButton_pressed():
+	all_off()
+	$WatershedMinimap.show()

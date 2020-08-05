@@ -119,3 +119,23 @@ func distance(a1: float, b1: float, x1: float, y1: float):
 	var a2 = abs(a1 - x1)
 	var b2 = abs(b1 - y1)
 	return sqrt((a2 * a2) + (b2 * b2))
+
+
+func sort_list(item_list, low=true):
+	var sorted_list = []
+	for each in item_list:
+		for sorted_item in sorted_list:
+			if each < sorted_item:
+				sorted_list.insert(each, sorted_list.find(sorted_item))
+	if low == true:
+		return sorted_list
+	return sorted_list.invert()
+
+func element_sort(item_list, e_index=0):
+	var sorted_list = []
+	for each in item_list:
+		for sorted_item in sorted_list:
+			if each < sorted_item:
+				sorted_list.insert(each, sorted_list.find(sorted_item))
+				continue
+	return sorted_list

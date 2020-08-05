@@ -12,7 +12,7 @@ func load_game():
 func new_game():
 	$UILayer/MainMenu/MapGenMessage.show()
 	$UILayer/MainMenu/MapGenMessage/Label.text = "Generating Map..."
-	$WorldGen.gen_new(100, 100, 2)
+	$WorldGen.gen_new(150, 150, 2)
 	$UILayer/MapWidget.setup_references($WorldGen.width, $WorldGen.height)
 	$UILayer/MapWidget.redraw_minimaps()
 	$Player.randomize_start($Cities)

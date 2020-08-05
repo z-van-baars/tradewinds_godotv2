@@ -6,12 +6,13 @@ var tempmap = []
 var moisturemap = []
 var biomemap = []
 var rivermap = []
-
+var waterflux_map = []
+var watersource_map = []
 
 var tools
 var cities
 
-
+onready var water_cutoff = 0.55
 var noise = OpenSimplexNoise.new()
 
 func _ready():
@@ -35,11 +36,17 @@ func gen_new(w=100, h=100, weeks=10):
 	$MoistureMap.clear()
 	print("Generating Heightmap...")
 	generate_heightmap()
+	print("...Finished Heightmap")
+	print("Generating Tempmap...")
 	generate_tempmap()
+	print("...Finished Tempmap")
+	print("Generating Moisturemap...")
+	print("...Finished Moisturemap")
 	generate_moisturemap()
-	print("Running Rivers...")
-	rivermap = $RiverLayer.run_rivers()
-	boost_river_moisture($RiverLayer.rivers)
+	$WatershedMap.generate_watersheds(self)
+	waterflux_map = $WatershedMap.waterflux_map
+	# boost_river_moisture($RiverLayer.rivers)
+	erode(1)
 	print("Setting Biomes...")
 	set_biomes()
 	$TempMap.set_temp(self)
@@ -163,7 +170,7 @@ func generate_tempmap():
 		tempmap.append(row)
 
 func generate_moisturemap():
-	var water_cutoff = 0.55
+	
 	var map_dryness = 0.0
 	for y in range(height):
 		var row = []
@@ -183,6 +190,9 @@ func generate_moisturemap():
 				moisture_3 = min(100, moisture_2 * 100 - map_dryness * 100)
 			row.append(floor(moisture_3))
 		moisturemap.append(row)
+
+func erode(iterations=1):
+	pass
 
 func boost_river_moisture(river_list):
 	for river in river_list:
