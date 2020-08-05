@@ -8,7 +8,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	._ready()
 	rng.randomize()
-	$WanderTimer.wait_time = rng.randf_range(0.5, 1.5)
+	$WanderTimer.wait_time = rng.randf_range(0.5, 5.5)
 	$WanderTimer.start()
 	captains = get_tree().root.get_node("Main/Captains")
 	message_log = get_tree().root.get_node("Main/UILayer/MessageLogDisplay")
@@ -31,6 +31,7 @@ func wander():
 	$Ship.path_to(random_coords)
 
 func transact():
+	print("starting transaction")
 	var cargo_escrow = {}
 
 	for i in range(5):
@@ -61,6 +62,7 @@ func transact():
 		var text = name_str + " bought " + str(cargo_escrow[each]) + " " + each
 		message_log.new_message(text)
 		$Ship.cargo[each] = cargo_escrow[each]
+	print("finishing transaction")
 	
 	
 
@@ -87,28 +89,30 @@ func _on_CityTimer_timeout():
 	state = "Move"
 	$CityTimer.stop()
 	var dest_city
-	if recently_visited.keys().size() > 0 and $Ship.get_burthen() != 0:
-		dest_city = find_best_deal()
-	else:
-		dest_city = tools.r_choice(get_tree().root.get_node("Main/Cities").get_children())
-	$Ship.path_to(
-		get_tree().root.get_node("Main/WorldGen/BiomeMap").map_to_world(dest_city.map_tile))
+#	if recently_visited.keys().size() > 0 and $Ship.get_burthen() != 0:
+#		dest_city = find_best_deal()
+#	else:
+#		dest_city = tools.r_choice(get_tree().root.get_node("Main/Cities").get_children())
+	# SPAWNABLE CITIES WITH C KEY BRUH
+	
+	dest_city = tools.r_choice(get_tree().root.get_node("Main/Cities").get_children())
+	$Ship.path_to(dest_city.get_center())
 	$Ship.destination_city = dest_city
 
 func _on_Ship_destination_reached(destination_city):
 	var _text = name_str + " has arrived in " + destination_city.city_name.capitalize() + "."
 	# message_log.new_message(text)
 	state = "Transacting"
+	print("Starting Transaction Timer")
 	$TransactionTimer.wait_time = rng.randf_range(0.5, 2.5)
 	$TransactionTimer.start()
 
 
-
-
-
 func _on_TransactionTimer_timeout():
+	print("Finished Transaction Timer")
 	transact()
 	$TransactionTimer.stop()
+	$Ship.clear_destination_city()
 	if randi()%100 < 30:
 		$WanderTimer.wait_time = randi()%10
 		$WanderTimer.start()

@@ -15,11 +15,11 @@ enum biomes {
 	LAKE,
 	OCEAN,
 	PLAINS,
-	SAVANNAH,
 	SEA,
 	SHALLOWS,
 	SNOWPACK,
 	SNOWY_TUNDRA,
+	STEPPE,
 	TAIGA,
 	TUNDRA}
 
@@ -29,8 +29,8 @@ var biome_production = {
 	"desert": {
 		"Grain": 5,
 		"Gold": 0.1,
-		"Gems": 0.2,
-		"Silver": 0.2,
+		"Gems": 0.5,
+		"Silver": 0.75,
 		"Incense": 1,
 		"Saffron": 0.1,
 		"Opium": 1,
@@ -69,8 +69,7 @@ var biome_production = {
 		"Opium": 1,
 		"Wine": 1,
 		"Fruit": 1,
-		"Vegetables": 2,
-		"Hemp": 3,
+		"Hemp": 2,
 		"Flax": 3,
 		"Olive Oil": 3,
 		"Citrus": 2,
@@ -89,6 +88,7 @@ var biome_production = {
 	"shallows": {"Fish": 2, "Shellfish": 4, "Pearls": 0.5, "Salt": 0.4},
 	"snowpack": {"Ivory": 0.5, "Pelts": 1},
 	"snowy tundra": {"Ivory": 1},
+	"steppe": {"Olive Oil": 2, "Citrus": 2, "Vegetables": 1, "Incense": 1, "Porcelain": 1, "Silver": 0.5},
 	"taiga": {"Timber": 3, "Pelts": 1, "Silver": 0.25},
 	"tundra": {"Ivory": 0.5, "Pelts": 1}}
 	

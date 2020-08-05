@@ -18,7 +18,7 @@ func load_ship_names(filename):
 func get_name():
 	var r_name = available_names[randi() % available_names.size()]
 	taken_names.append(r_name)
-	available_names.erase(r_name)
+	# available_names.erase(r_name)
 	return r_name
 
 func get_officer_slots(hull_class):

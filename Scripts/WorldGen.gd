@@ -25,7 +25,7 @@ func _ready():
 	noise.persistence = 0.8
 
 
-func gen_new(w=100, h=100):
+func gen_new(w=100, h=100, weeks=10):
 	width = w
 	height = h
 	tools.set_map_parameters(width, height)
@@ -39,15 +39,17 @@ func gen_new(w=100, h=100):
 	generate_moisturemap()
 	print("Running Rivers...")
 	rivermap = $RiverLayer.run_rivers()
+	boost_river_moisture($RiverLayer.rivers)
 	print("Setting Biomes...")
 	set_biomes()
 	$TempMap.set_temp(self)
 	$MoistureMap.set_moisture(self)
 	$BiomeMap.set_biome_type(self)
 	$VegetationMap.set_vegetation(self)
-	print("Starting A*")
-	$SeaNavMap.initialize(biomemap, $BiomeMap)
-	print("Finished A* junk")
+	$TerrainMap.set_terrain(self)
+	# print("Starting A*")
+	# $SeaNavMap.initialize(biomemap, $BiomeMap)
+	# print("Finished A* junk")
 	var map_arr_list = [
 		heightmap,
 		tempmap,
@@ -56,7 +58,7 @@ func gen_new(w=100, h=100):
 	cities.set_map_parameters(
 		width, height, map_arr_list)
 	print("Generating Cities...")
-	cities.gen_cities()
+	cities.gen_cities(weeks)
 	# $PreviewContainer.set_dims(width, height)
 	# $PreviewContainer.heightmap_preview(heightmap)
 	get_tree().root.get_node("Main/UILayer/LoadSplash").hide()
@@ -182,6 +184,16 @@ func generate_moisturemap():
 			row.append(floor(moisture_3))
 		moisturemap.append(row)
 
+func boost_river_moisture(river_list):
+	for river in river_list:
+		for point in river:
+			
+			var map_tile = $BiomeMap.world_to_map(Vector2(int(point.x), int(point.y)))
+			var m = moisturemap[map_tile.y][map_tile.x]
+			if m < 40:
+				moisturemap[map_tile.y][map_tile.x] = 45
+			elif m >= 40 and m < 50:
+				moisturemap[map_tile.y][map_tile.x] = 55
 func set_biomes():
 	for y in range(height):
 		var row = []

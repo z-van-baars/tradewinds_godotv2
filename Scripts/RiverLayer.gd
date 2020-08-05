@@ -24,24 +24,31 @@ func _draw():
 		var path_pts = []
 		path_pts.append(get_tree().root.get_node("Main/Player/Ship").position)
 		path_pts.append(get_tree().root.get_node("Main/Player/Ship").step_target)
-		for each_tile in get_tree().root.get_node("Main/Player/Ship").path:
-			var path_pt_raw = get_tree().root.get_node("Main/WorldGen/BiomeMap").map_to_world(each_tile)
-			path_pts.append(Vector2(path_pt_raw.x, path_pt_raw.y + 32))
-		draw_polyline(path_pts, Color.red, 10)
+		for each_pt in get_tree().root.get_node("Main/Player/Ship").path:
+			path_pts.append(each_pt)
+		draw_polyline(path_pts, Color.red, 5)
+	else:
+		var path_pts = [
+			get_tree().root.get_node("Main/Player/Ship").position,
+			get_tree().root.get_node("Main/Player/Ship").final_target]
+		draw_polyline(path_pts, Color.red, 5)
 	
 func draw_river(river_pts: Array):
-	draw_polyline(river_pts, Color.blue, 15)
+	draw_polyline(river_pts, Color.cornflower, 15)
 
 
 func choose_river_seeds(river_start_candidates: Array, n_rivers: int):
+	print(river_start_candidates.size())
 	var shuffled_seeds: Array = tools.shuffleList(river_start_candidates)
+	print(shuffled_seeds.size())
 	var set_seeds: Array = []
 	var re_shuffled_seeds: Array = tools.shuffleList(shuffled_seeds)
+	print(re_shuffled_seeds.size())
 	for r in range(n_rivers):
 		var chosen: bool = false
 		while chosen == false:
 			var start_point: Vector2 = tools.r_choice(re_shuffled_seeds)
-			if tools.check_distance_above(start_point, set_seeds, n_rivers) == false:
+			if tools.check_distance_above(start_point, set_seeds, n_rivers / 2) == false:
 				set_seeds.append(start_point)
 				chosen = true
 			re_shuffled_seeds.erase(start_point)
@@ -90,6 +97,8 @@ func run_rivers():
 	var river_start_candidates: Array = init_rivermap()
 	print("Tiles above cutoff " + str(river_start_height_cutoff) + " : " + str(river_start_candidates.size()))
 	n_rivers = int(sqrt((width + height)))
+	if river_start_candidates.size() == 0:
+		return []
 	var river_seeds = choose_river_seeds(river_start_candidates, n_rivers)
 	for river_seed in river_seeds:
 		var new_river = []

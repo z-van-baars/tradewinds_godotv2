@@ -18,7 +18,7 @@ func set_temp(worldgen):
 				set_cell(x, y, 0)
 			elif temp >= 40 and temp < 60:
 				set_cell(x, y, 3)
-			elif temp >= 60 and temp < 85:
+			elif temp >= 60 and temp < 80:
 				set_cell(x, y, 2)
 			else:
 				set_cell(x, y, 1)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/savannah_3.png-a4da2235fec23ade8c1d388999e10f56.stex"
+path="res://.import/hill_1.png-b2e303e6256977900a17a0e96b9e142b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/savannah_3.png"
-dest_files=[ "res://.import/savannah_3.png-a4da2235fec23ade8c1d388999e10f56.stex" ]
+source_file="res://Assets/Terrain/hill_1.png"
+dest_files=[ "res://.import/hill_1.png-b2e303e6256977900a17a0e96b9e142b.stex" ]
 
 [params]
 

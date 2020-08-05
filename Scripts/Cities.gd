@@ -41,9 +41,9 @@ func set_map_parameters(map_width, map_height, maps):
 	tools = get_tree().root.get_node(
 		"Main/Tools")
 
-func gen_cities():
+func gen_cities(weeks):
 	pick_cities(get_coastal_tiles())
-	for w in range(20):
+	for _w in range(weeks):
 		for city in get_children():
 			city.weekly_tick()
 
@@ -69,18 +69,26 @@ func get_coastal_tiles():
 func pick_cities(l_coastal_tiles):
 	for n in range(n_cities):
 		var choice = l_coastal_tiles[randi() % l_coastal_tiles.size()]
-		var new_city = city_scene.instance()
-		new_city.map_tile = Vector2(choice.x, choice.y)
-		add_child(new_city)
-		new_city.initialize()
-		new_city.connect_signals(
-			get_tree().root.get_node("Main/Player"),
-			get_tree().root.get_node("Main/UILayer/InfoCard"))
-		get_tree().root.get_node("Main/WorldGen/CityMap").set_cell(
-			new_city.map_tile.x,
-			new_city.map_tile.y,
-			tools.r_choice(city_tiles))
+		new_city(choice)
 	print("Cities Complete...")
+
+func new_city(tile):
+	var new_city = city_scene.instance()
+	new_city.map_tile = tile
+	add_child(new_city)
+	new_city.initialize()
+	new_city.connect_signals(
+		get_tree().root.get_node("Main/Player"),
+		get_tree().root.get_node("Main/UILayer/InfoCard"))
+	get_tree().root.get_node("Main/WorldGen/CityMap").set_cell(
+		new_city.map_tile.x,
+		new_city.map_tile.y,
+		tools.r_choice(city_tiles))
+
+func check_for_city(tile):
+	if get_tree().root.get_node("Main/WorldGen/CityMap").get_cellv(tile) == -1:
+		return false
+	return true
 
 func _on_Calendar_week_end():
 	for each_city in get_children():

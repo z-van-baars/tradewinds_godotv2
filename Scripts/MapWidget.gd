@@ -16,6 +16,57 @@ func setup_references(width, height):
 	map_height = height
 	player = get_tree().root.get_node("Main/Player")
 
+
+func get_biome_color(tile):
+	var colors = {
+		"alpine": Color.seagreen,
+		"conifer": Color.darkseagreen,
+		"desert": Color.khaki,
+		"forest": Color.forestgreen,
+		"grassland": Color.limegreen,
+		"hill": Color.darkgreen,
+		"jungle": Color.forestgreen,
+		"mountain": Color.darkgray,
+		"plains": Color.olive,
+		"snowpack": Color.white,
+		"snowy tundra": Color.lightsteelblue,
+		"steppe": Color.lightsalmon,
+		"taiga": Color.lightseagreen,
+		"tundra": Color.steelblue}
+	return colors[tile]
+
+func get_terrain_color(tile):
+	var colors_ = {
+		"alpine": Color.forestgreen,
+		"conifer": Color.forestgreen,
+		"desert": Color.khaki,
+		"forest": Color.forestgreen,
+		"grassland": Color.limegreen,
+		"jungle": Color.forestgreen,
+		"plains": Color.lawngreen,
+		"snowpack": Color.white,
+		"snowy tundra": Color.lightslategray,
+		"steppe": Color.green,
+		"taiga": Color.forestgreen,
+		"tundra": Color.slategray,
+		"mountain": Color.gray}
+	var colors = {
+		"alpine": Color.forestgreen,
+		"conifer": Color.forestgreen,
+		"desert": Color(1.0, 0.972, 0.392),
+		"forest": Color.forestgreen,
+		"grassland": Color.limegreen,
+		"hill": Color.darkgreen,
+		"jungle": Color.forestgreen,
+		"mountain": Color.darkgray,
+		"plains": Color(0.627, 0.784, 0.255),
+		"snowpack": Color.white,
+		"snowy tundra": Color(0.459, 0.729, 0.494),
+		"steppe": Color(0.784, 0.902, 0.352),
+		"taiga": Color.forestgreen,
+		"tundra": Color(0.459, 0.729, 0.494)}
+	return colors[tile]
+
 func redraw_minimaps():
 	var water_color = Color.darkblue
 	var land_color = Color.green
@@ -29,7 +80,7 @@ func redraw_minimaps():
 			if tile in water_biomes:
 				img.set_pixel(x, y, water_color)
 			else:
-				img.set_pixel(x, y, land_color)
+				img.set_pixel(x, y, get_terrain_color(tile))
 			x += 1
 		x = 0
 		y += 1
@@ -37,6 +88,22 @@ func redraw_minimaps():
 	var itex = ImageTexture.new()
 	itex.create_from_image(img)
 	$LandwaterMinimap.texture = itex
+
+	x = 0
+	y = 0
+	img = create_map_texture()
+	for row in biomemap:
+		for tile in row:
+			if tile in water_biomes:
+				img.set_pixel(x, y, water_color)
+			else:
+				img.set_pixel(x, y, get_biome_color(tile))
+			x += 1
+		x = 0
+		y += 1
+	img.unlock()
+	itex = ImageTexture.new()
+	itex.create_from_image(img)
 	$BiomeMinimap.texture = itex
 
 	var t_colors = {
@@ -106,7 +173,7 @@ func get_temp_tile(t):
 		return 0
 	elif t >= 40 and t < 60:
 		return 3
-	elif t >= 60 and t < 85:
+	elif t >= 60 and t < 80:
 		return 2
 	else:
 		return 1
@@ -121,30 +188,24 @@ func create_map_texture():
 	img.lock()
 	return img
 
+func all_off():
+	$LandwaterMinimap.hide()
+	$MoistureMinimap.hide()
+	$TempMinimap.hide()
+	$BiomeMinimap.hide()
 
 func _on_LandButton_pressed():
+	all_off()
 	$LandwaterMinimap.show()
-	$MoistureMinimap.hide()
-	$TempMinimap.hide()
-	$BiomeMinimap.hide()
-
 
 func _on_MoistureButton_pressed():
-	$LandwaterMinimap.hide()
+	all_off()
 	$MoistureMinimap.show()
-	$TempMinimap.hide()
-	$BiomeMinimap.hide()
-
 
 func _on_TempButton_pressed():
-	$LandwaterMinimap.hide()
-	$MoistureMinimap.hide()
+	all_off()
 	$TempMinimap.show()
-	$BiomeMinimap.hide()
-
 
 func _on_BiomeButton_pressed():
-	$LandwaterMinimap.hide()
-	$MoistureMinimap.hide()
-	$TempMinimap.hide()
+	all_off()
 	$BiomeMinimap.show()

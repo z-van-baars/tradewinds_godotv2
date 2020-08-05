@@ -85,10 +85,11 @@ func _process(delta):
 			path_to(target_entity.position)
 
 func _physics_process(delta):
+	if position == final_target:
+		return
 	# Do we have a path with at least 1 point remaining?
 	if path.size() > 0:
 		if position.distance_to(step_target) < 5:
-			print("arrived at step")
 			step_target = path[0]
 			path.remove(0)
 	else:
@@ -115,7 +116,6 @@ func _physics_process(delta):
 				target_entity.captain,
 				target_entity)
 			zero_target()
-			clear_target_entity()
 
 	# move and junk
 	var movement = speed * direction * delta
@@ -159,18 +159,16 @@ func get_navpath_astar(target_world_pos):
 	var nav_path = seanav.path_to(start_tile, target_tile)
 	if nav_path != null:
 		set_path(nav_path)
-		print(nav_path)
 
 func path_to(target_world_pos):
-	final_target = target_world_pos
 	var nav_path = seanav2d.get_simple_path(position, target_world_pos)
 	if nav_path.size() < 1:
 		return
+	final_target = target_world_pos
 	set_path(nav_path)
 
 func set_path(new_path):
 	path = new_path
-	print(path)
 	step_target = path[0]
 	path.remove(0)
 

@@ -9,6 +9,7 @@ signal open_city_menu
 
 var spawn_mode = false
 var teleport_mode = false
+var cityspawn_mode = false
 
 var artikels
 var own_ship_selected = false
@@ -64,8 +65,7 @@ func increment_silver(quantity):
 func _on_City_right_click(city_node):
 	if own_ship_selected == true:
 		$Ship.destination_city = city_node
-		if city_node.coastal_neighbors.size() > 0:
-			$Ship.get_navpath(tools.r_choice(city_node.coastal_neighbors))
+		$Ship.path_to(city_node.get_center())
 
 func _on_Ship_left_click(ship_node):
 	ship_selected = ship_node
@@ -78,7 +78,7 @@ func _on_Ship_right_click(ship_node):
 
 func _on_Ship_destination_reached(destination_city):
 	emit_signal("open_city_menu", destination_city)
-	$Ship.clear_destination()
+	$Ship.clear_destination_city()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -111,9 +111,15 @@ func _input(event):
 	elif event.is_action_pressed("teleport"):
 		teleport_mode = !teleport_mode
 		if teleport_mode == true:
-			get_tree().root.get_node("Main/UILayer/MapWidget/BoostIndicator").show()
+			get_tree().root.get_node("Main/UILayer/MapWidget/TeleportIndicator").show()
 		elif teleport_mode == false:
-			get_tree().root.get_node("Main/UILayer/MapWidget/BoostIndicator").hide()
+			get_tree().root.get_node("Main/UILayer/MapWidget/TeleportIndicator").hide()
+	elif event.is_action_pressed("cityspawn_key"):
+		cityspawn_mode = !cityspawn_mode
+		if cityspawn_mode == true:
+			get_tree().root.get_node("Main/UILayer/MapWidget/CitySpawnIndicator").show()
+		elif cityspawn_mode == false:
+			get_tree().root.get_node("Main/UILayer/MapWidget/CitySpawnIndicator").hide()
 	elif event.is_action_pressed("boost_key"):
 		if $Ship.speed == 75:
 			get_tree().root.get_node("Main/UILayer/MapWidget/BoostIndicator").show()
@@ -140,6 +146,7 @@ func _input(event):
 			var adjusted_target = new_target * camera.zoom * camera.zoom
 			if teleport_mode == true:
 				$Ship.position = adjusted_target
+				$Ship.final_target = adjusted_target
 				return
 			$Ship.path_to(adjusted_target)
 
@@ -159,9 +166,20 @@ func _input(event):
 				own_ship_selected = false
 
 	elif own_ship_selected == false and ship_selected == null:
-		if event.is_action_pressed("left_click") and spawn_mode == true:
+		if event.is_action_pressed("left_click") and spawn_mode == true and cityspawn_mode == false:
 			var world_pos = get_viewport().get_canvas_transform().xform_inv(event.position)
 			get_tree().root.get_node("Main/Captains").spawn_captain(world_pos)
+		elif event.is_action_pressed("left_click") and spawn_mode == false and cityspawn_mode == true:
+			print("doing some business")
+			var click_pos = get_viewport().get_canvas_transform().xform_inv(event.position)
+			var adjusted_click_pos = click_pos * camera.zoom * camera.zoom
+			var tile = get_tree().root.get_node("Main/WorldGen/BiomeMap").world_to_map(adjusted_click_pos)
+			if get_tree().root.get_node("Main/Cities").check_for_city(tile) == true:
+				return
+			elif get_tree().root.get_node("Main/Cities").check_for_city(tile) == false:
+				print("attempting to make a city")
+				get_tree().root.get_node("Main/Cities").new_city(tile)
+				return
 
 
 

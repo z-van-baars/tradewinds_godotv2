@@ -10,11 +10,11 @@ enum biomes {
 	LAKE,
 	OCEAN,
 	PLAINS,
-	SAVANNAH,
 	SEA,
 	SHALLOWS,
 	SNOWPACK,
 	SNOWY_TUNDRA,
+	STEPPE,
 	TAIGA,
 	TUNDRA}
 
@@ -42,19 +42,19 @@ var biome_strings = {
 		"wet": "taiga",
 		"very wet": "alpine"},
 	"cool": {
-		"very dry": "plains",
+		"very dry": "steppe",
 		"dry": "grassland",
-		"wet": "taiga",
+		"wet": "grassland",
 		"very wet": "conifer"},
 	"warm": {
-		"very dry": "plains",
-		"dry": "savannah",
-		"wet": "forest",
+		"very dry": "steppe",
+		"dry": "plains",
+		"wet": "grassland",
 		"very wet": "forest"},
 	"hot": {
 		"very dry": "desert",
-		"dry": "plains",
-		"wet": "savannah",
+		"dry": "steppe",
+		"wet": "plains",
 		"very wet": "jungle"}}
 
 func get_temp_string(t):
@@ -65,9 +65,9 @@ func get_temp_string(t):
 		return "cold"
 	elif 40 <= t and t < 60:
 		return "cool"
-	elif 60 <= t and t < 85:
+	elif 60 <= t and t < 80:
 		return "warm"
-	elif 85 <= t:
+	elif 80 <= t:
 		return "hot"
 
 func get_moisture_string(m):

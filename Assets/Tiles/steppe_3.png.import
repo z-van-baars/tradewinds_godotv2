@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/savannah_1.png-1ac4743066a8a2dd2142e311f5e1086f.stex"
+path="res://.import/steppe_3.png-0d7f5f5056b4ccf578d5ccb0dc4c7794.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/savannah_1.png"
-dest_files=[ "res://.import/savannah_1.png-1ac4743066a8a2dd2142e311f5e1086f.stex" ]
+source_file="res://Assets/Tiles/steppe_3.png"
+dest_files=[ "res://.import/steppe_3.png-0d7f5f5056b4ccf578d5ccb0dc4c7794.stex" ]
 
 [params]
 

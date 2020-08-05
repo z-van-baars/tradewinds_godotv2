@@ -95,6 +95,7 @@ func drop_goods():
 					$DragBox.artikel_str,
 					1,
 					$DragBox.taking)
+				open_city.set_demand_price($DragBox.artikel_str)
 	if in_take_zone:
 		if $DragBox.taking == true:
 			for q in range($DragBox.quantity):
@@ -102,7 +103,7 @@ func drop_goods():
 					$DragBox.artikel_str,
 					1,
 					$DragBox.taking)
-				open_city.set_demand_price()
+				open_city.set_demand_price($DragBox.artikel_str)
 
 func load_exchange(load_entity, load_city_menu=null):
 	entity = load_entity
@@ -201,8 +202,9 @@ func set_all():
 		new_box.load_artikel(
 			each,
 			to_give[each],
-			total_profit[each])
-		new_box.in_exchange = true
+			total_profit[each],
+			true)
+		# new_box.in_exchange = true
 		new_box.set_price_color(Color.green)
 		new_box.connect_signals(self)
 		transaction_total -= total_profit[each]
@@ -237,18 +239,30 @@ func _on_ArtikelBox_hovered(artikel_box_node):
 func _on_ArtikelBox_unhovered():
 	hovering = false
 
-func _on_ArtikelBox_clicked(artikel_box_node):
+func _on_ArtikelBox_clicked(artikel_box_node, left_click):
 	var q = 1
+
 	if shift == true:
+		sounds.get_node("UI/Drop_4").play()
 		q = 5
-		sounds.get_node("UI/Drop_4").play()
+		if left_click == false:
+			for _i in range(5):
+				transfer_goods(artikel_box_node.artikel_str, 1, artikel_box_node.taking)
+				open_city.set_demand_price(artikel_box_node.artikel_str)
+			return
 	if ctrl == true:
-		sounds.get_node("UI/Drop_3").play()
+		if left_click == false:
+			sounds.get_node("UI/Drop_3").play()
+			sounds.get_node("UI/Drop_4").play()
+			sounds.get_node("UI/Coins_5").play()
+			for _i in range(artikel_box_node.quantity):
+				transfer_goods(artikel_box_node.artikel_str, 1, artikel_box_node.taking)
+				open_city.set_demand_price(artikel_box_node.artikel_str)
+			return
+	if left_click == false:
 		sounds.get_node("UI/Drop_4").play()
-		sounds.get_node("UI/Coins_5").play()
-		for q in range(artikel_box_node.quantity):
-			transfer_goods(artikel_box_node.artikel_str, 1, artikel_box_node.taking)
-			open_city.set_demand_price()
+		transfer_goods(artikel_box_node.artikel_str, 1, artikel_box_node.taking)
+		open_city.set_demand_price(artikel_box_node.artikel_str)
 		return
 	q = min(q, artikel_box_node.quantity)
 	dragging = true
@@ -287,6 +301,7 @@ func _on_XButton_pressed():
 func _on_BackButton_pressed():
 	sounds.get_node("UI/Click_1").play()
 	sounds.get_node("Stream/Market_1").stop()
+	sounds.get_node("Stream/Market_2").stop()
 	clear_all()
 	hide()
 	if market_exchange == true:

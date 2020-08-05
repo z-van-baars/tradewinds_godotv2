@@ -68,5 +68,6 @@ func _on_Backing_mouse_exited():
 
 
 func _on_Backing_gui_input(event):
-	if event.is_action_pressed("left_click") and in_exchange == false:
-		emit_signal("clicked", self)
+	if in_exchange == false:
+		if event.is_action_pressed("left_click") or event.is_action_pressed("right_click"):
+			emit_signal("clicked", self, event.is_action_pressed("left_click"))

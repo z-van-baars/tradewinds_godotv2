@@ -122,17 +122,23 @@ func work_tile(tile):
 		increment_cargo(artikel_to_produce, q)
 	return artikels_to_produce
 
-func set_demand_price():
-	for _artikel in artikels.artikel_list:
-		var base = artikels.base_price[_artikel]
-		var q = get_cargo_quantity(_artikel)
-		var d = max(demand_for[_artikel], 1)
+func find_price(_artikel):
+	var base = artikels.base_price[_artikel]
+	var q = get_cargo_quantity(_artikel)
+	var d = max(demand_for[_artikel], 1)
 
-		var d_price = base
-		d_price += d * base * 0.01
-		d_price -= q * base * 0.01
-		d_price = max(1, d_price)
-		artikel_price[_artikel] = int(d_price)
+	var d_price = base
+	d_price += sqrt(d) * base * 0.01
+	d_price -= sqrt(q) * base * 0.01
+	d_price = max(1, d_price)
+	return int(d_price)
+
+func set_demand_price(artikel=null):
+	if artikel:
+		artikel_price[artikel] = get_price(artikel)
+		return
+	for _artikel in artikels.artikel_list:
+		artikel_price[_artikel] = find_price(_artikel)
 
 func most_artikel(tile_list, desired_artikel):
 	var most_artikel = [0, null]

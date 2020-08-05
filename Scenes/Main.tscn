@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=2]
+[gd_scene load_steps=147 format=2]
 
 [ext_resource path="res://Assets/Tile Overlays/very_wet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Tile Overlays/wet.png" type="Texture" id=2]
@@ -135,6 +135,8 @@
 [ext_resource path="res://Assets/Sound/stream/gulls_full.ogg" type="AudioStream" id=133]
 [ext_resource path="res://Scripts/SeaNavMap.gd" type="Script" id=134]
 [ext_resource path="res://Tilesets/SeaNavTileset.tres" type="TileSet" id=135]
+[ext_resource path="res://Scripts/TerrainMap.gd" type="Script" id=136]
+[ext_resource path="res://Tilesets/TerrainTileset.tres" type="TileSet" id=137]
 
 [sub_resource type="TileSet" id=1]
 0/name = "conifer_1.png 0"
@@ -434,7 +436,6 @@ script = ExtResource( 30 )
 [node name="SeaNav2D" type="Navigation2D" parent="."]
 
 [node name="SeaNavTileMap" type="TileMap" parent="SeaNav2D"]
-visible = false
 mode = 1
 tile_set = ExtResource( 135 )
 cell_size = Vector2( 128, 64 )
@@ -548,7 +549,7 @@ tile_set = ExtResource( 19 )
 cell_size = Vector2( 128, 64 )
 collision_bounce = 0.1
 format = 1
-tile_data = PoolIntArray( 7, 39, 0, 8, 39, 0, 9, 39, 0, 10, 39, 0, 11, 39, 0, 12, 39, 0, 13, 39, 0, 65543, 39, 0, 65544, 40, 0, 65545, 41, 0, 65546, 40, 0, 65547, 40, 0, 65548, 40, 0, 65549, 39, 0, 131079, 39, 0, 131080, 40, 0, 131081, 12, 0, 131082, 12, 0, 131083, 12, 0, 131084, 40, 0, 131085, 39, 0, 196615, 39, 0, 196616, 40, 0, 196617, 12, 0, 196618, 12, 0, 196619, 12, 0, 196620, 40, 0, 196621, 39, 0, 262151, 39, 0, 262152, 40, 0, 262153, 40, 0, 262154, 40, 0, 262155, 40, 0, 262156, 40, 0, 262157, 39, 0, 327687, 39, 0, 327688, 39, 0, 327689, 39, 0, 327690, 39, 0, 327691, 39, 0, 327692, 39, 0, 327693, 39, 0 )
+tile_data = PoolIntArray( -196594, 60, 0, -196593, 35, 0, 7, 39, 0, 8, 39, 0, 9, 39, 0, 10, 39, 0, 11, 39, 0, 12, 39, 0, 13, 39, 0, 65543, 39, 0, 65544, 40, 0, 65545, 41, 0, 65546, 40, 0, 65547, 40, 0, 65548, 40, 0, 65549, 39, 0, 131079, 39, 0, 131080, 40, 0, 131081, 12, 0, 131082, 12, 0, 131083, 12, 0, 131084, 40, 0, 131085, 39, 0, 196615, 39, 0, 196616, 40, 0, 196617, 12, 0, 196618, 12, 0, 196619, 12, 0, 196620, 40, 0, 196621, 39, 0, 262151, 39, 0, 262152, 40, 0, 262153, 40, 0, 262154, 40, 0, 262155, 40, 0, 262156, 40, 0, 262157, 39, 0, 327687, 39, 0, 327688, 39, 0, 327689, 39, 0, 327690, 39, 0, 327691, 39, 0, 327692, 39, 0, 327693, 39, 0 )
 script = ExtResource( 23 )
 
 [node name="SeaNavMap" type="TileMap" parent="WorldGen"]
@@ -556,6 +557,13 @@ mode = 1
 cell_size = Vector2( 128, 64 )
 format = 1
 script = ExtResource( 134 )
+
+[node name="TerrainMap" type="TileMap" parent="WorldGen"]
+mode = 1
+tile_set = ExtResource( 137 )
+cell_size = Vector2( 128, 64 )
+format = 1
+script = ExtResource( 136 )
 
 [node name="VegetationMap" type="TileMap" parent="WorldGen"]
 mode = 1
@@ -791,6 +799,28 @@ margin_right = 47.0039
 margin_bottom = 20.0
 custom_fonts/font = ExtResource( 75 )
 text = "B"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CitySpawnIndicator" type="Button" parent="UILayer/MapWidget"]
+visible = false
+margin_left = 37.6898
+margin_top = 6.20502
+margin_right = 64.6898
+margin_bottom = 26.205
+custom_styles/normal = ExtResource( 118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/MapWidget/CitySpawnIndicator"]
+margin_left = 7.00391
+margin_top = -1.0
+margin_right = 47.0039
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 75 )
+text = "C"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -3030,8 +3060,8 @@ wait_time = 3.0
 [connection signal="pressed" from="UILayer/LogisticsMenu/CrewButton" to="UILayer/LogisticsMenu" method="_on_CrewButton_pressed"]
 [connection signal="pressed" from="UILayer/LogisticsMenu/MoraleButton" to="UILayer/LogisticsMenu" method="_on_MoraleButton_pressed"]
 [connection signal="pressed" from="UILayer/LogisticsMenu/EquipmentButton" to="UILayer/LogisticsMenu" method="_on_EquipmentButton_pressed"]
-[connection signal="pressed" from="UILayer/EncounterScreen/FightButton" to="UILayer/BattleScreen" method="_on_FightButton_pressed"]
 [connection signal="pressed" from="UILayer/EncounterScreen/FightButton" to="UILayer/EncounterScreen" method="_on_FightButton_pressed"]
+[connection signal="pressed" from="UILayer/EncounterScreen/FightButton" to="UILayer/BattleScreen" method="_on_FightButton_pressed"]
 [connection signal="pressed" from="UILayer/EncounterScreen/InsultButton" to="UILayer/EncounterScreen" method="_on_InsultButton_pressed"]
 [connection signal="pressed" from="UILayer/EncounterScreen/ComplimentButton" to="UILayer/EncounterScreen" method="_on_ComplimentButton_pressed"]
 [connection signal="pressed" from="UILayer/EncounterScreen/LeaveButton" to="UILayer/EncounterScreen" method="_on_LeaveButton_pressed"]
