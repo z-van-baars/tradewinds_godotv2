@@ -13,6 +13,13 @@ var tools
 var cities
 
 onready var water_cutoff = 0.55
+onready var sea_cutoff = 0.50
+onready var ocean_cutoff = 0.45
+onready var river_threshold = 150
+onready var erosion_strength = 0.0005
+onready var hill_cutoff = 0.610
+onready var mountain_cutoff = 0.620
+onready var n_erosion = 2
 var noise = OpenSimplexNoise.new()
 
 func _ready():
@@ -43,10 +50,14 @@ func gen_new(w=100, h=100, weeks=10):
 	print("Generating Moisturemap...")
 	print("...Finished Moisturemap")
 	generate_moisturemap()
-	$WatershedMap.generate_watersheds(self)
-	waterflux_map = $WatershedMap.waterflux_map
+	for i in range(n_erosion):
+		$WatershedMap.generate_watersheds(self)
+		waterflux_map = $WatershedMap.waterflux_map
+		watersource_map = $WatershedMap.watersource_map
+		erode(1)
+	$RiverLayer.create_river_nodes()
 	# boost_river_moisture($RiverLayer.rivers)
-	erode(1)
+	
 	print("Setting Biomes...")
 	set_biomes()
 	$TempMap.set_temp(self)
@@ -192,7 +203,23 @@ func generate_moisturemap():
 		moisturemap.append(row)
 
 func erode(iterations=1):
-	pass
+	print("Eroding...")
+	var x = 0
+	var y = 0
+	for row in waterflux_map:
+		x = 0
+		for tile in row:
+			if heightmap[y][x] <= water_cutoff:
+				x += 1
+				continue
+			var flux = tile[1]
+			heightmap[y][x] = max(
+				water_cutoff + 0.0001,
+				heightmap[y][x] - flux * erosion_strength * iterations)
+			x += 1
+		y += 1
+	print("Finished Eroding")
+			
 
 func boost_river_moisture(river_list):
 	for river in river_list:
@@ -210,13 +237,13 @@ func set_biomes():
 		for x in range(width):
 			var str_biome = $BiomeSelector.get_biome(
 				tempmap[y][x], moisturemap[y][x])
-			if heightmap[y][x] > 0.55:
+			if heightmap[y][x] > water_cutoff:
 				row.append(str_biome)
-			elif 0.55 >= heightmap[y][x] and heightmap[y][x] > 0.50:
+			elif water_cutoff >= heightmap[y][x] and heightmap[y][x] > sea_cutoff:
 				row.append("shallows")
-			elif 0.50 >= heightmap[y][x] and heightmap[y][x] > 0.45:
+			elif sea_cutoff >= heightmap[y][x] and heightmap[y][x] > ocean_cutoff:
 				row.append("sea")
-			elif 0.45 >= heightmap[y][x]:
+			elif ocean_cutoff >= heightmap[y][x]:
 				row.append("ocean")
 		biomemap.append(row)
 	print("Set all biomes...")

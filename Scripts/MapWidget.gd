@@ -6,14 +6,16 @@ var biomemap
 var tempmap
 var moisturemap
 var waterflux_map
+var river_threshold
 var player
-
+onready var active_map = $LandwaterMinimap
 
 func setup_references(width, height):
 	biomemap = get_tree().root.get_node("Main/WorldGen").biomemap
 	tempmap = get_tree().root.get_node("Main/WorldGen").tempmap
 	moisturemap = get_tree().root.get_node("Main/WorldGen").moisturemap
 	waterflux_map = get_tree().root.get_node("Main/WorldGen").waterflux_map
+	river_threshold = get_tree().root.get_node("Main/WorldGen").river_threshold
 	map_width = width
 	map_height = height
 	player = get_tree().root.get_node("Main/Player")
@@ -113,11 +115,15 @@ func redraw_minimaps():
 	y = 0
 	img = create_map_texture()
 	for row in waterflux_map:
+		x = 0
 		for tile_flux in row:
-			var tile_color = Color(min(1, tile_flux[1] * 0.001), min(1, tile_flux[1] * 0.001), 1.00)
+			var tile_color
+			if tile_flux[2] >= river_threshold:
+				tile_color = Color(1.0, 0.1, 0.1)
+			else:
+				tile_color = Color(min(1, tile_flux[2] * 0.004), min(1, tile_flux[2] * 0.004), 0.50)
 			img.set_pixel(x, y, tile_color)
 			x += 1
-		x = 0
 		y += 1
 	img.unlock()
 	itex = ImageTexture.new()
@@ -215,21 +221,34 @@ func all_off():
 
 func _on_LandButton_pressed():
 	all_off()
+	active_map = $LandwaterMinimap
 	$LandwaterMinimap.show()
 
 func _on_MoistureButton_pressed():
 	all_off()
+	active_map = $MoistureMinimap
 	$MoistureMinimap.show()
 
 func _on_TempButton_pressed():
 	all_off()
+	active_map = $TempMinimap
 	$TempMinimap.show()
 
 func _on_BiomeButton_pressed():
 	all_off()
+	active_map = $BiomeMinimap
 	$BiomeMinimap.show()
 
 
 func _on_WatershedButton_pressed():
 	all_off()
+	active_map = $WatershedMinimap
 	$WatershedMinimap.show()
+
+
+func _on_MinimizeMapButton_pressed():
+	active_map.texture.resize(139, 139)
+
+
+func _on_MaximizeMapButton_pressed():
+	active_map.texture.resize(500, 500)

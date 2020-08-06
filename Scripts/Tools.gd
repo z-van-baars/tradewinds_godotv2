@@ -139,3 +139,32 @@ func element_sort(item_list, e_index=0):
 				sorted_list.insert(each, sorted_list.find(sorted_item))
 				continue
 	return sorted_list
+
+func get_position_from_tile(tile, neighbor_tile):
+	# Return an int from 0-7 based on clockwise rotation from a given tile
+	# Return Null if neighbor tile isn't a valid neighbor
+	var tile_positions = {
+		0: Vector2(-1, -1),
+		1: Vector2(0, -1),
+		2: Vector2(1, -1),
+		3: Vector2(1, 0),
+		4: Vector2(1, 1),
+		5: Vector2(0, 1),
+		6: Vector2(-1, 1),
+		7: Vector2(-1, 0)}
+	for position_id in tile_positions.keys():
+		if neighbor_tile - tile == tile_positions[position_id]:
+			return position_id
+	return null
+
+func get_tile_from_position(tile, position_id):
+	var tile_positions = {
+		0: Vector2(-1, -1),
+		1: Vector2(0, -1),
+		2: Vector2(1, -1),
+		3: Vector2(1, 0),
+		4: Vector2(1, 1),
+		5: Vector2(0, 1),
+		6: Vector2(-1, 1),
+		7: Vector2(-1, 0)}
+	return tile + position_id

@@ -6,12 +6,14 @@ var biomemap
 var biome_map
 var heightmap
 var vegetationmap
+var waterflux_map
 var map_width
 var map_height
 # Some values that produce decent results:
 # M = 0.625, H = 0.6
-var mountain_cutoff = 0.65
-var hill_cutoff = 0.625
+var mountain_cutoff
+var hill_cutoff
+var river_threshold
 
 var terrain_map = []
 
@@ -29,6 +31,10 @@ func set_maps(worldgen):
 	biome_map = get_tree().root.get_node("Main/WorldGen/BiomeMap")
 	heightmap = worldgen.heightmap
 	vegetationmap = get_tree().root.get_node("Main/WorldGen/VegetationMap")
+	waterflux_map = get_tree().root.get_node("Main/WorldGen").waterflux_map
+	river_threshold = get_tree().root.get_node("Main/WorldGen").river_threshold
+	hill_cutoff = get_tree().root.get_node("Main/WorldGen").hill_cutoff
+	mountain_cutoff = get_tree().root.get_node("Main/WorldGen").mountain_cutoff
 
 func init_terrainmap():
 	for y in range(map_height):
@@ -60,4 +66,3 @@ func set_terrain(worldgen):
 				biomemap[y][x] = "hill"
 			x += 1
 		y += 1
-			
