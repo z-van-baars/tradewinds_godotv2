@@ -15,11 +15,11 @@ var cities
 onready var water_cutoff = 0.55
 onready var sea_cutoff = 0.50
 onready var ocean_cutoff = 0.45
-onready var river_threshold = 150
-onready var erosion_strength = 0.0005
+onready var river_threshold = 100
+onready var erosion_strength = 0.0001
 onready var hill_cutoff = 0.610
 onready var mountain_cutoff = 0.620
-onready var n_erosion = 2
+onready var n_erosion = 1
 var noise = OpenSimplexNoise.new()
 
 func _ready():
@@ -231,6 +231,7 @@ func boost_river_moisture(river_list):
 				moisturemap[map_tile.y][map_tile.x] = 45
 			elif m >= 40 and m < 50:
 				moisturemap[map_tile.y][map_tile.x] = 55
+
 func set_biomes():
 	for y in range(height):
 		var row = []

@@ -3,6 +3,7 @@ var tools
 var worldgen
 var heightmap
 var moisturemap
+var biome_map
 
 var water_cutoff
 var world_width
@@ -138,3 +139,15 @@ func add_flux(receiving_tile, input_tile):
 		flow_data[1],
 		flow_data[2]]
 		
+
+func fill_basin(start, prev):
+	var frontier = tools.get_neighbors(start)
+	frontier.erase(prev)
+	var exit_found = false
+	var tiles_to_fill = [start]
+	while exit_found == false:
+		var new_tile = frontier.pop(0)
+		if heightmap[new_tile.y][new_tile.x] < prev:
+			pass
+	for each in tiles_to_fill:
+		biome_map.set_cellv(Vector2(each.x, each.y), "lake")

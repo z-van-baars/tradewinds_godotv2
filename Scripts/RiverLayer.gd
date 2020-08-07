@@ -31,3 +31,5 @@ func create_river_nodes():
 					watersource_map[y][x][1])
 			x += 1
 		y += 1
+
+			
