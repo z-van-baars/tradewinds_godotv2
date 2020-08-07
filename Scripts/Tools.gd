@@ -132,11 +132,11 @@ func sort_list(item_list, low=true):
 	return sorted_list.invert()
 
 func element_sort(item_list, e_index=0):
-	var sorted_list = []
-	for each in item_list:
+	var sorted_list = [item_list[0]]
+	for each in item_list.slice(1, item_list.size()-1):
 		for sorted_item in sorted_list:
-			if each < sorted_item:
-				sorted_list.insert(each, sorted_list.find(sorted_item))
+			if each[0] < sorted_item[0] and sorted_item[1] != each[1]:
+				sorted_list.insert(sorted_list.find(sorted_item), [each[0], each[1]])
 				continue
 	return sorted_list
 

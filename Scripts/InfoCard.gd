@@ -1,9 +1,15 @@
 extends Panel
 
 var city_header = Color(255, 207, 104)
+var tile_debug = false
 
 func _process(delta):
 	rect_position = get_viewport().get_mouse_position()
+	if tile_debug == true:
+		var mouse_pos = get_viewport().get_mouse_position()
+		var adjusted_pos = get_viewport().get_canvas_transform().xform_inv(mouse_pos)
+		var selected_tile = get_tree().root.get_node("Main/WorldGen/BiomeMap").world_to_map(adjusted_pos)
+		load_tile(selected_tile)
 
 func _on_Entity_hovered(entity_type, stats):
 	visible = true
@@ -35,3 +41,26 @@ func _on_Entity_unhovered():
 	visible = false
 	for each in get_children():
 		each.visible = false
+
+func load_tile(tile):
+	visible = true
+	$EntityName.text = get_tree().root.get_node("Main/WorldGen").biomemap[tile.y][tile.x]
+	$EntityName.visible = true
+	$TerrainLabel.text = str(get_tree().root.get_node("Main/WorldGen").terrain_map[tile.y][tile.x])
+	$TerrainLabel.visible = true
+	$PositionLabel.text = "Position [" + str(tile.x) + ", " + str(tile.y) + "]"
+	$PositionLabel.visible = true
+	$ElevationLabel.text = "Elevation: "
+	$ElevationLabel.text += str(get_tree().root.get_node("Main/WorldGen").heightmap[tile.y][tile.x])
+	$ElevationLabel.visible = true
+	$FluxLabel.text = str(get_tree().root.get_node("Main/WorldGen").waterflux_map[tile.y][tile.x])
+	$FluxLabel.visible = true
+
+func unload_tile():
+	$EntityName.visible = false
+	$TerrainLabel.visible = false
+	$PositionLabel.visible = false
+	$ElevationLabel.visible = false
+	$FluxLabel.visible = false
+	
+	visible = false

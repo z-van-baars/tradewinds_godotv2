@@ -5,6 +5,7 @@ var heightmap = []
 var tempmap = []
 var moisturemap = []
 var biomemap = []
+var terrain_map = []
 var rivermap = []
 var waterflux_map = []
 var watersource_map = []
@@ -50,11 +51,11 @@ func gen_new(w=100, h=100, weeks=10):
 	print("Generating Moisturemap...")
 	print("...Finished Moisturemap")
 	generate_moisturemap()
+	$WatershedMap.generate_watersheds(self)
 	for i in range(n_erosion):
-		$WatershedMap.generate_watersheds(self)
 		waterflux_map = $WatershedMap.waterflux_map
 		watersource_map = $WatershedMap.watersource_map
-		erode(1)
+		# erode(1)
 	$RiverLayer.create_river_nodes()
 	# boost_river_moisture($RiverLayer.rivers)
 	
@@ -65,6 +66,7 @@ func gen_new(w=100, h=100, weeks=10):
 	$BiomeMap.set_biome_type(self)
 	$VegetationMap.set_vegetation(self)
 	$TerrainMap.set_terrain(self)
+	terrain_map = $TerrainMap.terrain_map
 	# print("Starting A*")
 	# $SeaNavMap.initialize(biomemap, $BiomeMap)
 	# print("Finished A* junk")

@@ -10,6 +10,7 @@ signal open_city_menu
 var spawn_mode = false
 var teleport_mode = false
 var cityspawn_mode = false
+var tile_debug = false
 
 var artikels
 var own_ship_selected = false
@@ -108,6 +109,20 @@ func _input(event):
 		get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").visible = false
 		get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").text = "Paused"
 		spawn_mode = false
+	elif event.is_action_pressed("tile_debug_key"):
+		if tile_debug == false:
+			get_tree().root.get_node("Main/WorldGen/TileSelector").show()
+			get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").visible = true
+			get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").text = "Tile Debug Mode"
+			get_tree().root.get_node("Main/UILayer/InfoCard").tile_debug = true
+			tile_debug = true
+		else:
+			get_tree().root.get_node("Main/WorldGen/TileSelector").hide()
+			get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").visible = false
+			get_tree().root.get_node("Main/UILayer/InfoCard").tile_debug = false
+			get_tree().root.get_node("Main/UILayer/InfoCard").unload_tile()
+			tile_debug = false
+
 	elif event.is_action_pressed("teleport"):
 		teleport_mode = !teleport_mode
 		if teleport_mode == true:
@@ -117,9 +132,14 @@ func _input(event):
 	elif event.is_action_pressed("cityspawn_key"):
 		cityspawn_mode = !cityspawn_mode
 		if cityspawn_mode == true:
+			get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").visible = true
+			get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").text = "City Spawn Mode"
 			get_tree().root.get_node("Main/UILayer/MapWidget/CitySpawnIndicator").show()
+			get_tree().root.get_node("Main/WorldGen/TileSelector").show()
 		elif cityspawn_mode == false:
+			get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").visible = false
 			get_tree().root.get_node("Main/UILayer/MapWidget/CitySpawnIndicator").hide()
+			get_tree().root.get_node("Main/WorldGen/TileSelector").hide()
 	elif event.is_action_pressed("boost_key"):
 		if $Ship.speed == 75:
 			get_tree().root.get_node("Main/UILayer/MapWidget/BoostIndicator").show()
@@ -139,7 +159,11 @@ func _input(event):
 #		camera.zoom.y += 1
 #		camera.zoom.x = round(camera.zoom.x)
 #		camera.zoom.y = round(camera.zoom.y)
-
+	elif event.is_action_pressed("left_click") and tile_debug == true:
+		var new_target = get_viewport().get_canvas_transform().xform_inv(event.position)
+		var adjusted_target = new_target * camera.zoom * camera.zoom
+		var selected_tile = get_tree().root.get_node("Main/WorldGen/BiomeMap").world_to_map(adjusted_target)
+		get_tree().root.get_node("Main/UILayer/InfoCard").load_tile(selected_tile)
 	if own_ship_selected == true:
 		if event.is_action_pressed("right_click"):
 			var new_target = get_viewport().get_canvas_transform().xform_inv(event.position)

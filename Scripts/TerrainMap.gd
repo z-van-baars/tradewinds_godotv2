@@ -44,7 +44,6 @@ func init_terrainmap():
 		terrain_map.append(row)
 
 func set_terrain(worldgen):
-
 	set_maps(worldgen)
 	init_terrainmap()
 	var x = 0

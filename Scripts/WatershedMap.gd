@@ -30,11 +30,11 @@ func set_maps(worldgen):
 func generate_watersheds(worldgen):
 	print("Generating Watersheds...")
 	set_maps(worldgen)
-	var tiles_by_height = sort_tiles_by_height()
-
+	print("Filling Basins...")
+	fill_all_basins()
+	print("Running Rivers...")
 	init_water_maps()
-	flow_by_layer(tiles_by_height)
-	print("Finished Generating Watersheds...")
+	flow_by_layer()
 
 func set_rivers():
 	pass
@@ -69,7 +69,8 @@ func init_water_maps():
 		watersource_map.append(ws_row)
 
 
-func flow_by_layer(tiles_by_height):
+func flow_by_layer():
+	var tiles_by_height = sort_tiles_by_height()
 	var sorted_layers = tiles_by_height.keys()
 	sorted_layers.sort()
 	sorted_layers.invert()
@@ -92,17 +93,21 @@ func flow(tile):
 
 	var flowable_neighbors = []
 	var lowest_neighbor = [9999, Vector2(0, 0)]
+
 	for n_tile in neighbor_tiles:
 		var neighbor_height = heightmap[n_tile.y][n_tile.x]
-		if neighbor_height < tile_height:
+		if neighbor_height <= tile_height:
 			flowable_neighbors.append(n_tile)
 			if neighbor_height < lowest_neighbor[0]:
 				lowest_neighbor = [neighbor_height, n_tile]
+
+
 	if flowable_neighbors.size() == 0:
 		waterflux_map[tile.y][tile.x] = [
 			input_water,
 			rainfall + input_water,
 			water_outflow]
+		print("this should not happen")
 		return
 	
 	water_outflow = rainfall + input_water
@@ -140,14 +145,77 @@ func add_flux(receiving_tile, input_tile):
 		flow_data[2]]
 		
 
-func fill_basin(start, prev):
-	var frontier = tools.get_neighbors(start)
-	frontier.erase(prev)
-	var exit_found = false
+func fill_all_basins():
+	var tiles_by_layer = sort_tiles_by_height()
+	var tile_layers = tiles_by_layer.keys()
+	tile_layers.sort()
+	for each in tile_layers.slice(0, 10):
+		print(each)
+
+	while tile_layers.size() != 0:
+		var height_layer = tile_layers[0]
+		tile_layers.erase(height_layer)
+		
+		for tile in tiles_by_layer[height_layer]:
+			var downhill_neighbors = []
+			for n_tile in tools.get_neighbor_tiles(tile):
+				if heightmap[n_tile.y][n_tile.x] < heightmap[tile.y][tile.x]:
+					downhill_neighbors.append(n_tile)
+			
+			# We should only get here if there's a land tile with no land
+			# tiles neighbors of lower elevation.  Water edge tiles will always 
+			# have at least one neighbor, unless there's a rare land tile at 0,0
+			if downhill_neighbors.size() == 0:
+				fill_basin(tile)
+		
+func fill_basin(start):
+	var frontier = tools.get_neighbor_tiles(start)
+	var prev_height = heightmap[start.y][start.x]
 	var tiles_to_fill = [start]
-	while exit_found == false:
-		var new_tile = frontier.pop(0)
-		if heightmap[new_tile.y][new_tile.x] < prev:
-			pass
-	for each in tiles_to_fill:
-		biome_map.set_cellv(Vector2(each.x, each.y), "lake")
+	var tiles_to_raise = [start]
+
+
+	var frontier_by_height = {}
+	for f_tile in frontier:
+		frontier_by_height[heightmap[f_tile.y][f_tile.x]] = f_tile
+	
+	var height_keys = frontier_by_height.keys()
+	height_keys.sort()
+	height_keys.invert()
+	frontier = []
+	for h_key in height_keys:
+		frontier.append(frontier_by_height[h_key])
+	while frontier.size() != 0:
+		var new_tile = frontier[0]
+		if heightmap[new_tile.y][new_tile.x] < prev_height:
+			# print(heightmap[new_tile.y][new_tile.x])
+			#print(prev_height)
+			#print(tiles_to_raise.size())
+			# print(frontier.size())
+			break
+		prev_height = heightmap[new_tile.y][new_tile.x]
+		frontier.pop_front()
+
+		var new_neighbors = tools.get_neighbor_tiles(new_tile)
+		tiles_to_fill.append(new_tile)
+		tiles_to_raise.append(new_tile)
+		for each in new_neighbors:
+			if heightmap[new_tile.y][new_tile.x] >= prev_height:
+				if not tiles_to_raise.has(each) and not frontier.has(each):
+					frontier.append(each)
+		
+		frontier_by_height = {}
+		for f_tile in frontier:
+			frontier_by_height[heightmap[f_tile.y][f_tile.x]] = f_tile
+		
+		height_keys = frontier_by_height.keys()
+		height_keys.sort()
+		frontier = []
+		for h_key in height_keys:
+			frontier.append(frontier_by_height[h_key])
+#		for each in frontier:
+#			print(each)
+#		print(tiles_to_raise.size())
+
+		for raise_tile in tiles_to_raise:
+			heightmap[raise_tile.y][raise_tile.x] = prev_height

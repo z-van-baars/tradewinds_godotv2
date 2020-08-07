@@ -43,13 +43,11 @@ func _on_MusicTimer_timeout():
 		$Sounds/Stream/Windy.play()
 	elif music == 3 or music == 4:
 		$Sounds/Stream/Moontide.play()
-	elif music == 5 or music == 6:
-		$Sounds/Stream/EgyptGulls.play()
-	elif music == 7:
+	elif music == 5:
 		$Sounds/Stream/Waves_1.play()
-	elif music == 8:
+	elif music == 6:
 		$Sounds/Stream/GullsShort.play()
-	elif music == 9:
+	elif music == 7:
 		$Sounds/Stream/GullsFull.play()
 	else:
 		$Sounds/MusicTimer.wait_time = rand_range(30, 180)
