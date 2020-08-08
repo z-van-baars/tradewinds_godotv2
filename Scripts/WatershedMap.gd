@@ -46,13 +46,15 @@ func sort_tiles_by_height():
 	for row in heightmap:
 		x = 0
 		for tile_height in row:
-			x += 1
+			
 			if tile_height <= water_cutoff:
+				x += 1
 				continue
 			if tiles_by_height.has(stepify(tile_height, layer_step)):
 				tiles_by_height[stepify(tile_height, layer_step)].append(Vector2(x, y))
 			else:
 				tiles_by_height[stepify(tile_height, layer_step)] = [Vector2(x, y)]
+			x += 1
 		y += 1
 	return tiles_by_height
 
@@ -107,6 +109,7 @@ func flow(tile):
 			input_water,
 			rainfall + input_water,
 			water_outflow]
+		print(tile_height)
 		print("this should not happen")
 		return
 	
@@ -149,12 +152,9 @@ func fill_all_basins():
 	var tiles_by_layer = sort_tiles_by_height()
 	var tile_layers = tiles_by_layer.keys()
 	tile_layers.sort()
-	for each in tile_layers.slice(0, 10):
-		print(each)
 
 	while tile_layers.size() != 0:
-		var height_layer = tile_layers[0]
-		tile_layers.erase(height_layer)
+		var height_layer = tile_layers.pop_front()
 		
 		for tile in tiles_by_layer[height_layer]:
 			var downhill_neighbors = []
@@ -166,6 +166,10 @@ func fill_all_basins():
 			# tiles neighbors of lower elevation.  Water edge tiles will always 
 			# have at least one neighbor, unless there's a rare land tile at 0,0
 			if downhill_neighbors.size() == 0:
+				# print("My height: " + str(heightmap[tile.y][tile.x]))
+				for n_tile in tools.get_neighbor_tiles(tile):
+					pass
+					# print(heightmap[n_tile.y][n_tile.x])
 				fill_basin(tile)
 		
 func fill_basin(start):

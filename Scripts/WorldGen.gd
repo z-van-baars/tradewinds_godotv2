@@ -16,7 +16,7 @@ var cities
 onready var water_cutoff = 0.55
 onready var sea_cutoff = 0.50
 onready var ocean_cutoff = 0.45
-onready var river_threshold = 100
+onready var river_threshold = 300
 onready var erosion_strength = 0.0001
 onready var hill_cutoff = 0.610
 onready var mountain_cutoff = 0.620
