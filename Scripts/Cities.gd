@@ -2,7 +2,7 @@ extends Node2D
 
 var width = 0
 var height = 0
-var n_cities = 15
+var n_cities = 30
 var heightmap = []
 var tempmap = []
 var moisturemap = []

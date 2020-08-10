@@ -2,6 +2,7 @@ extends "res://Scripts/Character.gd"
 var captains
 var message_log
 var home_city
+var destination_city = null
 var state = "Idle"
 var rng = RandomNumberGenerator.new()
 
@@ -37,23 +38,23 @@ func transact():
 	for i in range(5):
 		var no_goods = true
 		var cheapest_good = [99999, null]
-		for _artikel in $Ship.destination_city.artikel_supply:
-			if ($Ship.destination_city.get_price(_artikel) < cheapest_good[0]
-				and $Ship.destination_city.get_cargo_quantity(_artikel) > 0):
+		for _artikel in destination_city.artikel_supply:
+			if (destination_city.get_price(_artikel) < cheapest_good[0]
+				and destination_city.get_cargo_quantity(_artikel) > 0):
 				no_goods = false
-				cheapest_good = [$Ship.destination_city.get_price(_artikel), _artikel]
+				cheapest_good = [destination_city.get_price(_artikel), _artikel]
 		if no_goods == true:
 			continue
 		if cargo_escrow.has(cheapest_good[1]):
 			cargo_escrow[cheapest_good[1]] += 1
 		else:
 			cargo_escrow[cheapest_good[1]] = 1
-		$Ship.destination_city.increment_cargo(cheapest_good[1], -1)
+		destination_city.increment_cargo(cheapest_good[1], -1)
 	for each in $Ship.cargo.keys():
 		if $Ship.cargo[each] > 0:
 			var text = name_str + " sold " + str($Ship.cargo[each]) + " " + each
 			message_log.new_message(text)
-			$Ship.destination_city.increment_cargo(each, $Ship.cargo[each])
+			destination_city.increment_cargo(each, $Ship.cargo[each])
 			$Ship.cargo[each] = 0
 	
 	for each in cargo_escrow.keys():
@@ -62,6 +63,7 @@ func transact():
 		var text = name_str + " bought " + str(cargo_escrow[each]) + " " + each
 		message_log.new_message(text)
 		$Ship.cargo[each] = cargo_escrow[each]
+	destination_city = null
 	print("finishing transaction")
 	
 	
@@ -98,6 +100,7 @@ func _on_CityTimer_timeout():
 	dest_city = tools.r_choice(get_tree().root.get_node("Main/Cities").get_children())
 	$Ship.path_to(dest_city.get_center())
 	$Ship.destination_city = dest_city
+	destination_city = dest_city
 
 func _on_Ship_destination_reached(destination_city):
 	var _text = name_str + " has arrived in " + destination_city.city_name.capitalize() + "."

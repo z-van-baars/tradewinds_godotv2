@@ -12,13 +12,14 @@ func load_game():
 func new_game():
 	$UILayer/MainMenu/MapGenMessage.show()
 	$UILayer/MainMenu/MapGenMessage/Label.text = "Generating Map..."
-	$WorldGen.gen_new(200, 200, 2)
+	$WorldGen.gen_new(150, 150, 2)
 	$UILayer/MapWidget.setup_references($WorldGen.width, $WorldGen.height)
 	$UILayer/MapWidget.redraw_minimaps()
+	$UILayer/MapWidget.pause_mode = PAUSE_MODE_PROCESS
 	$Player.randomize_start($Cities)
 	$Player/Ship.final_target = $Player/Ship.position
 	$UILayer/MainMenu/MapGenMessage/Label.text = "Generating AI Captains..."
-	# $Captains.generate_random_captains($Cities.get_children(), 1)
+	$Captains.generate_random_captains($Cities.get_children(), 1)
 	$Calendar.set_start_date()
 	$Calendar/Timer.start()
 	$UILayer/MessageLogDisplay.clear_all()

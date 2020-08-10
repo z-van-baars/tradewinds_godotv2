@@ -336,7 +336,7 @@ func _on_ResetButton_pressed():
 
 func _on_DoneButton_pressed():
 	if transaction_total > player.silver:
-		sounds.get_node("UI/Negative_1").play()
+
 		return
 	var empty_transaction = true
 
@@ -357,3 +357,6 @@ func _on_DoneButton_pressed():
 	open_city.set_demand_price()
 	set_all()
 	
+
+
+

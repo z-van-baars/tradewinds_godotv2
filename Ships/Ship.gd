@@ -9,6 +9,7 @@ signal target_entity_reached
 
 var tools
 var ships
+var characters
 var seanav
 var seanav2d
 var ship_stats
@@ -32,11 +33,12 @@ var ship_name
 var hull
 var speed
 var cargo_cap
-var officer_slots = {}
+var officers = {}
 
 func _ready():
 	tools = get_tree().root.get_node("Main/Tools")
 	ships = get_tree().root.get_node("Main/Ships")
+	characters = get_tree().root.get_node("Main/Characters")
 	seanav = get_tree().root.get_node("Main/WorldGen/SeaNavMap")
 	seanav2d = get_tree().root.get_node("Main/SeaNav2D")
 	ship_stats = get_tree().root.get_node("Main/ShipStats")
@@ -50,7 +52,10 @@ func initialize_stats(hull_class, is_player_ship, import_captain=null):
 	player_ship = is_player_ship
 	if import_captain != null:
 		captain = import_captain
-	officer_slots = ships.get_officer_slots(hull_class)
+	var officer_slots = ship_stats.get_officer_slots(hull_class)
+	for os in officer_slots:
+		if officer_slots[os] == true:
+			officers[os] = null
 
 func connect_signals(player_node, info_card, dispatch_node, captain_node):
 	self.connect(
@@ -78,11 +83,22 @@ func connect_signals(player_node, info_card, dispatch_node, captain_node):
 		captain_node,
 		"_on_Ship_destination_reached")
 	
+
+func _draw():
+	if path.size() > 0:
+		var path_pts = []
+		path_pts.append(position - position)
+		path_pts.append(step_target - position)
+		for each_point in path:
+			path_pts.append(each_point - position)
+		draw_polyline(path_pts, Color.red, 3)
+
 func _process(delta):
 	if target_entity != null:
 		# Check if our target moved and repath if so
 		if target_entity.position != final_target:
 			path_to(target_entity.position)
+	update()
 
 func _physics_process(delta):
 	if position == final_target:
@@ -103,9 +119,10 @@ func _physics_process(delta):
 
 	# Early Exit from Movement if we are at our target city
 	if destination_city != null:
-		if position.distance_to(destination_city.get_center()) < 40:
+		if position.distance_to(destination_city.get_center()) < 50:
 			emit_signal("destination_reached", destination_city)
 			zero_target()
+			clear_destination_city()
 	
 	# Early Exit from Movement if we have a target entity and are there
 	elif destination_city == null and target_entity != null:
@@ -116,6 +133,7 @@ func _physics_process(delta):
 				target_entity.captain,
 				target_entity)
 			zero_target()
+			clear_target_entity()
 
 	# move and junk
 	var movement = speed * direction * delta
@@ -132,12 +150,16 @@ func zero_target():
 
 func get_burthen():
 	var tons_burthen = 0
+
 	for each in cargo.keys():
 		tons_burthen += cargo[each]
+	return tons_burthen
 
 func generate_random_officers():
-	for each_office in officer_slots.keys():
-		pass
+	for os in officers.keys():
+		var new_character = characters.random_character()
+		officers[os] = new_character
+		new_character.title = os
 
 func clear_destination_city():
 	destination_city = null
@@ -151,20 +173,11 @@ func get_step_target():
 	step_target = Vector2(new_step_target.x, new_step_target.y + 32)
 	direction = (step_target - position).normalized()
 
-func get_navpath_astar(target_world_pos):
-	var target_tile = seanav.world_to_map(target_world_pos)
-	var start_tile = seanav.world_to_map(position)
-	if target_tile == start_tile:
-		final_target = target_world_pos
-	var nav_path = seanav.path_to(start_tile, target_tile)
-	if nav_path != null:
-		set_path(nav_path)
-
 func path_to(target_world_pos):
-	var nav_path = seanav2d.get_simple_path(position, target_world_pos)
+	var nav_path = seanav2d.get_simple_path(position, target_world_pos, false)
 	if nav_path.size() < 1:
 		return
-	final_target = target_world_pos
+	final_target = nav_path[nav_path.size()-1]
 	set_path(nav_path)
 
 func set_path(new_path):

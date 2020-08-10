@@ -79,3 +79,67 @@ var speed = {
 var cargo_cap = {
 	"galleon": 500,
 	"cog": 50}
+
+
+func get_officer_slots(hull_class):
+	var officer_types = [
+		"Quartermaster",
+		"1st Lieutenant",
+		"2nd Lieutenant",
+		"3rd Lieutenant",
+		"Bosun",
+		"Surgeon",
+		"Navigator",
+		"Master Gunner",
+		"Carpenter",
+		"Engineer"]
+	
+	var all_hull_slots = [
+		"cog",
+		"caravel",
+		"carrack",
+		"galleon",
+		"fluyt",
+		"clipper",
+		"schooner",
+		"cutter",
+		"sloop",
+		"corvette",
+		"frigate",
+		"ship of the line 1st rate",
+		"ship of the line 2nd rate",
+		"ship of the line 3rd rate",
+		"ship of the line 4th rate"]
+	
+	var slots_by_class = {}
+	for each in all_hull_slots:
+		slots_by_class[each] = {}
+		for o_type in officer_types:
+			slots_by_class[each][o_type] = false
+		slots_by_class[each]["Quartermaster"] = true
+		slots_by_class[each]["1st Lieutenant"] = true
+
+	var small_ships = all_hull_slots.slice(2, all_hull_slots.size())
+	for t_ship in small_ships:
+		slots_by_class[t_ship]["Navigator"] = true
+	var medium_ships = ["carrack", "galleon", "fluyt", "clipper", "schooner"]
+	medium_ships += all_hull_slots.slice(9, all_hull_slots.size())
+	for t_ship in medium_ships:
+		slots_by_class[t_ship]["2nd Lieutenant"] = true
+		slots_by_class[t_ship]["Bosun"] = true
+	
+	var large_ships = all_hull_slots.slice(10, all_hull_slots.size())
+	for t_ship in large_ships:
+		for oc in ["Carpenter",
+				   "Engineer"]:
+			slots_by_class[t_ship][oc] = true
+			slots_by_class[t_ship][oc] = true
+	
+	var gunships = all_hull_slots.slice(8, all_hull_slots.size())
+	for t_ship in gunships:
+		for oc in ["Surgeon",
+				   "Master Gunner"]:
+			slots_by_class[t_ship][oc] = true
+			slots_by_class[t_ship][oc] = true
+		
+	return slots_by_class[hull_class]

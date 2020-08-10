@@ -21,31 +21,4 @@ func get_name():
 	# available_names.erase(r_name)
 	return r_name
 
-func get_officer_slots(hull_class):
-	var cog_slots = {
-		"Quartermaster": true,
-		"1st Lieutenant": false,
-		"2nd Lieutenant": false,
-		"3rd Lieutenant": false,
-		"Bosun": false,
-		"Surgeon": false,
-		"Navigator": false,
-		"Master Gunner": false,
-		"Carpenter": false,
-		"Engineer": false}
-	var galleon_slots = {
-		"Quartermaster": true,
-		"1st Lieutenant": false,
-		"2nd Lieutenant": false,
-		"3rd Lieutenant": false,
-		"Bosun": false,
-		"Surgeon": false,
-		"Navigator": false,
-		"Master Gunner": false,
-		"Carpenter": false,
-		"Engineer": false}
-	var slots_by_class = {
-		"cog": cog_slots,
-		"galleon": galleon_slots}
-	return slots_by_class[hull_class]
 	

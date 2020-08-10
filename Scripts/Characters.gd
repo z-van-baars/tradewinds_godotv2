@@ -56,6 +56,13 @@ func spawn_character():
 	var new_character = character_scene.instance()
 	add_child(new_character)
 	new_character.initialize()
+	return new_character
+
+func random_character():
+	var new_character = character_scene.instance()
+	add_child(new_character)
+	new_character.initialize()
+	return new_character
 
 func choose_random_greeting():
 	var greetings_positive = [

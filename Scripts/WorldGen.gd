@@ -13,14 +13,14 @@ var watersource_map = []
 var tools
 var cities
 
-onready var water_cutoff = 0.55
-onready var sea_cutoff = 0.50
-onready var ocean_cutoff = 0.45
-onready var river_threshold = 300
-onready var erosion_strength = 0.0001
-onready var hill_cutoff = 0.610
-onready var mountain_cutoff = 0.620
-onready var n_erosion = 1
+var water_cutoff = 0.55
+var sea_cutoff = 0.50
+var ocean_cutoff = 0.45
+var river_threshold = 300
+var erosion_strength = 0.00005
+var hill_cutoff = 0.580
+var mountain_cutoff = 0.605
+var n_erosion = 30
 var noise = OpenSimplexNoise.new()
 
 func _ready():
@@ -55,7 +55,7 @@ func gen_new(w=100, h=100, weeks=10):
 	for i in range(n_erosion):
 		waterflux_map = $WatershedMap.waterflux_map
 		watersource_map = $WatershedMap.watersource_map
-		# erode(1)
+		erode(1)
 	$RiverLayer.create_river_nodes()
 	# boost_river_moisture($RiverLayer.rivers)
 	

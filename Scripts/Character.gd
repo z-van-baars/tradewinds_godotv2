@@ -7,6 +7,7 @@ var characters
 var disposition
 var stats = {}
 var portrait_id
+var age
 var firstname_str
 var surname_str
 var name_str
@@ -27,6 +28,7 @@ func initialize():
 	firstname_str = characters.first_names[randi() % characters.first_names.size()]
 	surname_str = characters.surnames[randi() % characters.surnames.size()]
 	name_str = firstname_str + " " + surname_str
+	age = randi()%1 + 50
 	randomize_stats()
 
 func randomize_stats():
@@ -37,6 +39,9 @@ func randomize_stats():
 	stats["Charisma"] = randi()%20+1
 	stats["Aggresiveness"] = randi()%20+1
 	stats["Leadership"] = randi()%20+1
+
+func get_age():
+	return age
 
 func choose_greeting():
 	return characters.choose_random_greeting()
