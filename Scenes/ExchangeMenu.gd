@@ -251,11 +251,12 @@ func _on_ArtikelBox_clicked(artikel_box_node, left_click):
 				open_city.set_demand_price(artikel_box_node.artikel_str)
 			return
 	if ctrl == true:
+		q = artikel_box_node.quantity
 		if left_click == false:
 			sounds.get_node("UI/Drop_3").play()
 			sounds.get_node("UI/Drop_4").play()
 			sounds.get_node("UI/Coins_5").play()
-			for _i in range(artikel_box_node.quantity):
+			for _i in range(q):
 				transfer_goods(artikel_box_node.artikel_str, 1, artikel_box_node.taking)
 				open_city.set_demand_price(artikel_box_node.artikel_str)
 			return

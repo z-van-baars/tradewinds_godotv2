@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bread.png-4e7f20eb7edbf5b1f2b15ddc828a6da3.stex"
+path="res://.import/shipwreck.png-2a43b1b248425fe2610e133403fd60a4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Artikel/bread.png"
-dest_files=[ "res://.import/bread.png-4e7f20eb7edbf5b1f2b15ddc828a6da3.stex" ]
+source_file="res://Assets/Objects/shipwreck.png"
+dest_files=[ "res://.import/shipwreck.png-2a43b1b248425fe2610e133403fd60a4.stex" ]
 
 [params]
 

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Objects/cargo_barrel.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/CargoBarrel.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Unit Overlays/ship_selection_border.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "float",
+"speed": 5.0
+} ]
+
+[node name="CargoBarrel" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="SelectionBox" type="Sprite" parent="."]
+visible = false
+position = Vector2( 1.53679, 6.84415 )
+scale = Vector2( 0.711852, 0.711852 )
+texture = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "float"
+
+[node name="BBox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BBox"]
+position = Vector2( 0.128513, 0.12851 )
+polygon = PoolVector2Array( -17.133, 1.14804, -10.4503, -9.77554, 12.1679, -9.90405, 19.6217, -0.394112, 16.1518, 13.3567, -15.4623, 13.0997 )
+[connection signal="input_event" from="BBox" to="." method="_on_BBox_input_event"]
+[connection signal="mouse_entered" from="BBox" to="." method="_on_BBox_mouse_entered"]
+[connection signal="mouse_exited" from="BBox" to="." method="_on_BBox_mouse_exited"]

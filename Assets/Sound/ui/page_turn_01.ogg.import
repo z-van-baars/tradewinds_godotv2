@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/page_turn_01.ogg-2c9d3e8282a3a32ba1be6ef33446a579.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound/ui/page_turn_01.ogg"
+dest_files=[ "res://.import/page_turn_01.ogg-2c9d3e8282a3a32ba1be6ef33446a579.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

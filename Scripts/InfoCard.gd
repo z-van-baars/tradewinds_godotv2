@@ -25,6 +25,7 @@ func _on_Entity_hovered(entity_type, stats):
 		for each in stats[3]:
 			if stats[3][each] > 0:
 				$ProductionLabel.text += each + "  " + str(stats[3][each]) + "   "
+		rect_size = Vector2(262, 240)
 	elif entity_type == 1:
 		$EntityName.text = stats[0].capitalize()
 		$EntityName.visible = true
@@ -36,6 +37,11 @@ func _on_Entity_hovered(entity_type, stats):
 		$SpeedLabel.visible = true
 		$StateLabel.text = "State - " + stats[3]
 		$StateLabel.visible = true
+	elif entity_type == 2:
+		$EntityName.text == "Dumped Cargo"
+		$EntityName.visible = true
+		$CaptainLabel.text = "Unknown Contents"
+		$CaptainLabel.visible = true
 
 func _on_Entity_unhovered():
 	visible = false
