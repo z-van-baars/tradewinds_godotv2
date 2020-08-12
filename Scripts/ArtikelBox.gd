@@ -54,8 +54,13 @@ func set_all():
 		$Backing/QuantityBacking.rect_size.x = 16
 		$Backing/QuantityBacking.rect_position.x = 52
 	if price != -1:
+		$Backing/PriceLabel.visible = true
+		$Backing/PriceBacking.visible = true
 		$Backing/PriceLabel.text = str(price)
 		$Backing/PriceLabel.modulate = artikels.get_color(artikel_str, price)
+	elif price == -1:
+		$Backing/PriceLabel.visible = false
+		$Backing/PriceBacking.visible = false
 
 func _on_Backing_mouse_entered():
 	mouse_in = true

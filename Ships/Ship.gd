@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 signal left_click
 signal right_click
-signal destination_reached
 signal hovered
 signal unhovered
 signal target_entity_reached
@@ -14,6 +13,7 @@ var seanav
 var seanav2d
 var ship_stats
 var selected = false
+var is_ship = true
 
 # constant stats, same for all ships
 var cargo = {}
@@ -57,7 +57,7 @@ func initialize_stats(hull_class, is_player_ship, import_captain=null):
 		if officer_slots[os] == true:
 			officers[os] = null
 
-func connect_signals(player_node, info_card, dispatch_node, captain_node):
+func connect_signals(player_node, info_card, dispatch_node):
 	self.connect(
 		"left_click",
 		player_node,
@@ -78,10 +78,6 @@ func connect_signals(player_node, info_card, dispatch_node, captain_node):
 		"target_entity_reached",
 		dispatch_node,
 		"_on_Ship_target_entity_reached")
-	self.connect(
-		"destination_reached",
-		captain_node,
-		"_on_Ship_destination_reached")
 	
 
 func _draw():
@@ -97,7 +93,7 @@ func _process(delta):
 	if target_entity != null:
 		# Check if our target moved and repath if so
 		if target_entity.position != final_target:
-			path_to(target_entity.position)
+			path_to(target_entity.get_center())
 	update()
 
 func _physics_process(delta):
@@ -120,7 +116,7 @@ func _physics_process(delta):
 	# Early Exit from Movement if we are at our target city
 	if destination_city != null:
 		if position.distance_to(destination_city.get_center()) < 50:
-			emit_signal("destination_reached", destination_city)
+			emit_signal("target_entity_reached", self, destination_city)
 			zero_target()
 			clear_destination_city()
 	
@@ -130,7 +126,6 @@ func _physics_process(delta):
 			emit_signal(
 				"target_entity_reached",
 				self,
-				target_entity.captain,
 				target_entity)
 			zero_target()
 			clear_target_entity()

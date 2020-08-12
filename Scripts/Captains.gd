@@ -36,7 +36,6 @@ func spawn_captain(world_pos):
 	new_ship.connect_signals(
 		player,
 		get_tree().root.get_node("Main/UILayer/InfoCard"),
-		get_tree().root.get_node("Main/Dispatcher"),
-		new_captain)
+		get_tree().root.get_node("Main/Dispatcher"))
 
 

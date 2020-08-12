@@ -20,6 +20,8 @@ var silver = 100
 
 var name_str = "Player"
 
+var cargo_barrel_scene = preload("res://Scenes/Objects/CargoBarrel.tscn")
+
 func _ready():
 	tools = get_tree().root.get_node("Main/Tools")
 	artikels = get_tree().root.get_node("Main/Artikels")
@@ -30,8 +32,7 @@ func _ready():
 	$Ship.connect_signals(
 		self,
 		get_tree().root.get_node("Main/UILayer/InfoCard"),
-		get_tree().root.get_node("Main/Dispatcher"),
-		self)
+		get_tree().root.get_node("Main/Dispatcher"))
 	$Ship/Flag.texture = load("res://Assets/Flags/green.png")
 
 	for _artikel in artikels.artikel_list:
@@ -40,6 +41,20 @@ func _ready():
 	$Ship.cargo["Rum"] = 2
 	$Ship.cargo["Bread"] = 5
 	$Ship.generate_random_officers()
+
+
+func make_random_cargo_barrels(b):
+	for barrel in range(b):
+		var new_barrel = cargo_barrel_scene.instance()
+		get_tree().root.get_node("Main/Objects").add_child(new_barrel)
+		new_barrel.connect_signals(
+			self,
+			get_tree().root.get_node("Main/UILayer/InfoCard"),
+			get_tree().root.get_node("Main/Dispatcher"))
+		var random_offset = Vector2(randi()%100 - 50, randi()%100 - 50)
+		new_barrel.position = $Ship.position + random_offset
+		var random_artikel = tools.r_choice(artikels.artikel_list)
+		new_barrel.cargo[random_artikel] = randi()%100
 	
 
 func randomize_start(cities):
@@ -64,9 +79,16 @@ func increment_silver(quantity):
 	silver += quantity
 
 func _on_City_right_click(city_node):
-	if own_ship_selected == true:
-		$Ship.destination_city = city_node
-		$Ship.path_to(city_node.get_center())
+	if own_ship_selected != true:
+		return
+	
+	$Ship.destination_city = city_node
+	$Ship.path_to(city_node.get_center())
+
+func _on_Entity_right_click(entity_node):
+	if own_ship_selected != true:
+		return
+	$Ship.target_entity = entity_node
 
 func _on_Ship_left_click(ship_node):
 	ship_selected = ship_node

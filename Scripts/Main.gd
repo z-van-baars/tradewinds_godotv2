@@ -24,6 +24,7 @@ func new_game():
 	$Calendar/Timer.start()
 	$UILayer/MessageLogDisplay.clear_all()
 	$Sounds/Stream/GullsShort.play()
+	$Player.make_random_cargo_barrels(4)
 
 
 func _on_NewGameButton_pressed():

@@ -38,7 +38,7 @@ func clear_all():
 func set_all():
 	exchange_menu.load_exchange(self.open_city, self)
 	exchange_menu.set_all()
-	$CityName.text = str(open_city.city_name)
+	$CityName.text = str(open_city.name_str)
 	$CityPortrait.texture = portraits[open_city.portrait_id]
 	$InfoPanel/PopLabel.text = "Population - " + str(open_city.population)
 	$InfoPanel/GrowthLabel.text = (
@@ -69,7 +69,12 @@ func _on_DragButton_button_up():
 	dragging = false
 	drag_offset = rect_position - get_global_mouse_position()
 
-func _on_Player_open_city_menu(city_to_open):
+func _on_MarketButton_pressed():
+	sounds.get_node("UI/Click_1").play()
+	sounds.get_node("Stream/AtBay").stop()
+	hide()
+
+func _on_Dispatcher_open_city_menu(city_to_open):
 	get_tree().root.get_node("Main").all_music_stop()
 	sounds.get_node("UI/Cabinet_1").play()
 	sounds.get_node("Stream/AtBay").play()
@@ -78,9 +83,3 @@ func _on_Player_open_city_menu(city_to_open):
 	open_city = city_to_open
 	set_all()
 	show()
-
-
-func _on_MarketButton_pressed():
-	sounds.get_node("UI/Click_1").play()
-	sounds.get_node("Stream/AtBay").stop()
-	hide()

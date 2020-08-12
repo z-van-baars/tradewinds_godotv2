@@ -1614,7 +1614,7 @@ wait_time = 0.5
 wait_time = 0.1
 one_shot = true
 
-[node name="CityName" type="Label" parent="UILayer/ExchangeMenu"]
+[node name="EntityNameLabel" type="Label" parent="UILayer/ExchangeMenu"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -182.0
@@ -1629,6 +1629,7 @@ __meta__ = {
 }
 
 [node name="BackButton" type="TextureButton" parent="UILayer/ExchangeMenu"]
+visible = false
 margin_left = 2.26108
 margin_top = 2.00003
 margin_right = 22.2611
@@ -2912,7 +2913,9 @@ wait_time = 3.0
 [connection signal="date_changed" from="Calendar" to="UILayer/DateBar" method="_on_Calendar_date_changed"]
 [connection signal="week_end" from="Calendar" to="Cities" method="_on_Calendar_week_end"]
 [connection signal="timeout" from="Calendar/Timer" to="Calendar" method="_on_Timer_timeout"]
+[connection signal="open_city_menu" from="Dispatcher" to="UILayer/CityMenu" method="_on_Dispatcher_open_city_menu"]
 [connection signal="open_encounter_screen" from="Dispatcher" to="UILayer/EncounterScreen" method="_on_Dispatcher_open_encounter_screen"]
+[connection signal="open_exchange_screen" from="Dispatcher" to="UILayer/ExchangeMenu" method="_on_Dispatcher_open_exchange_screen"]
 [connection signal="open_city_menu" from="Player" to="UILayer/CityMenu" method="_on_Player_open_city_menu"]
 [connection signal="toggle_logistics_menu" from="Player" to="UILayer/LogisticsMenu" method="_on_Player_toggle_logistics_menu"]
 [connection signal="pressed" from="UILayer/MapWidget/LogisticsButton" to="UILayer/LogisticsMenu" method="_on_Player_toggle_logistics_menu"]
@@ -2929,8 +2932,8 @@ wait_time = 3.0
 [connection signal="button_down" from="UILayer/CityMenu/DragButton" to="UILayer/CityMenu" method="_on_DragButton_button_down"]
 [connection signal="button_up" from="UILayer/CityMenu/DragButton" to="UILayer/CityMenu" method="_on_DragButton_button_up"]
 [connection signal="pressed" from="UILayer/CityMenu/XButton" to="UILayer/CityMenu" method="_on_XButton_pressed"]
-[connection signal="pressed" from="UILayer/CityMenu/MarketButton" to="UILayer/ExchangeMenu" method="_on_MarketButton_pressed"]
 [connection signal="pressed" from="UILayer/CityMenu/MarketButton" to="UILayer/CityMenu" method="_on_MarketButton_pressed"]
+[connection signal="pressed" from="UILayer/CityMenu/MarketButton" to="UILayer/ExchangeMenu" method="_on_MarketButton_pressed"]
 [connection signal="visibility_changed" from="UILayer/MarketMenu" to="UILayer/MarketMenu" method="_on_MarketMenu_visibility_changed"]
 [connection signal="button_down" from="UILayer/MarketMenu/DragButton" to="UILayer/MarketMenu" method="_on_DragButton_button_down"]
 [connection signal="button_up" from="UILayer/MarketMenu/DragButton" to="UILayer/MarketMenu" method="_on_DragButton_button_up"]

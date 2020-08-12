@@ -18,7 +18,7 @@ func _process(delta):
 	$Ship.state = state
 	for city in recently_visited.keys():
 		if get_tree().root.get_node("Main/Calendar").t_days - recently_visited[city][0] > 60:
-			var text = name_str + " erased records of his visit to " + city.city_name
+			var text = name_str + " erased records of his visit to " + city.name_str
 			get_tree().root.get_node("Main/UILayer/MessageLogDisplay").new_message(text)
 			recently_visited.erase(city)
 	
@@ -38,9 +38,9 @@ func transact():
 	for i in range(5):
 		var no_goods = true
 		var cheapest_good = [99999, null]
-		for _artikel in destination_city.artikel_supply:
+		for _artikel in destination_city.cargo:
 			if (destination_city.get_price(_artikel) < cheapest_good[0]
-				and destination_city.get_cargo_quantity(_artikel) > 0):
+				and destination_city.cargo[_artikel] > 0):
 				no_goods = false
 				cheapest_good = [destination_city.get_price(_artikel), _artikel]
 		if no_goods == true:
@@ -102,8 +102,10 @@ func _on_CityTimer_timeout():
 	$Ship.destination_city = dest_city
 	destination_city = dest_city
 
-func _on_Ship_destination_reached(destination_city):
-	var _text = name_str + " has arrived in " + destination_city.city_name.capitalize() + "."
+func on_destination_reached():
+	if destination_city == null:
+		return
+	var _text = name_str + " has arrived in " + destination_city.name_str.capitalize() + "."
 	# message_log.new_message(text)
 	state = "Transacting"
 	print("Starting Transaction Timer")

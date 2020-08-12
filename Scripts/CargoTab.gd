@@ -170,6 +170,10 @@ func _on_DumpButton_pressed():
 	sounds.get_node("UI/Drop_3").play()
 	var new_barrel = cargo_barrel_scene.instance()
 	get_tree().root.get_node("Main/Objects").add_child(new_barrel)
+	new_barrel.connect_signals(
+		player,
+		get_tree().root.get_node("Main/UILayer/InfoCard"),
+		get_tree().root.get_node("Main/Dispatcher"))
 	new_barrel.position = player.get_node("Ship").position
 	for artikel_type in items_to_dump:
 		if items_to_dump.has(artikel_type) and items_to_dump[artikel_type] > 0:

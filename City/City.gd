@@ -11,8 +11,10 @@ var city_tilemap
 var artikels
 
 var map_tile
+var is_ship = false
+var is_city = true
 
-var city_name = "~"
+var name_str = "~"
 var portrait_id = randi()%3+0
 var size = (randi()%10+1)
 var population = size * 1000
@@ -23,7 +25,7 @@ var neighborhood = []
 var coastal_neighbors = []
 var prioritized_tiles = []
 
-var artikel_supply = {}
+var cargo = {}
 var artikel_price = {}
 var demand_for = {}
 var demand_last = {}
@@ -35,7 +37,7 @@ var water_indexes = [
 	40, 41, 42, 43]
 
 func initialize():
-	city_name = get_tree().root.get_node("Main/Cities").get_name()
+	name_str = get_tree().root.get_node("Main/Cities").get_name()
 	tools = get_tree().root.get_node("Main/Tools")
 	biome_map = get_tree().root.get_node("Main/WorldGen/BiomeMap")
 	artikels = get_tree().root.get_node("Main/Artikels")
@@ -51,20 +53,17 @@ func initialize():
 	set_label()
 
 func set_label():
-	$BBox/Label/NameLabel.text = city_name.capitalize()
+	$BBox/Label/NameLabel.text = name_str.capitalize()
 
 func increment_cargo(artikel_name, quantity):
-	if artikel_supply[artikel_name] == 0 and quantity < 0:
+	if cargo[artikel_name] == 0 and quantity < 0:
 		# print("No " + artikel_name + " to sell!")
 		return
-	artikel_supply[artikel_name] = max(0, artikel_supply[artikel_name] + quantity)
-
-func get_cargo_quantity(artikel_name):
-	return artikel_supply[artikel_name]
+	cargo[artikel_name] = max(0, cargo[artikel_name] + quantity)
 
 func init_cargo():
 	for _artikel in artikels.artikel_list:
-		artikel_supply[_artikel] = 0
+		cargo[_artikel] = 0
 
 func init_demand():
 	for _artikel in artikels.artikel_list:
@@ -124,7 +123,7 @@ func work_tile(tile):
 
 func find_price(_artikel):
 	var base = artikels.base_price[_artikel]
-	var q = get_cargo_quantity(_artikel)
+	var q = cargo[_artikel]
 	var d = max(demand_for[_artikel], 1)
 
 	var d_price = base
@@ -203,7 +202,7 @@ func eat():
 		var cheapest_food = [99999, null]
 		var food_found = false
 		for _artikel in artikels.foods:
-			if artikel_price[_artikel] < cheapest_food[0] and get_cargo_quantity(_artikel) > 0:
+			if artikel_price[_artikel] < cheapest_food[0] and cargo[_artikel] > 0:
 				food_found = true
 				cheapest_food = [artikel_price[_artikel], _artikel]
 
@@ -218,10 +217,10 @@ func eat():
 			starving_citizens += 0.5
 	starving_citizens = int(round(starving_citizens))
 	for each in food_consumed.keys():
-		var text = city_name.capitalize() + " consumed " + str(food_consumed[each]) + " " + each + "."
+		var text = name_str.capitalize() + " consumed " + str(food_consumed[each]) + " " + each + "."
 		get_tree().root.get_node("Main/UILayer/MessageLogDisplay").new_message(text)
 	if starving_citizens > 0:
-		var text = str(starving_citizens) + " citizens went hungry in " + city_name.capitalize()
+		var text = str(starving_citizens) + " citizens went hungry in " + name_str.capitalize()
 		get_tree().root.get_node("Main/UILayer/MessageLogDisplay").new_message(text)
 		size = max(1, size - starving_citizens)
 		population = size * 1000
@@ -241,7 +240,7 @@ func grow_check():
 
 func grow():
 	size += 1
-	var text = city_name + " has grown to size " + str(size)
+	var text = name_str + " has grown to size " + str(size)
 	get_tree().root.get_node("Main/UILayer/MessageLogDisplay").new_message(text)
 	population += 1
 	growth_counter = 0
@@ -282,7 +281,7 @@ func _on_BBox_mouse_entered():
 	$BBox/Label/NameLabel.visible = true
 	emit_signal("hovered",
 		0,
-		[city_name,
+		[name_str,
 		 "Joe Schmoe",
 		 population,
 		 production_last])

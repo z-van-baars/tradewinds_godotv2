@@ -30,6 +30,9 @@ animation = "float"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BBox"]
 position = Vector2( 0.128513, 0.12851 )
 polygon = PoolVector2Array( -17.133, 1.14804, -10.4503, -9.77554, 12.1679, -9.90405, 19.6217, -0.394112, 16.1518, 13.3567, -15.4623, 13.0997 )
+
+[node name="LifeTimer" type="Timer" parent="."]
 [connection signal="input_event" from="BBox" to="." method="_on_BBox_input_event"]
 [connection signal="mouse_entered" from="BBox" to="." method="_on_BBox_mouse_entered"]
 [connection signal="mouse_exited" from="BBox" to="." method="_on_BBox_mouse_exited"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]

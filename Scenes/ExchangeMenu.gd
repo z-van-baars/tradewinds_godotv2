@@ -5,10 +5,11 @@ var artikels
 var sounds
 var player
 var entity
-var market_exchange
+var merchant_exchange
 var open_city
 var city_menu
 var hovering
+
 var shift = false
 var ctrl = false
 var dragging = false
@@ -69,9 +70,10 @@ func transfer_goods(artikel_str, q, taking):
 		elif to_take[artikel_str] == 0:
 			to_give[artikel_str] += q
 		player.increment_cargo(artikel_str, -q)
-		open_city.increment_cargo(artikel_str, q)
-		total_profit[artikel_str] += open_city.get_price(artikel_str)
-		total_cost[artikel_str] -= open_city.get_price(artikel_str)
+		entity.increment_cargo(artikel_str, q)
+		if merchant_exchange:
+			total_profit[artikel_str] += open_city.get_price(artikel_str)
+			total_cost[artikel_str] -= open_city.get_price(artikel_str)
 	elif taking == true:
 		if to_give[artikel_str] > 0:
 			if to_give[artikel_str] > q:
@@ -82,9 +84,10 @@ func transfer_goods(artikel_str, q, taking):
 		elif to_give[artikel_str] == 0:
 			to_take[artikel_str] += q
 		player.increment_cargo(artikel_str, q)
-		open_city.increment_cargo(artikel_str, -q)
-		total_profit[artikel_str] -= open_city.get_price(artikel_str)
-		total_cost[artikel_str] += open_city.get_price(artikel_str)
+		entity.increment_cargo(artikel_str, -q)
+		if merchant_exchange:
+			total_profit[artikel_str] -= open_city.get_price(artikel_str)
+			total_cost[artikel_str] += open_city.get_price(artikel_str)
 	set_all()
 
 func drop_goods():
@@ -95,7 +98,8 @@ func drop_goods():
 					$DragBox.artikel_str,
 					1,
 					$DragBox.taking)
-				open_city.set_demand_price($DragBox.artikel_str)
+				if merchant_exchange:
+					open_city.set_demand_price($DragBox.artikel_str)
 	if in_take_zone:
 		if $DragBox.taking == true:
 			for q in range($DragBox.quantity):
@@ -103,13 +107,14 @@ func drop_goods():
 					$DragBox.artikel_str,
 					1,
 					$DragBox.taking)
-				open_city.set_demand_price($DragBox.artikel_str)
+				if merchant_exchange:
+					open_city.set_demand_price($DragBox.artikel_str)
 
 func load_exchange(load_entity, load_city_menu=null):
 	entity = load_entity
 	if load_city_menu != null:
 		city_menu = load_city_menu
-		market_exchange = true
+		merchant_exchange = true
 		open_city = load_city_menu.open_city
 	clear_exchange()
 
@@ -149,10 +154,13 @@ func set_all():
 	#the exchange screen and I don't know why
 	clear_all()
 	var transaction_balance = 0
-	if market_exchange == true:
-		$CityName.text = open_city.city_name + " Market"
+	$EntityNameLabel.text = entity.name_str
+	if merchant_exchange == true:
+		$EntityNameLabel.text += " Market"
 		$BalanceBox/AmountLabel.text = str(transaction_balance)
 		$BalanceBox.show()
+		$BackButton.show()
+
 	var player_artikels_list = []
 	var entity_artikels_list = []
 	var to_take_list = []
@@ -161,53 +169,65 @@ func set_all():
 	for artikel in artikels.artikel_list:
 		if player.get_cargo_quantity(artikel) > 0:
 			player_artikels_list.append(artikel)
-		if entity.get_cargo_quantity(artikel) > 0:
+		if entity.cargo[artikel] > 0:
 			entity_artikels_list.append(artikel)
 		if to_give[artikel] > 0:
 			to_give_list.append(artikel)
 		if to_take[artikel] > 0:
 			to_take_list.append(artikel)
 	for each in entity_artikels_list:
+		var p = -1
+		if merchant_exchange == true:
+			p = entity.get_price(each)
 		var new_box = a_box_scene.instance()
 		$EntityGrid.add_child(new_box)
 		new_box.load_artikel(
 			each,
-			entity.get_cargo_quantity(each),
-			open_city.get_price(each),
+			entity.cargo[each],
+			p,
 			true)
 		new_box.connect_signals(self)
 
 	for each in player_artikels_list:
+		var p = -1
+		if merchant_exchange == true:
+			p = entity.get_price(each)
 		var new_box = a_box_scene.instance()
 		$ShipGrid.add_child(new_box)
 		new_box.load_artikel(
 			each,
 			player.get_cargo_quantity(each),
-			open_city.get_price(each))
+			p)
 		new_box.connect_signals(self)
+
 	transaction_total = 0
 	for each in to_take_list:
+		var p = -1
+		if merchant_exchange:
+			p = total_cost[each]
+			transaction_total += total_cost[each]
 		var new_box = a_box_scene.instance()
 		$ExchangeGrid.add_child(new_box)
 		new_box.load_artikel(
 			each,
 			to_take[each],
-			total_cost[each])
+			p)
 		new_box.set_price_color(Color.red)
 		new_box.connect_signals(self)
-		transaction_total += total_cost[each]
 	for each in to_give_list:
+		var p = -1
+		if merchant_exchange:
+			p = total_profit[each]
+			transaction_total -= total_profit[each]
 		var new_box = a_box_scene.instance()
 		$ExchangeGrid.add_child(new_box)
 		new_box.load_artikel(
 			each,
 			to_give[each],
-			total_profit[each],
+			p,
 			true)
-		# new_box.in_exchange = true
 		new_box.set_price_color(Color.green)
 		new_box.connect_signals(self)
-		transaction_total -= total_profit[each]
 	$BalanceBox/AmountLabel.text = str(-transaction_total)
 	if transaction_total > 0:
 		$BalanceBox/AmountLabel.modulate = Color.red
@@ -226,9 +246,18 @@ func _on_ArtikelBox_hovered(artikel_box_node):
 	hovering = true
 	sounds.get_node("UI/Flick_1").play()
 	$HoverBox/NameLabel.text = artikel_box_node.artikel_str
-	$HoverBox/DemandLabel.text = "Demand : " + str(open_city.demand_for[artikel_box_node.artikel_str])
+	if merchant_exchange == true:
+		$HoverBox/DemandLabel.text = "Demand : " + str(open_city.demand_for[artikel_box_node.artikel_str])
+		$HoverBox/DemandLabel.visible = true
+		
+		$HoverBox/ProducedLabel.text = "Produced Last Week - " + str(
+			open_city.production_last[artikel_box_node.artikel_str])
+		$HoverBox/ProducedLabel.visible = true
+	else:
+		$HoverBox/DemandLabel.visible = false
+		$HoverBox/ProducedLabel.visible = false
 	$HoverBox/BasePriceLabel.text = "Base Price - " + str(artikels.base_price[artikel_box_node.artikel_str])
-	$HoverBox/ProducedLabel.text = "Produced Last Week - " + str(open_city.production_last[artikel_box_node.artikel_str])
+
 	if artikels.perishable[artikel_box_node.artikel_str] == true:
 		$HoverBox/PerishableLabel.text = "Perishable"
 		$HoverBox/PerishableLabel.modulate = Color.crimson
@@ -248,17 +277,20 @@ func _on_ArtikelBox_clicked(artikel_box_node, left_click):
 		if left_click == false:
 			for _i in range(5):
 				transfer_goods(artikel_box_node.artikel_str, 1, artikel_box_node.taking)
-				open_city.set_demand_price(artikel_box_node.artikel_str)
+				if merchant_exchange:
+					open_city.set_demand_price(artikel_box_node.artikel_str)
 			return
 	if ctrl == true:
 		q = artikel_box_node.quantity
 		if left_click == false:
 			sounds.get_node("UI/Drop_3").play()
 			sounds.get_node("UI/Drop_4").play()
+			
 			sounds.get_node("UI/Coins_5").play()
 			for _i in range(q):
 				transfer_goods(artikel_box_node.artikel_str, 1, artikel_box_node.taking)
-				open_city.set_demand_price(artikel_box_node.artikel_str)
+				if merchant_exchange:
+					open_city.set_demand_price(artikel_box_node.artikel_str)
 			return
 	if left_click == false:
 		sounds.get_node("UI/Drop_4").play()
@@ -291,6 +323,7 @@ func _on_XButton_pressed():
 	sounds.get_node("UI/Click_1").play()
 	get_tree().root.get_node("Main/UILayer/DateBar/StatusLabel").hide()
 	get_tree().paused = false
+	revert_exchange()
 	clear_all()
 	hide()
 	sounds.get_node("Stream/Market_1").stop()
@@ -305,7 +338,7 @@ func _on_BackButton_pressed():
 	sounds.get_node("Stream/Market_2").stop()
 	clear_all()
 	hide()
-	if market_exchange == true:
+	if merchant_exchange == true:
 		city_menu.show()
 
 func _on_GiveZone_mouse_entered():
@@ -352,12 +385,20 @@ func _on_DoneButton_pressed():
 	if empty_transaction == true:
 		_on_XButton_pressed()
 	else:
-		player.silver -= transaction_total
-		sounds.get_node("UI/Coins_1").play()
+		if merchant_exchange == true:
+			player.silver -= transaction_total
+			sounds.get_node("UI/Coins_1").play()
+		else:
+			sounds.get_node("UI/Click_1").play()
+			sounds.get_node("UI/Coins_5").play()
+			sounds.get_node("UI/Drop_3").play()
 	clear_exchange()
-	open_city.set_demand_price()
+	if merchant_exchange:
+		open_city.set_demand_price()
 	set_all()
-	
 
-
-
+func _on_Dispatcher_open_exchange_screen(target_node):
+	get_tree().paused = true
+	load_exchange(target_node)
+	set_all()
+	show()
