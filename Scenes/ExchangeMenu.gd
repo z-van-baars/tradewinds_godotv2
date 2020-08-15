@@ -112,6 +112,7 @@ func drop_goods():
 
 func load_exchange(load_entity, load_city_menu=null):
 	entity = load_entity
+	merchant_exchange = false
 	if load_city_menu != null:
 		city_menu = load_city_menu
 		merchant_exchange = true

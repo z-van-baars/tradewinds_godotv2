@@ -38,7 +38,7 @@ func _on_Entity_hovered(entity_type, stats):
 		$StateLabel.text = "State - " + stats[3]
 		$StateLabel.visible = true
 	elif entity_type == 2:
-		$EntityName.text == "Dumped Cargo"
+		$EntityName.text = "Cargo Barrel"
 		$EntityName.visible = true
 		$CaptainLabel.text = "Unknown Contents"
 		$CaptainLabel.visible = true
