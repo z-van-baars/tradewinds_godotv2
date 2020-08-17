@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bread.png-4e7f20eb7edbf5b1f2b15ddc828a6da3.stex"
+path="res://.import/cannonball.png-6713aa7d2016f15394a73d24eb5cc4cd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Artikel/bread.png"
-dest_files=[ "res://.import/bread.png-4e7f20eb7edbf5b1f2b15ddc828a6da3.stex" ]
+source_file="res://Assets/Objects/cannonball.png"
+dest_files=[ "res://.import/cannonball.png-6713aa7d2016f15394a73d24eb5cc4cd.stex" ]
 
 [params]
 

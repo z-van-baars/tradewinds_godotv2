@@ -108,7 +108,7 @@ func transfer_goods(artikel_str, q, taking):
 
 		
 
-func _on_ArtikelBox_hovered():
+func _on_ArtikelBox_hovered(box_node):
 	hovering = true
 	sounds.get_node("UI/Flick_1").play()
 
@@ -189,6 +189,7 @@ func _on_DropTimer_timeout():
 	sounds.get_node("UI/Drop_1").play()
 
 func _on_DumpPanel_mouse_entered():
+	print("fire")
 	in_dump_zone = true
 
 func _on_DumpPanel_mouse_exited():
@@ -202,9 +203,11 @@ func _on_CargoPanel_mouse_exited():
 
 
 func _on_ResetButton_pressed():
+	sounds.get_node("UI/PageTurn_1").play()
 	revert_dump()
 	create_cargo_grid()
 	create_dump_grid()
+
 
 
 func _on_XButton_pressed():

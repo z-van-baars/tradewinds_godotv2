@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bread.png-4e7f20eb7edbf5b1f2b15ddc828a6da3.stex"
+path="res://.import/cannon.png-6de0f67c9b5bf5e56187bd667ac66c29.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Artikel/bread.png"
-dest_files=[ "res://.import/bread.png-4e7f20eb7edbf5b1f2b15ddc828a6da3.stex" ]
+source_file="res://Assets/Objects/cannon.png"
+dest_files=[ "res://.import/cannon.png-6de0f67c9b5bf5e56187bd667ac66c29.stex" ]
 
 [params]
 

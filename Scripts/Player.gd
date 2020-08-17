@@ -188,6 +188,7 @@ func _input(event):
 		get_tree().root.get_node("Main/UILayer/InfoCard").load_tile(selected_tile)
 	if own_ship_selected == true:
 		if event.is_action_pressed("right_click"):
+			$Ship.clear_target_entity()
 			var new_target = get_viewport().get_canvas_transform().xform_inv(event.position)
 			var adjusted_target = new_target * camera.zoom * camera.zoom
 			if teleport_mode == true:

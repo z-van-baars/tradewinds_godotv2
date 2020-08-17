@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Objects/cannon.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Objects/cone.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/TimesSS/TIMESS__.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Scripts/Gun.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.85098, 0.0941176, 0.0745098, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color( 0.239216, 0.2, 0.2, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.247059, 0.266667, 0.313726, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.176471, 0.176471, 0.176471, 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.85098, 0.658824, 0.0745098, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color( 0.239216, 0.2, 0.2, 1 )
+
+[node name="Gun" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1820.0
+margin_bottom = -1038.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -49.0
+margin_top = -25.0
+margin_right = 53.0
+margin_bottom = 26.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpriteGroup" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 19.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cannon" type="Sprite" parent="SpriteGroup"]
+position = Vector2( 9.73648, 0 )
+rotation = 1.5708
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -250 )
+
+[node name="Cone" type="Sprite" parent="SpriteGroup"]
+visible = false
+modulate = Color( 1, 1, 1, 0.576471 )
+position = Vector2( -377.233, 10.2384 )
+rotation = 1.5708
+scale = Vector2( 4.82392, 4.71346 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -400 )
+
+[node name="ReloadBar" type="ProgressBar" parent="."]
+margin_left = -23.0
+margin_top = 26.0
+margin_right = 93.0
+margin_bottom = 42.0
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+value = 34.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RotationBar" type="ProgressBar" parent="."]
+visible = false
+margin_left = -23.0
+margin_top = 26.0
+margin_right = 93.0
+margin_bottom = 42.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+value = 34.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="RotationTimer" type="Timer" parent="."]
+wait_time = 4.0
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
+[connection signal="timeout" from="RotationTimer" to="." method="_on_RotationTimer_timeout"]

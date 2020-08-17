@@ -14,7 +14,7 @@ func _on_Ship_target_entity_reached(targeting_entity, target_entity):
 func resolve_player_interaction(target_entity):
 	print("resolving player junk")
 	if target_entity.is_ship == true:
-		emit_signal("open_encounter_screen", target_entity)
+		emit_signal("open_encounter_screen", target_entity.captain, target_entity)
 	elif target_entity.is_city == true:
 		emit_signal("open_city_menu", target_entity)
 	elif target_entity.is_ship == false and target_entity.is_city == false:

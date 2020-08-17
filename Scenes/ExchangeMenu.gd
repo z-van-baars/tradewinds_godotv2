@@ -364,9 +364,11 @@ func _on_ResetButton_pressed():
 	
 	sounds.get_node("UI/Drop_3").play()
 	sounds.get_node("UI/Drop_1").play(0.5)
-	sounds.get_node("UI/Coins_5").play()
+
 	revert_exchange()
-	open_city.set_demand_price()
+	if merchant_exchange == true:
+		sounds.get_node("UI/Coins_5").play()
+		open_city.set_demand_price()
 	set_all()
 
 func _on_DoneButton_pressed():

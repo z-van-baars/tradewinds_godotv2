@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=2]
+[gd_scene load_steps=149 format=2]
 
 [ext_resource path="res://Assets/Tile Overlays/very_wet.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Tile Overlays/wet.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Scripts/BiomeSelector.gd" type="Script" id=26]
 [ext_resource path="res://Scripts/CityMenu.gd" type="Script" id=27]
 [ext_resource path="res://Scripts/Captains.gd" type="Script" id=28]
+[ext_resource path="res://Fonts/Optimus Princeps/OptimusPrinceps.tres" type="DynamicFont" id=29]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=30]
 [ext_resource path="res://Scripts/MarketMenu.gd" type="Script" id=31]
 [ext_resource path="res://Scripts/DateBar.gd" type="Script" id=32]
@@ -51,7 +52,9 @@
 [ext_resource path="res://Scripts/MapWidget.gd" type="Script" id=50]
 [ext_resource path="res://Scripts/ShipIcon.gd" type="Script" id=51]
 [ext_resource path="res://Ships/Galleon/down_right.png" type="Texture" id=52]
+[ext_resource path="res://Scenes/BattleShip.tscn" type="PackedScene" id=53]
 [ext_resource path="res://Assets/UI/Buttons/done_regular.png" type="Texture" id=54]
+[ext_resource path="res://Scenes/Gun.tscn" type="PackedScene" id=55]
 [ext_resource path="res://Assets/UI/Buttons/arrow_right_regular.png" type="Texture" id=57]
 [ext_resource path="res://Assets/UI/Buttons/arrow_left_hover.png" type="Texture" id=59]
 [ext_resource path="res://Assets/UI/Buttons/arrow_left_regular.png" type="Texture" id=60]
@@ -461,6 +464,7 @@ stream = ExtResource( 86 )
 
 [node name="Cabinet_1" type="AudioStreamPlayer" parent="Sounds/UI"]
 stream = ExtResource( 87 )
+volume_db = -3.0
 
 [node name="Flick_1" type="AudioStreamPlayer" parent="Sounds/UI"]
 stream = ExtResource( 120 )
@@ -1956,9 +1960,10 @@ __meta__ = {
 
 [node name="Ship Class" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
 margin_left = 34.0
-margin_top = 96.0
-margin_right = 98.0
-margin_bottom = 110.0
+margin_top = 106.0
+margin_right = 132.0
+margin_bottom = 124.0
+custom_fonts/font = ExtResource( 78 )
 text = "Ship Class"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1966,10 +1971,11 @@ __meta__ = {
 
 [node name="HullLabel" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
 modulate = Color( 0.894118, 0.733333, 0.376471, 1 )
-margin_left = 130.0
-margin_top = 96.0
-margin_right = 290.0
-margin_bottom = 110.0
+margin_left = 160.0
+margin_top = 106.0
+margin_right = 320.0
+margin_bottom = 124.0
+custom_fonts/font = ExtResource( 78 )
 text = "Ship of the Line"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1977,9 +1983,10 @@ __meta__ = {
 
 [node name="Speed" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
 margin_left = 34.0
-margin_top = 120.0
-margin_right = 79.0
-margin_bottom = 134.0
+margin_top = 143.0
+margin_right = 89.0
+margin_bottom = 161.0
+custom_fonts/font = ExtResource( 78 )
 text = "Speed"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1987,10 +1994,11 @@ __meta__ = {
 
 [node name="SpeedLabel" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
 modulate = Color( 0.894118, 0.733333, 0.376471, 1 )
-margin_left = 130.0
-margin_top = 120.0
-margin_right = 175.0
-margin_bottom = 134.0
+margin_left = 160.0
+margin_top = 138.0
+margin_right = 205.0
+margin_bottom = 164.0
+custom_fonts/font = ExtResource( 29 )
 text = "100"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1998,9 +2006,10 @@ __meta__ = {
 
 [node name="Cargo" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
 margin_left = 34.0
-margin_top = 144.0
-margin_right = 79.0
-margin_bottom = 158.0
+margin_top = 180.0
+margin_right = 103.0
+margin_bottom = 198.0
+custom_fonts/font = ExtResource( 78 )
 text = "Cargo"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -2008,10 +2017,11 @@ __meta__ = {
 
 [node name="CargoLabel" type="Label" parent="UILayer/LogisticsMenu/ShipTab"]
 modulate = Color( 0.894118, 0.733333, 0.376471, 1 )
-margin_left = 130.0
-margin_top = 144.0
-margin_right = 175.0
-margin_bottom = 158.0
+margin_left = 160.0
+margin_top = 175.0
+margin_right = 221.0
+margin_bottom = 201.0
+custom_fonts/font = ExtResource( 29 )
 text = "10/100"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -2027,6 +2037,50 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sensors" type="Control" parent="UILayer/LogisticsMenu/CargoTab"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="OutTop" type="Panel" parent="UILayer/LogisticsMenu/CargoTab/Sensors"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -919.0
+margin_top = -730.0
+margin_right = 1681.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OutBottom" type="Panel" parent="UILayer/LogisticsMenu/CargoTab/Sensors"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -919.0
+margin_top = 800.0
+margin_right = 1681.0
+margin_bottom = 1531.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OutLeft" type="Panel" parent="UILayer/LogisticsMenu/CargoTab/Sensors"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -899.0
+margin_bottom = 802.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OutRight" type="Panel" parent="UILayer/LogisticsMenu/CargoTab/Sensors"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 800.0
+margin_right = 1701.0
+margin_bottom = 800.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="DropTimer" type="Timer" parent="UILayer/LogisticsMenu/CargoTab"]
 wait_time = 0.1
 one_shot = true
@@ -2036,6 +2090,7 @@ margin_left = 34.0
 margin_top = 53.0
 margin_right = 79.0
 margin_bottom = 67.0
+custom_fonts/font = ExtResource( 78 )
 text = "Cargo"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -2043,10 +2098,11 @@ __meta__ = {
 
 [node name="CargoLabel" type="Label" parent="UILayer/LogisticsMenu/CargoTab"]
 modulate = Color( 0.894118, 0.733333, 0.376471, 1 )
-margin_left = 130.0
-margin_top = 53.0
-margin_right = 175.0
-margin_bottom = 67.0
+margin_left = 116.0
+margin_top = 48.0
+margin_right = 177.0
+margin_bottom = 74.0
+custom_fonts/font = ExtResource( 29 )
 text = "10/100"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -2196,9 +2252,9 @@ __meta__ = {
 
 [node name="PortraitGrid" type="GridContainer" parent="UILayer/LogisticsMenu/OfficersTab"]
 margin_left = 20.0
-margin_top = 75.0
+margin_top = 83.0
 margin_right = 784.0
-margin_bottom = 781.0
+margin_bottom = 789.0
 custom_constants/vseparation = 153
 custom_constants/hseparation = 176
 columns = 4
@@ -2801,9 +2857,14 @@ __meta__ = {
 
 [node name="BattleScreen" type="ColorRect" parent="UILayer"]
 pause_mode = 2
-visible = false
-margin_right = 1280.0
-margin_bottom = 720.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -545.0
+margin_right = 962.0
+margin_bottom = 536.0
 color = Color( 0.113725, 0.219608, 0.298039, 1 )
 script = ExtResource( 76 )
 __meta__ = {
@@ -2811,10 +2872,13 @@ __meta__ = {
 }
 
 [node name="WinButton" type="Button" parent="UILayer/BattleScreen"]
-margin_left = 407.0
-margin_top = 596.0
-margin_right = 550.0
-margin_bottom = 679.0
+margin_left = 25.0
+margin_top = 1024.0
+margin_right = 168.0
+margin_bottom = 1072.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WinLabel" type="Label" parent="UILayer/BattleScreen/WinButton"]
 anchor_left = 0.5
@@ -2832,10 +2896,10 @@ __meta__ = {
 }
 
 [node name="LoseButton" type="Button" parent="UILayer/BattleScreen"]
-margin_left = 613.0
-margin_top = 595.0
-margin_right = 771.0
-margin_bottom = 679.0
+margin_left = 231.0
+margin_top = 1024.0
+margin_right = 389.0
+margin_bottom = 1072.0
 
 [node name="LoseLabel" type="Label" parent="UILayer/BattleScreen/LoseButton"]
 anchor_left = 0.5
@@ -2852,56 +2916,63 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Attack1Button" type="Button" parent="UILayer/BattleScreen"]
-margin_left = 408.0
-margin_top = 318.0
-margin_right = 580.0
-margin_bottom = 392.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Attack1Label" type="Label" parent="UILayer/BattleScreen/Attack1Button"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -62.5
-margin_top = -9.0
-margin_right = 62.5
-margin_bottom = 9.0
-custom_fonts/font = ExtResource( 78 )
-text = "Attack One"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Attack2Button" type="Button" parent="UILayer/BattleScreen"]
-margin_left = 407.0
-margin_top = 450.0
-margin_right = 579.0
-margin_bottom = 527.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Attack2Label" type="Label" parent="UILayer/BattleScreen/Attack2Button"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -62.0
-margin_top = -9.0
-margin_right = 67.0
-margin_bottom = 9.0
-custom_fonts/font = ExtResource( 78 )
-text = "Attack Two"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="OutcomeMessageTimer" type="Timer" parent="UILayer/BattleScreen"]
 wait_time = 3.0
+
+[node name="EShip" parent="UILayer/BattleScreen" instance=ExtResource( 53 )]
+margin_left = 1600.0
+margin_top = 37.0
+margin_right = -67.0
+margin_bottom = -188.0
+
+[node name="Gun" parent="UILayer/BattleScreen/EShip" instance=ExtResource( 55 )]
+margin_left = 54.6702
+margin_top = 187.0
+margin_right = 54.6702
+margin_bottom = 187.0
+
+[node name="Gun2" parent="UILayer/BattleScreen/EShip" instance=ExtResource( 55 )]
+margin_left = 54.6702
+margin_top = 374.0
+margin_right = 54.6702
+margin_bottom = 374.0
+
+[node name="Gun3" parent="UILayer/BattleScreen/EShip" instance=ExtResource( 55 )]
+margin_left = 73.8446
+margin_top = 673.0
+margin_right = 73.8446
+margin_bottom = 673.0
+
+[node name="PShip" parent="UILayer/BattleScreen" instance=ExtResource( 53 )]
+margin_left = 79.0
+margin_top = 37.1543
+margin_right = -1588.0
+margin_bottom = -187.846
+
+[node name="Gun" parent="UILayer/BattleScreen/PShip" instance=ExtResource( 55 )]
+margin_left = 152.0
+margin_top = 212.846
+margin_right = 152.0
+margin_bottom = 212.846
+
+[node name="Gun2" parent="UILayer/BattleScreen/PShip" instance=ExtResource( 55 )]
+margin_left = 152.0
+margin_top = 421.846
+margin_right = 152.0
+margin_bottom = 421.846
+
+[node name="Gun3" parent="UILayer/BattleScreen/PShip" instance=ExtResource( 55 )]
+margin_left = 145.0
+margin_top = 657.846
+margin_right = 145.0
+margin_bottom = 657.846
+
+[node name="Projectiles" type="Control" parent="UILayer/BattleScreen"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="finished" from="Sounds/Stream/Windy" to="." method="_on_MusTrack_finished"]
 [connection signal="finished" from="Sounds/Stream/Moontide" to="." method="_on_MusTrack_finished"]
 [connection signal="finished" from="Sounds/Stream/EgyptGulls" to="." method="_on_MusTrack_finished"]
@@ -2932,8 +3003,8 @@ wait_time = 3.0
 [connection signal="button_down" from="UILayer/CityMenu/DragButton" to="UILayer/CityMenu" method="_on_DragButton_button_down"]
 [connection signal="button_up" from="UILayer/CityMenu/DragButton" to="UILayer/CityMenu" method="_on_DragButton_button_up"]
 [connection signal="pressed" from="UILayer/CityMenu/XButton" to="UILayer/CityMenu" method="_on_XButton_pressed"]
-[connection signal="pressed" from="UILayer/CityMenu/MarketButton" to="UILayer/ExchangeMenu" method="_on_MarketButton_pressed"]
 [connection signal="pressed" from="UILayer/CityMenu/MarketButton" to="UILayer/CityMenu" method="_on_MarketButton_pressed"]
+[connection signal="pressed" from="UILayer/CityMenu/MarketButton" to="UILayer/ExchangeMenu" method="_on_MarketButton_pressed"]
 [connection signal="visibility_changed" from="UILayer/MarketMenu" to="UILayer/MarketMenu" method="_on_MarketMenu_visibility_changed"]
 [connection signal="button_down" from="UILayer/MarketMenu/DragButton" to="UILayer/MarketMenu" method="_on_DragButton_button_down"]
 [connection signal="button_up" from="UILayer/MarketMenu/DragButton" to="UILayer/MarketMenu" method="_on_DragButton_button_up"]
@@ -2959,6 +3030,14 @@ wait_time = 3.0
 [connection signal="mouse_exited" from="UILayer/ExchangeMenu/TakeZone" to="UILayer/ExchangeMenu" method="_on_TakeZone_mouse_exited"]
 [connection signal="pressed" from="UILayer/ExchangeMenu/ResetButton" to="UILayer/ExchangeMenu" method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="UILayer/ExchangeMenu/DoneButton" to="UILayer/ExchangeMenu" method="_on_DoneButton_pressed"]
+[connection signal="mouse_entered" from="UILayer/LogisticsMenu/CargoTab/Sensors/OutTop" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_entered"]
+[connection signal="mouse_exited" from="UILayer/LogisticsMenu/CargoTab/Sensors/OutTop" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_exited"]
+[connection signal="mouse_entered" from="UILayer/LogisticsMenu/CargoTab/Sensors/OutBottom" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_entered"]
+[connection signal="mouse_exited" from="UILayer/LogisticsMenu/CargoTab/Sensors/OutBottom" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_exited"]
+[connection signal="mouse_entered" from="UILayer/LogisticsMenu/CargoTab/Sensors/OutLeft" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_entered"]
+[connection signal="mouse_exited" from="UILayer/LogisticsMenu/CargoTab/Sensors/OutLeft" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_exited"]
+[connection signal="mouse_entered" from="UILayer/LogisticsMenu/CargoTab/Sensors/OutRight" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_entered"]
+[connection signal="mouse_exited" from="UILayer/LogisticsMenu/CargoTab/Sensors/OutRight" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_exited"]
 [connection signal="timeout" from="UILayer/LogisticsMenu/CargoTab/DropTimer" to="UILayer/LogisticsMenu/CargoTab" method="_on_DropTimer_timeout"]
 [connection signal="pressed" from="UILayer/LogisticsMenu/CargoTab/ResetButton" to="UILayer/LogisticsMenu/CargoTab" method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="UILayer/LogisticsMenu/CargoTab/DumpButton" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpButton_pressed"]
@@ -2968,8 +3047,8 @@ wait_time = 3.0
 [connection signal="mouse_exited" from="UILayer/LogisticsMenu/CargoTab/DumpPanel" to="UILayer/LogisticsMenu/CargoTab" method="_on_DumpPanel_mouse_exited"]
 [connection signal="button_down" from="UILayer/LogisticsMenu/DragButton" to="UILayer/LogisticsMenu" method="_on_DragButton_button_down"]
 [connection signal="button_up" from="UILayer/LogisticsMenu/DragButton" to="UILayer/LogisticsMenu" method="_on_DragButton_button_up"]
-[connection signal="pressed" from="UILayer/LogisticsMenu/XButton" to="UILayer/LogisticsMenu/CargoTab" method="_on_XButton_pressed"]
 [connection signal="pressed" from="UILayer/LogisticsMenu/XButton" to="UILayer/LogisticsMenu" method="_on_XButton_pressed"]
+[connection signal="pressed" from="UILayer/LogisticsMenu/XButton" to="UILayer/LogisticsMenu/CargoTab" method="_on_XButton_pressed"]
 [connection signal="mouse_entered" from="UILayer/LogisticsMenu/ShipButton" to="UILayer/LogisticsMenu" method="_on_Button_hovered"]
 [connection signal="pressed" from="UILayer/LogisticsMenu/ShipButton" to="UILayer/LogisticsMenu" method="_on_ShipButton_pressed"]
 [connection signal="mouse_entered" from="UILayer/LogisticsMenu/CargoButton" to="UILayer/LogisticsMenu" method="_on_Button_hovered"]

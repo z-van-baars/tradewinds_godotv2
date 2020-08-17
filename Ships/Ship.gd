@@ -122,6 +122,7 @@ func _physics_process(delta):
 	
 	# Early Exit from Movement if we have a target entity and are there
 	elif destination_city == null and target_entity != null:
+		print("doodees")
 		if position.distance_to(target_entity.get_center()) < 15:
 			emit_signal(
 				"target_entity_reached",
